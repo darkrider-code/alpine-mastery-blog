@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const posts = getAllPosts(DEFAULT_LOCALE);
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
 
   return (
