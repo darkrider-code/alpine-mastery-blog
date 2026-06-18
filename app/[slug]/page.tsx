@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BlogCard, { categoryColors, formatDate } from "@/components/BlogCard";
+import BlogCard, { categoryColors } from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
 import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
@@ -43,6 +43,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: post.description,
     },
   };
+}
+
+function formatDate(dateString: string): string {
+  return new Intl.DateTimeFormat('sv-SE', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date(dateString));
 }
 
 export default async function PostPage({ params }: PageProps) {
