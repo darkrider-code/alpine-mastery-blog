@@ -1,10 +1,10 @@
 {
   "sv": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
-      "homeTitle": "Skidteknik & Träning",
-      "homeDescription": "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analysera ditt åk →",
       "languageLabel": "Välj språk",
       "languageSwitch": "Språk",
@@ -68,14 +68,21 @@
       "section4P1": "Kantningsteknik blir först riktigt värdefull när den inte längre kräver aktivt tänkande. Det kräver repetition med avsikt – inte bara fler svängar, utan svängar där du vet exakt vad du fokuserar på.",
       "section5Title": "Accelerera inlärningen med videofeedback",
       "section5P1": "Att känna skillnaden mellan bra och dålig kantgrip i realtid är svårt – kroppen ljuger ofta. Med videofeedback kan du se exakt när INI börjar, hur tyngdpunkten förflyttas och när STEOUT blir för lång."
+    },
+    "categories": {
+      "Technique": "Teknik",
+      "Strength & Conditioning": "Styrka & Kondition",
+      "Mindset": "Mindset",
+      "AI & Analysis": "AI & Analys",
+      "Athlete Stories": "Idrottshistorier"
     }
   },
   "en": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Evidence-based articles on alpine technique, training planning, and mental preparation.",
-      "homeTitle": "Ski Technique & Training",
-      "homeDescription": "Evidence-based articles on alpine technique, training planning, and mental preparation.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analyze your skiing →",
       "languageLabel": "Select language",
       "languageSwitch": "Language",
@@ -139,14 +146,21 @@
       "section4P1": "Edging technique becomes truly valuable when it no longer requires conscious thought. It requires intentional repetition — not just more turns, but turns where you know exactly what you are focusing on.",
       "section5Title": "Accelerate your learning with video feedback",
       "section5P1": "Feeling the difference between good and bad edge grip in real time is difficult — the body often lies. With video feedback, you can see exactly when INI begins, how the center of mass moves, and when STEOUT becomes too long."
+    },
+    "categories": {
+      "Technique": "Technique",
+      "Strength & Conditioning": "Strength & Conditioning",
+      "Mindset": "Mindset",
+      "AI & Analysis": "AI & Analysis",
+      "Athlete Stories": "Athlete Stories"
     }
   },
   "no": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Vitenskapelig baserte artikler om alpinteknikk, treningsplanlegging og mental forberedelse.",
-      "homeTitle": "Skiteknikk & Trening",
-      "homeDescription": "Vitenskapelig baserte artikler om alpinteknikk, treningsplanlegging og mental forberedelse.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analyser åket ditt →",
       "languageLabel": "Velg språk",
       "languageSwitch": "Språk",
@@ -210,14 +224,21 @@
       "section4P1": "Kantteknikk blir først virkelig nyttig når den ikke lenger krever aktiv tenking. Det krever målrettet repetisjon — ikke bare flere svinger, men svinger der du vet akkurat hva du fokuserer på.",
       "section5Title": "Akselerer læringen med videofeedback",
       "section5P1": "Å kjenne forskjellen mellom godt og dårlig kantgrep i sanntid er vanskelig — kroppen lyver ofte. Med videofeedback kan du se nøyaktig når INI starter, hvordan tyngdepunktet beveger seg, og når STEOUT blir for lang."
+    },
+    "categories": {
+      "Technique": "Teknikk",
+      "Strength & Conditioning": "Styrke & Kondisjon",
+      "Mindset": "Mindset",
+      "AI & Analysis": "AI & Analyse",
+      "Athlete Stories": "Idrettshistorier"
     }
   },
   "da": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Videnskabeligt baserede artikler om alpin teknik, træningsplanlægning og mental forberedelse.",
-      "homeTitle": "Skiteknik & Træning",
-      "homeDescription": "Videnskabeligt baserede artikler om alpin teknik, træningsplanlægning og mental forberedelse.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analyser dit åk →",
       "languageLabel": "Vælg sprog",
       "languageSwitch": "Sprog",
@@ -281,14 +302,21 @@
       "section4P1": "Kantteknik bliver først virkelig værdifuld, når den ikke længere kræver aktiv tænkning. Det kræver målrettet repetition — ikke bare flere sving, men sving, hvor du ved præcist, hvad du fokuserer på.",
       "section5Title": "Accelerer læringen med videofeedback",
       "section5P1": "At mærke forskellen mellem godt og dårligt kantgreb i realtid er svært — kroppen lyver ofte. Med videofeedback kan du se præcist, når INI begynder, hvordan tyngdepunktet bevæger sig, og når STEOUT bliver for lang."
+    },
+    "categories": {
+      "Technique": "Teknik",
+      "Strength & Conditioning": "Styrke & Kondition",
+      "Mindset": "Mindset",
+      "AI & Analysis": "AI & Analyse",
+      "Athlete Stories": "Atlethistorier"
     }
   },
   "fi": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Alppihiihtotekniikkaa, harjoittelusuunnittelua ja henkistä valmistautumista käsitteleviä tieteellisesti perusteltuja artikkeleita.",
-      "homeTitle": "Hiihtotekniikka & Harjoittelu",
-      "homeDescription": "Alppihiihtotekniikkaa, harjoittelusuunnittelua ja henkistä valmistautumista käsitteleviä tieteellisesti perusteltuja artikkeleita.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analysoi hiihtosi →",
       "languageLabel": "Valitse kieli",
       "languageSwitch": "Kieli",
@@ -352,14 +380,21 @@
       "section4P1": "Kanttekniikka tulee todella hyödylliseksi vasta silloin, kun sitä ei tarvitse enää ajatella jatkuvasti. Se vaatii tarkoituksellista toistoa — ei vain enemmän kaaria, vaan kaaria, joissa tiedät tarkalleen, mihin keskityt.",
       "section5Title": "Kiihdytä oppimista videopalautteella",
       "section5P1": "Hyvän ja huonon reunanoton eron tunteminen reaaliajassa on vaikeaa — keho valehtelee usein. Videopalautteen avulla näet tarkasti, milloin INI alkaa, miten painopiste liikkuu ja milloin STEOUT tulee liian pitkäksi."
+    },
+    "categories": {
+      "Technique": "Tekniikka",
+      "Strength & Conditioning": "Voima & Kunto",
+      "Mindset": "Mielentila",
+      "AI & Analysis": "AI & Analyysi",
+      "Athlete Stories": "Urheilijatarinat"
     }
   },
   "de": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Wissenschaftlich fundierte Artikel zur alpinen Technik, Trainingsplanung und mentalen Vorbereitung.",
-      "homeTitle": "Ski-Technik & Training",
-      "homeDescription": "Wissenschaftlich fundierte Artikel zur alpinen Technik, Trainingsplanung und mentalen Vorbereitung.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analysiere dein Fahren →",
       "languageLabel": "Sprache auswählen",
       "languageSwitch": "Sprache",
@@ -423,14 +458,21 @@
       "section4P1": "Kanttechnik wird erst dann wirklich wertvoll, wenn sie nicht mehr bewusst gedacht werden muss. Sie erfordert absichtsvolle Wiederholung — nicht einfach mehr Kurven, sondern Kurven, bei denen du genau weißt, worauf du dich konzentrierst.",
       "section5Title": "Beschleunige das Lernen mit Video-Feedback",
       "section5P1": "Den Unterschied zwischen gutem und schlechtem Kantengriff in Echtzeit zu spüren, ist schwer — der Körper lügt oft. Mit Video-Feedback kannst du genau sehen, wann INI beginnt, wie sich der Schwerpunkt bewegt und wann STEOUT zu lang wird."
+    },
+    "categories": {
+      "Technique": "Technik",
+      "Strength & Conditioning": "Kraft & Kondition",
+      "Mindset": "Mindset",
+      "AI & Analysis": "KI & Analyse",
+      "Athlete Stories": "Sportlergeschichten"
     }
   },
   "fr": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Articles fondés sur des données probantes sur la technique alpine, la planification d'entraînement et la préparation mentale.",
-      "homeTitle": "Technique de ski & Entraînement",
-      "homeDescription": "Articles fondés sur des données probantes sur la technique alpine, la planification d'entraînement et la préparation mentale.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analysez votre ski →",
       "languageLabel": "Choisir la langue",
       "languageSwitch": "Langue",
@@ -494,14 +536,21 @@
       "section4P1": "La technique de carving devient vraiment utile lorsqu'elle ne nécessite plus de réflexion consciente. Elle demande une répétition intentionnelle — pas seulement plus de virages, mais des virages où vous savez exactement sur quoi vous vous concentrez.",
       "section5Title": "Accélérez l'apprentissage avec les retours vidéo",
       "section5P1": "Sentir la différence entre une bonne et une mauvaise prise d'arête en temps réel est difficile — le corps ment souvent. Avec les retours vidéo, vous pouvez voir exactement quand l'INI commence, comment le centre de masse se déplace et quand le STEOUT devient trop long."
+    },
+    "categories": {
+      "Technique": "Technique",
+      "Strength & Conditioning": "Force & Condition",
+      "Mindset": "État d'esprit",
+      "AI & Analysis": "IA & Analyse",
+      "Athlete Stories": "Histoires d'athlètes"
     }
   },
   "es": {
     "site": {
-      "title": "Alpine Mastery Blog",
-      "description": "Artículos basados en evidencia sobre técnica alpina, planificación de entrenamiento y preparación mental.",
-      "homeTitle": "Técnica de esquí & Entrenamiento",
-      "homeDescription": "Artículos basados en evidencia sobre técnica alpina, planificación de entrenamiento y preparación mental.",
+      "title": "Masteryhub Training Lab",
+      "description": "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      "homeTitle": "Progress starts with insight",
+      "homeDescription": "Science-based articles on technique, training, mindset, and analysis for athletes.",
       "cta": "Analiza tu esquí →",
       "languageLabel": "Selecciona el idioma",
       "languageSwitch": "Idioma",
@@ -565,6 +614,13 @@
       "section4P1": "La técnica del canto se vuelve realmente valiosa cuando ya no exige pensar conscientemente. Requiere repetición intencional — no solo más curvas, sino curvas en las que sabes exactamente en qué te estás concentrando.",
       "section5Title": "Acelera el aprendizaje con feedback de video",
       "section5P1": "Percibir la diferencia entre un buen y un mal agarre del canto en tiempo real es difícil — el cuerpo suele mentir. Con feedback de video puedes ver exactamente cuándo comienza la INI, cómo se mueve el centro de masas y cuándo la STEOUT se vuelve demasiado larga."
+    },
+    "categories": {
+      "Technique": "Técnica",
+      "Strength & Conditioning": "Fuerza & Condición",
+      "Mindset": "Mentalidad",
+      "AI & Analysis": "IA & Análisis",
+      "Athlete Stories": "Historias de atletas"
     }
   }
 }
