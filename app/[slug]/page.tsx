@@ -13,8 +13,14 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getAllPosts(DEFAULT_LOCALE).map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  try {
+    const posts = getAllPosts(DEFAULT_LOCALE);
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch (error) {
+    // Fallback: return empty array if posts cannot be loaded
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
