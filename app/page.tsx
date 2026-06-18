@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import BlogList from "@/components/BlogList";
 import { cookies } from "next/headers";
-import { DEFAULT_LOCALE } from "@/lib/translations";
 import HomeHero from "@/components/HomeHero";
-import { getAllPosts } from "@/lib/posts";
-import { DEFAULT_LOCALE } from "@/lib/translations";
+import { getAllPosts, DEFAULT_LOCALE } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "Progress starts with insight",
