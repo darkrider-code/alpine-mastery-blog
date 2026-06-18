@@ -7,18 +7,22 @@ import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/posts";
+import { DEFAULT_LOCALE } from "@/lib/translations";
+import { cookies } from "next/headers";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ locale?: string }>;
 };
 
 export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+  return getAllPosts(DEFAULT_LOCALE).map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { locale } = await searchParams;
+  const post = getPostBySlug(slug, locale || DEFAULT_LOCALE);
 
   if (!post) {
     return {};
@@ -53,15 +57,16 @@ function formatDate(dateString: string): string {
   }).format(new Date(dateString));
 }
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { locale } = await searchParams;
+  const post = getPostBySlug(slug, locale || DEFAULT_LOCALE);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post, 3);
+  const relatedPosts = getRelatedPosts(post, 3, locale || DEFAULT_LOCALE);
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${post.slug}`;
 
