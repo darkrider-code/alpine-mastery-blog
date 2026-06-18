@@ -64,7 +64,7 @@ function formatDate(dateString: string): string {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
   const post = getPostBySlug(slug, locale);
 
