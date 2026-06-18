@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import BlogList from "@/components/BlogList";
 import { cookies } from "next/headers";
-import type { ReadonlyRequestCookies } from "next/headers";
+
 import HomeHero from "@/components/HomeHero";
 import { getAllPosts, DEFAULT_LOCALE } from "@/lib/posts";
 
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const posts = getAllPosts(DEFAULT_LOCALE);
-  const cookieStore: ReadonlyRequestCookies = await cookies();
+  const cookieStore = await cookies() as any;
   const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
 
   return (
