@@ -6,14 +6,14 @@ import CTABanner from "@/components/CTABanner";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
 
-const CATEGORIES = ["Slalom", "GS", "SL", "Teknik", "Träning", "Mental"] as const;
+const CATEGORIES = ["Technique", "Strength & Conditioning", "Mindset", "AI & Analysis", "Athlete Stories"] as const;
 
 export default function BlogList({ posts }: { posts: Post[] }) {
   const { t } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState<string>(t("site.allCategories"));
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === t("site.allCategories")) return posts;
+    if (activeCategory === "All") return posts;
     return posts.filter((post) => post.category === activeCategory);
   }, [activeCategory, posts, t]);
 
