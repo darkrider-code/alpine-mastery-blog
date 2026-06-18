@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
   const post = getPostBySlug(slug, locale);
 
