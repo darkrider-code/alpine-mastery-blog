@@ -6,8 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
-import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/posts";
-import { DEFAULT_LOCALE } from "@/lib/translations";
+import { getAllPosts, getPostBySlug, getRelatedPosts, DEFAULT_LOCALE } from "@/lib/posts";
 import { cookies } from "next/headers";
 
 type PageProps = {
