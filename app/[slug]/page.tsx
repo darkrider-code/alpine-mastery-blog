@@ -7,20 +7,21 @@ import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllPosts, getPostBySlug, getRelatedPosts, DEFAULT_LOCALE } from "@/lib/posts";
+import { cookies } from "next/headers";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ locale?: string }>;
 };
 
 export function generateStaticParams() {
   return getAllPosts(DEFAULT_LOCALE).map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const { locale } = await searchParams;
-  const post = getPostBySlug(slug, locale || DEFAULT_LOCALE);
+  const cookieStore = cookies();
+  const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     return {};
@@ -55,16 +56,17 @@ function formatDate(dateString: string): string {
   }).format(new Date(dateString));
 }
 
-export default async function PostPage({ params, searchParams }: PageProps) {
+export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const { locale } = await searchParams;
-  const post = getPostBySlug(slug, locale || DEFAULT_LOCALE);
+  const cookieStore = cookies();
+  const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post, 3, locale || DEFAULT_LOCALE);
+  const relatedPosts = getRelatedPosts(post, 3, locale);
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${post.slug}`;
 
