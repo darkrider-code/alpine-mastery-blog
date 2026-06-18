@@ -5,17 +5,18 @@ import BlogCard from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 
 const CATEGORIES = ["Technique", "Strength & Conditioning", "Mindset", "AI & Analysis", "Athlete Stories"] as const;
 
-export default function BlogList({ posts }: { posts: Post[] }) {
+export default function BlogList({ posts, locale }: { posts: Post[]; locale?: string }) {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
   const filteredPosts = useMemo(() => {
     if (activeCategory === "All") return posts;
     return posts.filter((post) => post.category === activeCategory);
-  }, [activeCategory, posts, t]);
+  }, [activeCategory, posts]);
 
   return (
     <>
