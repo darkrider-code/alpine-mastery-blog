@@ -1,0 +1,570 @@
+{
+  "sv": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
+      "homeTitle": "Skidteknik & Träning",
+      "homeDescription": "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
+      "cta": "Analysera ditt åk →",
+      "languageLabel": "Välj språk",
+      "languageSwitch": "Språk",
+      "copyright": "© 2025 Alpine Mastery · Del av Masteryhub",
+      "readMore": "Läs mer →",
+      "allCategories": "Alla",
+      "relatedTitle": "Fler artiklar i",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blogg",
+      "noPosts": "Inga artiklar i denna kategori ännu."
+    },
+    "post": {
+      "title": "Slalom-kantningsteknik: Så bygger du hastighet genom varje sväng",
+      "description": "Lär dig grunderna i slalom-kantningsteknik – från INI- och STEOUT-faser till balans, tryckfördelning och vanliga misstag som bromsar ditt åk.",
+      "intro": "Att åka slalom snabbt handlar sällan om att \"trycka på hårdare\". De åkare som konsekvent hittar tid i portarna har ofta en gemensam fördel: de använder initiationsfasen (INI) som en accelerator och håller styrfasen ut ur svängen (STEOUT) kort för att undvika onödig bromsning.",
+      "section1Title": "Varför INI-fasen avgör din linje",
+      "section1P1": "I slalom är det inte alltid optimalt att minimera den fas där skidan glider platt mellan svängarna. Forskning visar att elitåkare ofta förlänger INI-fasen för att öka tyngdpunktens framåthastighet innan nästa styrfas börjar.",
+      "section1P2": "Målet är inte att gå från övergång till ren kant så snabbt som möjligt. Målet är att få en effektiv accelerationsfas där kroppen fortsätter att få fart framåt medan skidan fortfarande har möjlighet att pendla mellan kanterna.",
+      "section1P3": "En effektiv övergång börjar fortfarande i underbenen. Genom att leda med underbenet och låta bålen följa efter skapar du vinkel mot backen utan att kasta överkroppen inåt.",
+      "section2Title": "Balans och tryckfördelning genom svängen",
+      "section2P1": "Balansen i slalom är dynamisk, inte statisk. I ingången av svängen ligger tyngdpunkten ofta något framåt för att hjälpa skidan att komma in i rätt riktning.",
+      "section2P2": "Kantväxlingen – eller turn switch – sker ofta platt under övergången mellan kanterna. Det är en del av den dynamiska pendlingen där skidorna glider utan stort sidotryck.",
+      "section2P3": "Många åkare tappar hastighet genom att stå för upprätt eller för långt bakåt när trycket ökar. Tänk på att låta höfterna leda rörelsen och att hålla överkroppen stabil i förhållande till backen.",
+      "quote": "Kantning handlar inte om att luta sig in – det handlar om att använda rörelsen effektivt. De snabbaste åkarna gör inte bara ett starkt kantgrepp; de bygger upp fart under INI och låter svängen följa igenom utan onödig bromsning.",
+      "quoteAuthor": "Marcus Lindqvist, FIS-slalomcoach",
+      "section3Title": "Vanliga fel och hur du korrigerar dem",
+      "section3Intro": "De flesta teknikproblem i slalom syns tydligt om du vet vad du letar efter. Här är några av de vanligaste mönstren vi ser bland klubbåkare och masters:",
+      "tableHeaders": {
+        "issue": "Vanligt fel",
+        "symptom": "Symptom",
+        "fix": "Korrektion"
+      },
+      "tableRows": [
+        {
+          "issue": "För kort INI-fas",
+          "symptom": "Tappar fart mellan svängarna",
+          "fix": "Öva längre glidfas med aktiv tyngdpunktsförflyttning framåt"
+        },
+        {
+          "issue": "Lång STEOUT-fas",
+          "symptom": "Bromsar in i nästa sväng",
+          "fix": "Fokusera på snabbare kantväxling och tidig inledning av nästa sväng"
+        },
+        {
+          "issue": "Inåtlutning med överkropp",
+          "symptom": "Tappar ytterkant, skidan sladdar",
+          "fix": "Håll bålen mer upprätt, rotera med underben"
+        },
+        {
+          "issue": "Stumt ytterben",
+          "symptom": "Skidan studsar, ojämnt tryck",
+          "fix": "Flexa aktivt genom svängen, undvik att låsa knät"
+        },
+        {
+          "issue": "Brådskande övergång",
+          "symptom": "Kort kantgrip, hackigt åk",
+          "fix": "Räkna tempo: låt svängen \"andlas\" innan byte"
+        }
+      ],
+      "section4Title": "Från förståelse till automatiserad rörelse",
+      "section4P1": "Kantningsteknik blir först riktigt värdefull när den inte längre kräver aktivt tänkande. Det kräver repetition med avsikt – inte bara fler svängar, utan svängar där du vet exakt vad du fokuserar på.",
+      "section5Title": "Accelerera inlärningen med videofeedback",
+      "section5P1": "Att känna skillnaden mellan bra och dålig kantgrip i realtid är svårt – kroppen ljuger ofta. Med videofeedback kan du se exakt när INI börjar, hur tyngdpunkten förflyttas och när STEOUT blir för lång."
+    }
+  },
+  "en": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Evidence-based articles on alpine technique, training planning, and mental preparation.",
+      "homeTitle": "Ski Technique & Training",
+      "homeDescription": "Evidence-based articles on alpine technique, training planning, and mental preparation.",
+      "cta": "Analyze your skiing →",
+      "languageLabel": "Select language",
+      "languageSwitch": "Language",
+      "copyright": "© 2025 Alpine Mastery · Part of Masteryhub",
+      "readMore": "Read more →",
+      "allCategories": "All",
+      "relatedTitle": "More articles in",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blog",
+      "noPosts": "No articles in this category yet."
+    },
+    "post": {
+      "title": "Slalom Edging Technique: How to Build Speed Through Every Turn",
+      "description": "Learn the fundamentals of slalom edging technique — from INI and STEOUT phases to balance, pressure distribution, and common mistakes that slow you down.",
+      "intro": "Skiing slalom fast is rarely about \"pushing harder\". The skiers who consistently find time in the gates often share one advantage: they use the initiation phase (INI) as an accelerator and keep the steering-out phase (STEOUT) short to avoid unnecessary braking.",
+      "section1Title": "Why the INI phase defines your line",
+      "section1P1": "In slalom, it is not always optimal to minimize the phase where the ski slides flat between turns. Research shows that elite skiers often extend the INI phase to increase the center-of-mass forward speed before the next steering phase begins.",
+      "section1P2": "The goal is not to move from transition to clean edge as quickly as possible. The goal is to create an efficient acceleration phase where the body keeps gaining forward speed while the ski still has room to oscillate between edges.",
+      "section1P3": "An effective transition still starts in the lower legs. By leading with the lower leg and letting the torso follow, you create angle to the slope without throwing the upper body inward.",
+      "section2Title": "Balance and pressure distribution through the turn",
+      "section2P1": "Balance in slalom is dynamic, not static. At the entry of the turn, the center of mass is often slightly forward to help the ski enter the right path.",
+      "section2P2": "The turn switch often happens flat during the transition between edges. It is part of the dynamic pendulum action where the skis slide with little side pressure.",
+      "section2P3": "Many skiers lose speed by standing too upright or too far back as pressure increases. Think about letting the hips lead the movement and keeping the upper body stable relative to the slope.",
+      "quote": "Edging is not about leaning in — it is about using movement efficiently. The fastest skiers do not just create strong edge grip; they build speed during INI and let the turn flow without unnecessary braking.",
+      "quoteAuthor": "Marcus Lindqvist, FIS slalom coach",
+      "section3Title": "Common mistakes and how to correct them",
+      "section3Intro": "Most technical issues in slalom become obvious once you know what to look for. Here are some of the most common patterns we see among club skiers and masters:",
+      "tableHeaders": {
+        "issue": "Common mistake",
+        "symptom": "Symptom",
+        "fix": "Correction"
+      },
+      "tableRows": [
+        {
+          "issue": "Too short INI phase",
+          "symptom": "Loses speed between turns",
+          "fix": "Practice a longer glide phase with active forward center-of-mass movement"
+        },
+        {
+          "issue": "Long STEOUT phase",
+          "symptom": "Brakes into the next turn",
+          "fix": "Focus on faster edge transition and earlier start of the next turn"
+        },
+        {
+          "issue": "Upper body leaning inward",
+          "symptom": "Loses outside edge, skis skid",
+          "fix": "Keep the torso more upright and rotate with the lower leg"
+        },
+        {
+          "issue": "Stiff outside leg",
+          "symptom": "Skis bounce, pressure is uneven",
+          "fix": "Flex actively through the turn and avoid locking the knee"
+        },
+        {
+          "issue": "Rushed transition",
+          "symptom": "Short edge hold, choppy skiing",
+          "fix": "Count the rhythm: let the turn breathe before switching"
+        }
+      ],
+      "section4Title": "From understanding to automatic movement",
+      "section4P1": "Edging technique becomes truly valuable when it no longer requires conscious thought. It requires intentional repetition — not just more turns, but turns where you know exactly what you are focusing on.",
+      "section5Title": "Accelerate your learning with video feedback",
+      "section5P1": "Feeling the difference between good and bad edge grip in real time is difficult — the body often lies. With video feedback, you can see exactly when INI begins, how the center of mass moves, and when STEOUT becomes too long."
+    }
+  },
+  "no": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Vitenskapelig baserte artikler om alpinteknikk, treningsplanlegging og mental forberedelse.",
+      "homeTitle": "Skiteknikk & Trening",
+      "homeDescription": "Vitenskapelig baserte artikler om alpinteknikk, treningsplanlegging og mental forberedelse.",
+      "cta": "Analyser åket ditt →",
+      "languageLabel": "Velg språk",
+      "languageSwitch": "Språk",
+      "copyright": "© 2025 Alpine Mastery · En del av Masteryhub",
+      "readMore": "Les mer →",
+      "allCategories": "Alle",
+      "relatedTitle": "Flere artikler i",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blogg",
+      "noPosts": "Ingen artikler i denne kategorien ennå."
+    },
+    "post": {
+      "title": "Slalombehandling: Hvordan du bygger fart gjennom hver sving",
+      "description": "Lær grunnleggende om slalombehandling — fra INI- og STEOUT-faser til balanse, trykkfordeling og vanlige feil som bremser deg ned.",
+      "intro": "Å kjøre slalom fort handler sjelden om å \"trykke hardere\". De som konsekvent finner tid i portene deler ofte en fordel: de bruker initiationsfasen (INI) som en akselerator og holder styringsfasen ut av svingen (STEOUT) kort for å unngå unødvendig bremsing.",
+      "section1Title": "Hvorfor INI-fasen bestemmer linjen din",
+      "section1P1": "I slalom er det ikke alltid optimalt å minimere den fasen der skiene glir flatt mellom svingene. Forskning viser at elitedømmere ofte forlater INI-fasen for å øke tyngdepunktets framoverfart før neste styringsfase starter.",
+      "section1P2": "Målet er ikke å gå fra overgang til ren kant så raskt som mulig. Målet er å få en effektiv akselerasjonsfase der kroppen fortsetter å få fart framover mens skiene fortsatt har rom til å pendle mellom kantene.",
+      "section1P3": "En effektiv overgang starter fortsatt i underbena. Ved å lede med underbenet og la overkroppen følge etter, skaper du vinkel mot bakken uten å kaste overkroppen inn.",
+      "section2Title": "Balanse og trykkfordeling gjennom svingen",
+      "section2P1": "Balanse i slalom er dynamisk, ikke statisk. Ved innkjøringen til svingen ligger tyngdepunktet ofte litt framover for å hjelpe skiene inn i riktig retning.",
+      "section2P2": "Kantbyttet skjer ofte flatt under overgangen mellom kanter. Det er en del av den dynamiske pendlingen der skiene glir uten stort sidepress.",
+      "section2P3": "Mange kjørere taper fart ved å stå for rett eller for langt bak når trykket øker. Tenk på å la hoftepartiet lede bevegelsen og holde overkroppen stabil i forhold til bakken.",
+      "quote": "Kanting handler ikke om å lene seg inn — det handler om å bruke bevegelsen effektivt. De raskeste kjørerne bygger ikke bare opp sterk kantgrep; de bygger fart under INI og lar svingen flyte uten unødvendig bremsing.",
+      "quoteAuthor": "Marcus Lindqvist, FIS-slalomtrener",
+      "section3Title": "Vanlige feil og hvordan du retter dem opp",
+      "section3Intro": "De fleste tekniske problemer i slalom blir tydelige når du vet hva du skal se etter. Her er noen av de vanligste mønstrene vi ser blant klubbkjørere og masterkjørere:",
+      "tableHeaders": {
+        "issue": "Vanlig feil",
+        "symptom": "Symptom",
+        "fix": "Korrigering"
+      },
+      "tableRows": [
+        {
+          "issue": "For kort INI-fase",
+          "symptom": "Mister fart mellom svingen",
+          "fix": "Øv en lengre glidefase med aktiv fremoverflytting av tyngdepunktet"
+        },
+        {
+          "issue": "Lang STEOUT-fase",
+          "symptom": "Bremser inn i neste sving",
+          "fix": "Fokuser på raskere kantbyte og tidligere start av neste sving"
+        },
+        {
+          "issue": "Innvendig kroppslutning",
+          "symptom": "Mister ytre kant, skiene slir",
+          "fix": "Hold overkroppen mer oppreist og roter med underbenet"
+        },
+        {
+          "issue": "Stiv ytterbe",
+          "symptom": "Skiene hopper, trykket blir ujevnt",
+          "fix": "Bøy aktivt gjennom svingen og unngå å låse kneet"
+        },
+        {
+          "issue": "Ruset overgang",
+          "symptom": "Kort kantgrep, hakkete kjøring",
+          "fix": "Tell tempoet: la svingen puste før byttet"
+        }
+      ],
+      "section4Title": "Fra forståelse til automatisert bevegelse",
+      "section4P1": "Kantteknikk blir først virkelig nyttig når den ikke lenger krever aktiv tenking. Det krever målrettet repetisjon — ikke bare flere svinger, men svinger der du vet akkurat hva du fokuserer på.",
+      "section5Title": "Akselerer læringen med videofeedback",
+      "section5P1": "Å kjenne forskjellen mellom godt og dårlig kantgrep i sanntid er vanskelig — kroppen lyver ofte. Med videofeedback kan du se nøyaktig når INI starter, hvordan tyngdepunktet beveger seg, og når STEOUT blir for lang."
+    }
+  },
+  "da": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Videnskabeligt baserede artikler om alpin teknik, træningsplanlægning og mental forberedelse.",
+      "homeTitle": "Skiteknik & Træning",
+      "homeDescription": "Videnskabeligt baserede artikler om alpin teknik, træningsplanlægning og mental forberedelse.",
+      "cta": "Analyser dit åk →",
+      "languageLabel": "Vælg sprog",
+      "languageSwitch": "Sprog",
+      "copyright": "© 2025 Alpine Mastery · Del af Masteryhub",
+      "readMore": "Læs mere →",
+      "allCategories": "Alle",
+      "relatedTitle": "Flere artikler i",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blog",
+      "noPosts": "Ingen artikler i denne kategori endnu."
+    },
+    "post": {
+      "title": "Slalomkantteknik: Sådan bygger du fart gennem hver sving",
+      "description": "Lær grundlaget for slalomkantteknik — fra INI- og STEOUT-faser til balance, trykfordeling og almindelige fejl, der bremser dig ned.",
+      "intro": "At køre slalom hurtigt handler sjældent om at \"trykke hårdere\". De åkere, der konsekvent finder tid i portene, har ofte en fælles fordel: de bruger initiationsfasen (INI) som en accelerator og holder styringsfasen ud af svingen (STEOUT) kort for at undgå unødvendig bremsning.",
+      "section1Title": "Hvorfor INI-fasen bestemmer din linje",
+      "section1P1": "I slalom er det ikke altid optimalt at minimere den fase, hvor skien glider fladt mellem svingene. Forskning viser, at eliteåkere ofte forlener INI-fasen for at øge tyngdepunktets fremadshastighed, før den næste styringsfase begynder.",
+      "section1P2": "Målet er ikke at gå fra overgang til ren kant så hurtigt som muligt. Målet er at skabe en effektiv accelerationsfase, hvor kroppen fortsætter med at få fart fremad, mens skien stadig har plads til at pendle mellem kanterne.",
+      "section1P3": "En effektiv overgang starter stadig i underbenene. Ved at lede med underbenet og lade kroppen følge efter, skaber du vinkel mod bakken uden at kaste overkroppen indad.",
+      "section2Title": "Balance og trykfordeling gennem svingen",
+      "section2P1": "Balancen i slalom er dynamisk, ikke statisk. Ved indgangen til svingen ligger tyngdepunktet ofte lidt fremad for at hjælpe skien ind i den rigtige retning.",
+      "section2P2": "Kantskiftet sker ofte fladt under overgangen mellem kanter. Det er en del af den dynamiske pendulering, hvor skiene glider uden stort sidepres.",
+      "section2P3": "Mange åkere mister fart ved at stå for opret eller for langt tilbage, når trykket stiger. Tænk på at lade hoften lede bevægelsen og holde overkroppen stabil i forhold til bakken.",
+      "quote": "Kantning handler ikke om at læne sig ind — det handler om at bruge bevægelsen effektivt. De hurtigste åkere bygger ikke kun et stærkt kantgreb; de bygger fart under INI og lader svingen flyde uden unødvendig bremsning.",
+      "quoteAuthor": "Marcus Lindqvist, FIS-slalomtræner",
+      "section3Title": "Almindelige fejl og hvordan du retter dem",
+      "section3Intro": "De fleste tekniske problemer i slalom bliver tydelige, når du ved, hvad du skal kigge efter. Her er nogle af de mest almindelige mønstre, vi ser blandt klubåkere og mestre:",
+      "tableHeaders": {
+        "issue": "Almindelig fejl",
+        "symptom": "Symptom",
+        "fix": "Korrigering"
+      },
+      "tableRows": [
+        {
+          "issue": "For kort INI-fase",
+          "symptom": "Mister fart mellem svingene",
+          "fix": "Øv en længere glidefase med aktiv fremadgående tyngdepunktsbevægelse"
+        },
+        {
+          "issue": "Lang STEOUT-fase",
+          "symptom": "Bremses ind i næste sving",
+          "fix": "Fokuser på hurtigere kantskift og tidligere start på næste sving"
+        },
+        {
+          "issue": "Indadgående overkrop",
+          "symptom": "Mister ydersiden, skien slir",
+          "fix": "Hold kroppen mere opret og roter med underbenet"
+        },
+        {
+          "issue": "Stiv ydre ben",
+          "symptom": "Skiene hopper, trykket bliver ujævnt",
+          "fix": "Bøj aktivt gennem svingen og undgå at låse knæet"
+        },
+        {
+          "issue": "Hastig overgang",
+          "symptom": "Kort kantgreb, hakket kørsel",
+          "fix": "Tal tempoet: lad svingen trække vejret før skift"
+        }
+      ],
+      "section4Title": "Fra forståelse til automatiseret bevægelse",
+      "section4P1": "Kantteknik bliver først virkelig værdifuld, når den ikke længere kræver aktiv tænkning. Det kræver målrettet repetition — ikke bare flere sving, men sving, hvor du ved præcist, hvad du fokuserer på.",
+      "section5Title": "Accelerer læringen med videofeedback",
+      "section5P1": "At mærke forskellen mellem godt og dårligt kantgreb i realtid er svært — kroppen lyver ofte. Med videofeedback kan du se præcist, når INI begynder, hvordan tyngdepunktet bevæger sig, og når STEOUT bliver for lang."
+    }
+  },
+  "fi": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Alppihiihtotekniikkaa, harjoittelusuunnittelua ja henkistä valmistautumista käsitteleviä tieteellisesti perusteltuja artikkeleita.",
+      "homeTitle": "Hiihtotekniikka & Harjoittelu",
+      "homeDescription": "Alppihiihtotekniikkaa, harjoittelusuunnittelua ja henkistä valmistautumista käsitteleviä tieteellisesti perusteltuja artikkeleita.",
+      "cta": "Analysoi hiihtosi →",
+      "languageLabel": "Valitse kieli",
+      "languageSwitch": "Kieli",
+      "copyright": "© 2025 Alpine Mastery · Masteryhubin osa",
+      "readMore": "Lue lisää →",
+      "allCategories": "Kaikki",
+      "relatedTitle": "Lisää artikkeleita",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blogi",
+      "noPosts": "Tässä kategoriassa ei ole vielä artikkeleita."
+    },
+    "post": {
+      "title": "Slalom-kanttekniikka: Kuinka rakennat nopeutta jokaiseen kaarreeseen",
+      "description": "Opi slalom-kanttekniikan perusteet — INI- ja STEOUT-vaiheista tasapainoon, painonjakautumiseen ja yleisiin virheisiin, jotka hidastavat sinua.",
+      "intro": "Slalomissa nopea hiihto on harvoin kyse siitä, että \"työntäisi kovempaa\". Portit läpi ajavat hiihtäjät jakavat usein saman edun: he käyttävät aloitusvaihetta (INI) kiihdyttimenä ja pitävät ulosvetovaiheen (STEOUT) lyhyenä välttääkseen tarpeetonta jarrutusta.",
+      "section1Title": "Miksi INI-vaihe määrittää linjasi",
+      "section1P1": "Slalomissa ei aina ole optimaalista minimoida vaihetta, jossa suksi liukuu tasaisesti kaarien välillä. Tutkimukset osoittavat, että huippuhiihtäjät usein pidentävät INI-vaihetta lisätäkseen painopisteen eteenpäin suuntautuvaa nopeutta ennen seuraavan ohjausvaiheen alkua.",
+      "section1P2": "Tavoitteena ei ole siirtyä mahdollisimman nopeasti siirtymävaiheesta puhtaaseen reunaan. Tavoitteena on luoda tehokas kiihtymisvaihe, jossa keho jatkaa nopeutumista eteenpäin samalla, kun suksi voi edelleen heilahdella reunojen välillä.",
+      "section1P3": "Tehokas siirtymä alkaa edelleen alaraajoista. Johtaen alaraajalla ja antaen vartalon seurata, luot kulman rinteen suhteen ilman, että heität ylävartaloa sisäänpäin.",
+      "section2Title": "Tasapaino ja paineen jakautuminen kaaren aikana",
+      "section2P1": "Tasapaino slalomissa on dynaaminen, ei staattinen. Kaareen tulossa painopiste on usein hieman eteenpäin, jotta suksi pääsee oikeaan suuntaan.",
+      "section2P2": "Kantavaihdin tapahtuu usein tasaisesti reunojen välillä. Se on osa dynaamista heiluntaa, jossa suksit liukuvat ilman suurta sivupainetta.",
+      "section2P3": "Monet hiihtäjät menettävät nopeutta seisoessaan liian suorina tai liian takana, kun paine kasvaa. Ajattele lantion johtavan liikettä ja ylävartalon pysyvän vakaana rinnetason suhteen.",
+      "quote": "Kantaminen ei ole sitä, että nojautuisi sisään — vaan sitä, että käyttää liikettä tehokkaasti. Nopeimmat hiihtäjät eivät vain luo vahvaa reunan otetta; he rakentavat nopeutta INI-vaiheen aikana ja päästävät kaaren virrata ilman tarpeetonta jarrutusta.",
+      "quoteAuthor": "Marcus Lindqvist, FIS-slalomvalmentaja",
+      "section3Title": "Yleiset virheet ja miten ne korjataan",
+      "section3Intro": "Useimmat tekniset ongelmat slalomissa tulevat näkyviin, kun tietää mitä etsiä. Tässä joitakin yleisimpiä malleja, joita näemme seurahiihtäjissä ja mestareissa:",
+      "tableHeaders": {
+        "issue": "Yleinen virhe",
+        "symptom": "Oire",
+        "fix": "Korjaus"
+      },
+      "tableRows": [
+        {
+          "issue": "Liian lyhyt INI-vaihe",
+          "symptom": "Menetää nopeutta kaarien välillä",
+          "fix": "Harjoittele pidempää liukuvaihetta aktiivisella painopisteen liikuttamisella eteenpäin"
+        },
+        {
+          "issue": "Pitkä STEOUT-vaihe",
+          "symptom": "Jarruttaa seuraavaan kaarreeseen",
+          "fix": "Keskitä huomio nopeampaan reunavaihdintaan ja seuraavan kaarron aikaisempaan alkuun"
+        },
+        {
+          "issue": "Ylävartalo kallistuu sisäänpäin",
+          "symptom": "Menetää ulkoreunan, suksit luistaa",
+          "fix": "Pidä vartalo enemmän pystyssä ja pyöritä alaraajan kanssa"
+        },
+        {
+          "issue": "Jäykkä ulkoinen jalka",
+          "symptom": "Sukset pomppaavat, paine jaetaan epätasaisesti",
+          "fix": "Taivuta aktiivisesti kaaren läpi ja vältä polven lukitsemista"
+        },
+        {
+          "issue": "Kiirehtivä siirtymä",
+          "symptom": "Lyhyt reunansito, hakkaava hiihto",
+          "fix": "Laskekaa tahtia: anna kaaren hengittää ennen vaihtoa"
+        }
+      ],
+      "section4Title": "Ymmärryksestä automatisoituihin liikkeisiin",
+      "section4P1": "Kanttekniikka tulee todella hyödylliseksi vasta silloin, kun sitä ei tarvitse enää ajatella jatkuvasti. Se vaatii tarkoituksellista toistoa — ei vain enemmän kaaria, vaan kaaria, joissa tiedät tarkalleen, mihin keskityt.",
+      "section5Title": "Kiihdytä oppimista videopalautteella",
+      "section5P1": "Hyvän ja huonon reunanoton eron tunteminen reaaliajassa on vaikeaa — keho valehtelee usein. Videopalautteen avulla näet tarkasti, milloin INI alkaa, miten painopiste liikkuu ja milloin STEOUT tulee liian pitkäksi."
+    }
+  },
+  "de": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Wissenschaftlich fundierte Artikel zur alpinen Technik, Trainingsplanung und mentalen Vorbereitung.",
+      "homeTitle": "Ski-Technik & Training",
+      "homeDescription": "Wissenschaftlich fundierte Artikel zur alpinen Technik, Trainingsplanung und mentalen Vorbereitung.",
+      "cta": "Analysiere dein Fahren →",
+      "languageLabel": "Sprache auswählen",
+      "languageSwitch": "Sprache",
+      "copyright": "© 2025 Alpine Mastery · Teil von Masteryhub",
+      "readMore": "Mehr lesen →",
+      "allCategories": "Alle",
+      "relatedTitle": "Mehr Artikel in",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blog",
+      "noPosts": "Noch keine Artikel in dieser Kategorie."
+    },
+    "post": {
+      "title": "Slalom-Kanttechnik: So baust du Geschwindigkeit in jede Kurve ein",
+      "description": "Lerne die Grundlagen der Slalom-Kanttechnik — von INI- und STEOUT-Phasen über Gleichgewicht und Druckverteilung bis hin zu häufigen Fehlern, die dich bremsen.",
+      "intro": "Bei Slalom schnell zu fahren heißt selten, \"stärker zu drücken\". Die Fahrer, die konsequent Zeit in den Toren finden, haben oft einen gemeinsamen Vorteil: Sie nutzen die Initiationsphase (INI) als Beschleuniger und halten die Steuerungsphase aus der Kurve (STEOUT) kurz, um unnötiges Bremsen zu vermeiden.",
+      "section1Title": "Warum die INI-Phase deine Linie bestimmt",
+      "section1P1": "Im Slalom ist es nicht immer optimal, die Phase zu minimieren, in der der Ski zwischen den Kurven flach gleitet. Forschung zeigt, dass Elitefahrer die INI-Phase oft verlängern, um die Vorwärtsgeschwindigkeit des Schwerpunkts zu erhöhen, bevor die nächste Steuerphase beginnt.",
+      "section1P2": "Ziel ist nicht, so schnell wie möglich vom Übergang zur reinen Kante zu gelangen. Ziel ist es, eine effiziente Beschleunigungsphase zu schaffen, in der der Körper weiter an Geschwindigkeit gewinnt, während der Ski noch Zeit hat, zwischen den Kanten zu pendeln.",
+      "section1P3": "Ein effektiver Übergang beginnt weiterhin in den Unterbeinen. Indem du das Unterbein führst und den Oberkörper folgen lässt, erzeugst du Winkel zur Piste, ohne den Oberkörper nach innen zu werfen.",
+      "section2Title": "Gleichgewicht und Druckverteilung durch die Kurve",
+      "section2P1": "Das Gleichgewicht im Slalom ist dynamisch, nicht statisch. Beim Kurveneinstieg liegt der Schwerpunkt oft etwas nach vorn, um dem Ski zu helfen, die richtige Richtung einzunehmen.",
+      "section2P2": "Der Kantenwechsel passiert oft flach während des Übergangs zwischen den Kanten. Er ist Teil der dynamischen Pendelbewegung, bei der die Skier ohne großen Seitenruck gleiten.",
+      "section2P3": "Viele Fahrer verlieren Geschwindigkeit, wenn sie beim Druckaufbau zu aufrecht oder zu weit hinten stehen. Denk daran, die Hüften die Bewegung führen zu lassen und den Oberkörper stabil zur Piste zu halten.",
+      "quote": "Kantenfahren bedeutet nicht, sich nach innen zu lehnen — es bedeutet, Bewegung effizient zu nutzen. Die schnellsten Fahrer bauen nicht nur starken Kantengriff auf; sie bauen Geschwindigkeit in der INI-Phase auf und lassen die Kurve ohne unnötiges Bremsen ablaufen.",
+      "quoteAuthor": "Marcus Lindqvist, FIS-Slalomtrainer",
+      "section3Title": "Häufige Fehler und wie du sie korrigierst",
+      "section3Intro": "Die meisten technischen Probleme im Slalom werden sichtbar, sobald du weißt, worauf du achten musst. Hier sind einige der häufigsten Muster, die wir bei Clubfahrern und Meistern sehen:",
+      "tableHeaders": {
+        "issue": "Häufiger Fehler",
+        "symptom": "Symptom",
+        "fix": "Korrektur"
+      },
+      "tableRows": [
+        {
+          "issue": "Zu kurze INI-Phase",
+          "symptom": "Verliert Geschwindigkeit zwischen den Kurven",
+          "fix": "Übe eine längere Gleitphase mit aktiver Vorwärtsbewegung des Schwerpunkts"
+        },
+        {
+          "issue": "Lange STEOUT-Phase",
+          "symptom": "Bremst in die nächste Kurve ein",
+          "fix": "Konzentriere dich auf schnelleren Kantenwechsel und früheren Beginn der nächsten Kurve"
+        },
+        {
+          "issue": "Oberkörper nach innen geneigt",
+          "symptom": "Verliert die Außenkante, Skier schleifen",
+          "fix": "Halte den Oberkörper aufrechter und rotiere mit dem Unterbein"
+        },
+        {
+          "issue": "Steifes äußeres Bein",
+          "symptom": "Skier springen, Druck ist ungleichmäßig",
+          "fix": "Beuge aktiv durch die Kurve und vermeide das Verriegeln des Knies"
+        },
+        {
+          "issue": "Hastiger Übergang",
+          "symptom": "Kurzer Kantengriff, ruckartige Fahrweise",
+          "fix": "Zähle das Tempo: Lass die Kurve atmen, bevor du wechselst"
+        }
+      ],
+      "section4Title": "Vom Verständnis zur automatisierten Bewegung",
+      "section4P1": "Kanttechnik wird erst dann wirklich wertvoll, wenn sie nicht mehr bewusst gedacht werden muss. Sie erfordert absichtsvolle Wiederholung — nicht einfach mehr Kurven, sondern Kurven, bei denen du genau weißt, worauf du dich konzentrierst.",
+      "section5Title": "Beschleunige das Lernen mit Video-Feedback",
+      "section5P1": "Den Unterschied zwischen gutem und schlechtem Kantengriff in Echtzeit zu spüren, ist schwer — der Körper lügt oft. Mit Video-Feedback kannst du genau sehen, wann INI beginnt, wie sich der Schwerpunkt bewegt und wann STEOUT zu lang wird."
+    }
+  },
+  "fr": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Articles fondés sur des données probantes sur la technique alpine, la planification d'entraînement et la préparation mentale.",
+      "homeTitle": "Technique de ski & Entraînement",
+      "homeDescription": "Articles fondés sur des données probantes sur la technique alpine, la planification d'entraînement et la préparation mentale.",
+      "cta": "Analysez votre ski →",
+      "languageLabel": "Choisir la langue",
+      "languageSwitch": "Langue",
+      "copyright": "© 2025 Alpine Mastery · Fait partie de Masteryhub",
+      "readMore": "Lire la suite →",
+      "allCategories": "Tous",
+      "relatedTitle": "Plus d'articles dans",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blog",
+      "noPosts": "Aucun article dans cette catégorie pour l'instant."
+    },
+    "post": {
+      "title": "Technique de virage en slalom : comment construire la vitesse à chaque courbe",
+      "description": "Apprenez les bases de la technique de virage en slalom — des phases INI et STEOUT à l'équilibre, à la répartition de la pression et aux erreurs courantes qui vous freinent.",
+      "intro": "Skier vite en slalom n'est presque jamais une question de \"pousser plus fort\". Les skieurs qui trouvent régulièrement du temps dans les portes ont souvent un avantage commun : ils utilisent la phase d'initiation (INI) comme un accélérateur et gardent la phase de sortie du virage (STEOUT) courte pour éviter un freinage inutile.",
+      "section1Title": "Pourquoi la phase INI définit votre ligne",
+      "section1P1": "En slalom, ce n'est pas toujours optimal de minimiser la phase où le ski glisse à plat entre les virages. Les recherches montrent que les skieurs d'élite prolongent souvent la phase INI pour augmenter la vitesse vers l'avant du centre de masse avant le début de la phase suivante.",
+      "section1P2": "Le but n'est pas de passer le plus vite possible de la transition à l'arête propre. Le but est de créer une phase d'accélération efficace où le corps continue à gagner de la vitesse pendant que le ski garde encore la possibilité d'osciller entre les arêtes.",
+      "section1P3": "Une transition efficace commence toujours dans les jambes. En menant avec le bas du corps et en laissant le tronc suivre, vous créez un angle sur la pente sans projeter le haut du corps vers l'intérieur.",
+      "section2Title": "Équilibre et répartition de la pression dans le virage",
+      "section2P1": "L'équilibre en slalom est dynamique, pas statique. À l'entrée du virage, le centre de masse est souvent légèrement en avant pour aider le ski à entrer dans la bonne direction.",
+      "section2P2": "Le changement de bord se produit souvent à plat pendant la transition entre les arêtes. C'est une partie de la pendulation dynamique où les skis glissent sans grand appui latéral.",
+      "section2P3": "Beaucoup de skieurs perdent de la vitesse en restant trop droits ou trop en arrière quand la pression augmente. Pensez à laisser les hanches guider le mouvement et à garder le haut du corps stable par rapport à la pente.",
+      "quote": "Le carving ne consiste pas à se pencher vers l'intérieur — il s'agit d'utiliser le mouvement efficacement. Les skieurs les plus rapides ne créent pas seulement une forte prise d'arête ; ils construisent la vitesse pendant l'INI et laissent le virage s'écouler sans freinage inutile.",
+      "quoteAuthor": "Marcus Lindqvist, entraîneur FIS de slalom",
+      "section3Title": "Erreurs courantes et comment les corriger",
+      "section3Intro": "La plupart des problèmes techniques en slalom deviennent évidents lorsque vous savez ce qu'il faut observer. Voici certains des schémas les plus fréquents que nous voyons chez les skieurs de club et les maîtres :",
+      "tableHeaders": {
+        "issue": "Erreur courante",
+        "symptom": "Symptôme",
+        "fix": "Correction"
+      },
+      "tableRows": [
+        {
+          "issue": "Phase INI trop courte",
+          "symptom": "Perd de la vitesse entre les virages",
+          "fix": "Pratiquez une phase de glisse plus longue avec un mouvement actif du centre de masse vers l'avant"
+        },
+        {
+          "issue": "Phase STEOUT longue",
+          "symptom": "Freine dans le virage suivant",
+          "fix": "Concentrez-vous sur une transition de bord plus rapide et sur un démarrage plus précoce du prochain virage"
+        },
+        {
+          "issue": "Haut du corps penché vers l'intérieur",
+          "symptom": "Perd l'arête extérieure, les skis patinent",
+          "fix": "Gardez le tronc plus droit et tournez avec le bas du corps"
+        },
+        {
+          "issue": "Jambe extérieure raide",
+          "symptom": "Les skis rebondissent, la pression est irrégulière",
+          "fix": "Fléchissez activement dans le virage et évitez de bloquer le genou"
+        },
+        {
+          "issue": "Transition précipitée",
+          "symptom": "Prise d'arête courte, ski saccadé",
+          "fix": "Comptez le rythme : laissez le virage respirer avant de changer"
+        }
+      ],
+      "section4Title": "De la compréhension au mouvement automatisé",
+      "section4P1": "La technique de carving devient vraiment utile lorsqu'elle ne nécessite plus de réflexion consciente. Elle demande une répétition intentionnelle — pas seulement plus de virages, mais des virages où vous savez exactement sur quoi vous vous concentrez.",
+      "section5Title": "Accélérez l'apprentissage avec les retours vidéo",
+      "section5P1": "Sentir la différence entre une bonne et une mauvaise prise d'arête en temps réel est difficile — le corps ment souvent. Avec les retours vidéo, vous pouvez voir exactement quand l'INI commence, comment le centre de masse se déplace et quand le STEOUT devient trop long."
+    }
+  },
+  "es": {
+    "site": {
+      "title": "Alpine Mastery Blog",
+      "description": "Artículos basados en evidencia sobre técnica alpina, planificación de entrenamiento y preparación mental.",
+      "homeTitle": "Técnica de esquí & Entrenamiento",
+      "homeDescription": "Artículos basados en evidencia sobre técnica alpina, planificación de entrenamiento y preparación mental.",
+      "cta": "Analiza tu esquí →",
+      "languageLabel": "Selecciona el idioma",
+      "languageSwitch": "Idioma",
+      "copyright": "© 2025 Alpine Mastery · Parte de Masteryhub",
+      "readMore": "Leer más →",
+      "allCategories": "Todo",
+      "relatedTitle": "Más artículos en",
+      "breadcrumbMasteryhub": "Masteryhub",
+      "breadcrumbBlog": "Blog",
+      "noPosts": "Aún no hay artículos en esta categoría."
+    },
+    "post": {
+      "title": "Técnica de canto en slalom: cómo construir velocidad en cada curva",
+      "description": "Aprende los fundamentos de la técnica de canto en slalom — desde las fases INI y STEOUT hasta el equilibrio, la distribución de presión y los errores comunes que te frenan.",
+      "intro": "Ir rápido en slalom rara vez se trata de \"empujar más fuerte\". Los esquiadores que consiguen tiempo de forma constante en las puertas suelen tener una ventaja común: utilizan la fase de iniciación (INI) como acelerador y mantienen la fase de salida de la curva (STEOUT) corta para evitar frenos innecesarios.",
+      "section1Title": "Por qué la fase INI define tu línea",
+      "section1P1": "En slalom, no siempre es óptimo minimizar la fase en la que la tabla se desliza plana entre curvas. La investigación muestra que los esquiadores de élite suelen alargar la fase INI para aumentar la velocidad hacia delante del centro de masas antes de que empiece la siguiente fase de control.",
+      "section1P2": "La meta no es pasar lo más rápido posible de la transición al canto limpio. La meta es crear una fase de aceleración eficiente donde el cuerpo siga ganando velocidad mientras la tabla todavía tiene espacio para oscilar entre los cantos.",
+      "section1P3": "Una transición efectiva sigue empezando en las piernas. Guiando con la pierna inferior y dejando que el tronco siga, creas ángulo con la pendiente sin lanzar el torso hacia dentro.",
+      "section2Title": "Equilibrio y distribución de presión a lo largo de la curva",
+      "section2P1": "El equilibrio en slalom es dinámico, no estático. En la entrada de la curva, el centro de masas suele estar ligeramente adelantado para ayudar a que la tabla entre en la dirección correcta.",
+      "section2P2": "El cambio de canto suele ocurrir de forma plana durante la transición entre cantos. Es parte de la oscilación dinámica donde las tablas se deslizan sin mucho esfuerzo lateral.",
+      "section2P3": "Muchos esquiadores pierden velocidad al mantenerse demasiado erguidos o demasiado atrás cuando aumenta la presión. Piensa en dejar que las caderas guíen el movimiento y mantener el tronco estable en relación con la pendiente.",
+      "quote": "Cantar no consiste en inclinarse hacia dentro — consiste en usar el movimiento de forma eficiente. Los esquiadores más rápidos no solo crean un fuerte agarre en el canto; construyen velocidad durante la INI y dejan que la curva fluya sin freno innecesario.",
+      "quoteAuthor": "Marcus Lindqvist, entrenador FIS de slalom",
+      "section3Title": "Errores comunes y cómo corregirlos",
+      "section3Intro": "La mayoría de los problemas técnicos en slalom se hacen evidentes cuando sabes qué mirar. Aquí tienes algunos de los patrones más comunes que vemos entre esquiadores de club y maestros:",
+      "tableHeaders": {
+        "issue": "Error común",
+        "symptom": "Síntoma",
+        "fix": "Corrección"
+      },
+      "tableRows": [
+        {
+          "issue": "INI demasiado corta",
+          "symptom": "Pierde velocidad entre curvas",
+          "fix": "Practica una fase de deslizamiento más larga con movimiento activo del centro de masas hacia delante"
+        },
+        {
+          "issue": "STEOUT larga",
+          "symptom": "Frena hacia la siguiente curva",
+          "fix": "Concéntrate en una transición de canto más rápida y en el inicio más temprano de la siguiente curva"
+        },
+        {
+          "issue": "Tronco inclinándose hacia dentro",
+          "symptom": "Pierde el canto exterior, las tablas patinan",
+          "fix": "Mantén el tronco más erguido y rota con la pierna inferior"
+        },
+        {
+          "issue": "Pierna exterior rígida",
+          "symptom": "Las tablas rebotan, la presión es desigual",
+          "fix": "Flexiona activamente durante la curva y evita bloquear la rodilla"
+        },
+        {
+          "issue": "Transición apresurada",
+          "symptom": "Agarre corto, esquí desigual",
+          "fix": "Cuenta el ritmo: deja que la curva respire antes de cambiar"
+        }
+      ],
+      "section4Title": "De la comprensión al movimiento automatizado",
+      "section4P1": "La técnica del canto se vuelve realmente valiosa cuando ya no exige pensar conscientemente. Requiere repetición intencional — no solo más curvas, sino curvas en las que sabes exactamente en qué te estás concentrando.",
+      "section5Title": "Acelera el aprendizaje con feedback de video",
+      "section5P1": "Percibir la diferencia entre un buen y un mal agarre del canto en tiempo real es difícil — el cuerpo suele mentir. Con feedback de video puedes ver exactamente cuándo comienza la INI, cómo se mueve el centro de masas y cuándo la STEOUT se vuelve demasiado larga."
+    }
+  }
+}

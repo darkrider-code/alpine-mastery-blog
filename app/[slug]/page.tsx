@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import BlogCard, { categoryColors, formatDate } from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
 import ScrollProgress from "@/components/ScrollProgress";
-import { RenderMdx } from "@/lib/render-mdx";
+import TranslatedPostBody from "@/components/TranslatedPostBody";
+import TranslatedPostHeader from "@/components/TranslatedPostHeader";
+import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 
 type PageProps = {
@@ -115,7 +116,7 @@ export default async function PostPage({ params }: PageProps) {
       <article>
         <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-3xl">
-            <nav aria-label="Brödsmulor" className="mb-6 text-sm text-text-secondary">
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-text-secondary">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
                   <a href="https://masteryhub.se" className="transition hover:text-accent">
@@ -124,9 +125,9 @@ export default async function PostPage({ params }: PageProps) {
                 </li>
                 <li aria-hidden="true">→</li>
                 <li>
-                  <Link href="/" className="transition hover:text-accent">
-                    Blogg
-                  </Link>
+                  <a href="https://blog.masteryhub.se" className="transition hover:text-accent">
+                    Blog
+                  </a>
                 </li>
                 <li aria-hidden="true">→</li>
                 <li className="text-white">{post.title}</li>
@@ -137,9 +138,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.category}
             </span>
 
-            <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-              {post.title}
-            </h1>
+            <TranslatedPostHeader />
 
             <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-text-secondary">
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
@@ -152,7 +151,7 @@ export default async function PostPage({ params }: PageProps) {
         </header>
 
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <RenderMdx source={post.content} />
+          <TranslatedPostBody />
         </div>
       </article>
 
@@ -161,9 +160,7 @@ export default async function PostPage({ params }: PageProps) {
 
         {relatedPosts.length > 0 && (
           <section className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold text-white">
-              Fler artiklar i {post.category}
-            </h2>
+            <TranslatedRelatedTitle category={post.category} />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((related) => (
                 <BlogCard key={related.slug} post={related} />

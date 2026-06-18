@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
 
 const categoryColors: Record<string, string> = {
@@ -10,8 +13,8 @@ const categoryColors: Record<string, string> = {
   Mental: "bg-orange-900 text-orange-300",
 };
 
-function formatDate(dateString: string): string {
-  return new Intl.DateTimeFormat("sv-SE", {
+function formatDate(dateString: string, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -24,6 +27,7 @@ function truncate(text: string, maxLength: number): string {
 }
 
 export default function BlogCard({ post }: { post: Post }) {
+  const { locale, t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
 
   return (
@@ -45,13 +49,13 @@ export default function BlogCard({ post }: { post: Post }) {
 
       <div className="mt-6 flex items-center justify-between text-sm">
         <time dateTime={post.publishedAt} className="text-text-secondary">
-          {formatDate(post.publishedAt)}
+          {formatDate(post.publishedAt, locale)}
         </time>
         <Link
           href={`/${post.slug}`}
           className="font-medium text-accent transition hover:text-accent-hover"
         >
-          Läs mer →
+          {t("site.readMore")}
         </Link>
       </div>
     </article>

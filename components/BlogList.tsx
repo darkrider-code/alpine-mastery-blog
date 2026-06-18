@@ -3,31 +3,33 @@
 import { useMemo, useState } from "react";
 import BlogCard from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
+import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
 
 const CATEGORIES = ["Slalom", "GS", "SL", "Teknik", "Träning", "Mental"] as const;
 
 export default function BlogList({ posts }: { posts: Post[] }) {
-  const [activeCategory, setActiveCategory] = useState<string>("Alla");
+  const { t } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState<string>(t("site.allCategories"));
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === "Alla") return posts;
+    if (activeCategory === t("site.allCategories")) return posts;
     return posts.filter((post) => post.category === activeCategory);
-  }, [activeCategory, posts]);
+  }, [activeCategory, posts, t]);
 
   return (
     <>
       <div className="mb-8 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => setActiveCategory("Alla")}
+          onClick={() => setActiveCategory(t("site.allCategories"))}
           className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-            activeCategory === "Alla"
+            activeCategory === t("site.allCategories")
               ? "bg-accent text-bg-primary"
               : "border border-border bg-bg-card text-text-secondary hover:border-accent/50 hover:text-white"
           }`}
         >
-          Alla
+          {t("site.allCategories")}
         </button>
         {CATEGORIES.map((category) => (
           <button
@@ -53,7 +55,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
       {filteredPosts.length === 0 && (
         <p className="py-12 text-center text-text-secondary">
-          Inga artiklar i denna kategori ännu.
+          {t("site.noPosts")}
         </p>
       )}
 

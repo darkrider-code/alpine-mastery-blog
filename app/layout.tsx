@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,9 +33,11 @@ export default function RootLayout({
   return (
     <html lang="sv" className="dark">
       <body className={`${inter.className} flex min-h-screen flex-col bg-bg-primary text-white antialiased`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );
