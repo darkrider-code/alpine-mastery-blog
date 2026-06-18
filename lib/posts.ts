@@ -5,7 +5,7 @@ import type { Post } from "@/types/post";
 import { DEFAULT_LOCALE } from "@/lib/translations";
 export { DEFAULT_LOCALE } from "@/lib/translations";
 
-const postsDirectory = path.join(process.cwd(), "content/posts");
+const postsDirectory = path.join(process.cwd(), "content", "posts");
 
 function parsePost(slug: string, locale: string, fileContents: string): Post {
   const { data, content } = matter(fileContents);
