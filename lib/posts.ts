@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import type { Post } from "@/types/post";
 import { DEFAULT_LOCALE } from "@/lib/translations";
+export { DEFAULT_LOCALE } from "@/lib/translations";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
