@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   description:
     "Science-based articles on technique, training, mindset, and analysis for athletes.",
   openGraph: {
-    title: "Skidteknik & Träning | Alpine Mastery Blog",
+    title: "Progress starts with insight | Masteryhub Training Lab",
     description:
-      "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
+      "Science-based articles on technique, training, mindset, and analysis for athletes.",
     url: "https://blog.masteryhub.se",
   },
 };
