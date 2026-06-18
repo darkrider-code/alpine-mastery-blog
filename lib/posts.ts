@@ -2,14 +2,16 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Post } from "@/types/post";
+import { DEFAULT_LOCALE } from "@/lib/translations";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
-function parsePost(slug: string, fileContents: string): Post {
+function parsePost(slug: string, locale: string, fileContents: string): Post {
   const { data, content } = matter(fileContents);
 
   return {
     slug,
+    locale,
     title: data.title as string,
     description: data.description as string,
     publishedAt: data.publishedAt as string,
@@ -21,38 +23,79 @@ function parsePost(slug: string, fileContents: string): Post {
   };
 }
 
-export function getAllPosts(): Post[] {
+// Get all unique slugs (directories in content/posts)
+function getAllSlugs(): string[] {
   if (!fs.existsSync(postsDirectory)) {
     return [];
   }
 
-  const fileNames = fs.readdirSync(postsDirectory).filter((name) => name.endsWith(".mdx"));
+  return fs.readdirSync(postsDirectory)
+    .filter((name) => {
+      const fullPath = path.join(postsDirectory, name);
+      return fs.statSync(fullPath).isDirectory();
+    });
+}
 
-  const posts = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, "");
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    return parsePost(slug, fileContents);
-  });
+// Get all posts for a specific locale
+function getPostsByLocale(locale: string): Post[] {
+  const slugs = getAllSlugs();
+  const posts: Post[] = [];
+
+  for (const slug of slugs) {
+    const localePath = path.join(postsDirectory, slug, `${locale}.mdx`);
+    const fallbackPath = path.join(postsDirectory, slug, 'sv.mdx');
+    
+    let filePath = localePath;
+    if (!fs.existsSync(filePath)) {
+      filePath = fallbackPath;
+    }
+    
+    if (fs.existsSync(filePath)) {
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      posts.push(parsePost(slug, locale, fileContents));
+    }
+  }
 
   return posts.sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 }
 
-export function getPostBySlug(slug: string): Post | null {
-  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+export function getAllPosts(locale: string = DEFAULT_LOCALE): Post[] {
+  return getPostsByLocale(locale);
+}
 
-  if (!fs.existsSync(fullPath)) {
+export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Post | null {
+  const localePath = path.join(postsDirectory, slug, `${locale}.mdx`);
+  const fallbackPath = path.join(postsDirectory, slug, 'sv.mdx');
+  
+  let filePath = localePath;
+  if (!fs.existsSync(filePath)) {
+    filePath = fallbackPath;
+  }
+  
+  if (!fs.existsSync(filePath)) {
     return null;
   }
 
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  return parsePost(slug, fileContents);
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  return parsePost(slug, locale, fileContents);
 }
 
-export function getRelatedPosts(post: Post, limit: number): Post[] {
-  return getAllPosts()
+export function getRelatedPosts(post: Post, limit: number, locale: string = DEFAULT_LOCALE): Post[] {
+  return getAllPosts(locale)
     .filter((p) => p.category === post.category && p.slug !== post.slug)
     .slice(0, limit);
+}
+
+// Get all available locales for a specific post
+export function getPostLocales(slug: string): string[] {
+  const slugPath = path.join(postsDirectory, slug);
+  if (!fs.existsSync(slugPath)) {
+    return [];
+  }
+  
+  return fs.readdirSync(slugPath)
+    .filter((name) => name.endsWith(".mdx"))
+    .map((name) => name.replace(/.mdx$/, ""));
 }
