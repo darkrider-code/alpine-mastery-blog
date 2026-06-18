@@ -1,5 +1,6 @@
 export type Post = {
   slug: string;
+  locale: string;
   title: string;
   description: string;
   publishedAt: string;
