@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import BlogList from "@/components/BlogList";
-import { cookies } from "next/headers";
+
 
 import HomeHero from "@/components/HomeHero";
 import { getAllPosts, DEFAULT_LOCALE } from "@/lib/posts";
+import { getLocaleFromCookies } from "@/lib/language";
 
 export const metadata: Metadata = {
   title: "Progress starts with insight",
@@ -19,8 +20,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const posts = getAllPosts(DEFAULT_LOCALE);
-  const cookieStore = await cookies() as any;
-  const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
+  const locale = await getLocaleFromCookies();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
