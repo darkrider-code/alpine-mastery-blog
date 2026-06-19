@@ -7,7 +7,8 @@ import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllPosts, getPostBySlug, getRelatedPosts, DEFAULT_LOCALE } from "@/lib/posts";
-import { cookies } from "next/headers";
+import { getLocaleFromCookies } from "@/lib/language";
+
 
 
 type PageProps = {
@@ -26,8 +27,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const cookieStore = await cookies() as any;
-  const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
+  const locale = await getLocaleFromCookies();
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
@@ -65,8 +65,7 @@ function formatDate(dateString: string): string {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const cookieStore = await cookies() as any;
-  const locale = cookieStore.get("alpine-mastery-language")?.value || DEFAULT_LOCALE;
+  const locale = await getLocaleFromCookies();
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
