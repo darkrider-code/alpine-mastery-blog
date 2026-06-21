@@ -15,40 +15,49 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  const slugs = getAllSlugs();
-
-  return SUPPORTED_LOCALES.flatMap((locale) =>
-    slugs.map((slug) => ({ locale, slug }))
-  );
+  try {
+    const slugs = getAllSlugs();
+    return SUPPORTED_LOCALES.flatMap((locale) =>
+      slugs.map((slug) => ({ locale, slug }))
+    );
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
+  try {
+    const { locale, slug } = await params;
+    const post = getPostBySlug(slug, locale);
 
-  if (!post) {
+    if (!post) {
+      return {};
+    }
+
+    const title = `${post.title} | Masteryhub Training Lab`;
+    const url = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+
+    return {
+      title: post.title,
+      description: post.description,
+      openGraph: {
+        title,
+        description: post.description,
+        type: "article",
+        publishedTime: post.publishedAt,
+        url,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description: post.description,
+      },
+    };
+  } catch (error) {
+    console.error('Error in generateMetadata:', error);
     return {};
   }
-
-  const title = `${post.title} | Masteryhub Training Lab`;
-  const url = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-
-  return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
-      title,
-      description: post.description,
-      type: "article",
-      publishedTime: post.publishedAt,
-      url,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: post.description,
-    },
-  };
 }
 
 function formatDate(dateString: string, locale: string): string {
@@ -61,129 +70,145 @@ function formatDate(dateString: string, locale: string): string {
 }
 
 export default async function PostPage({ params }: PageProps) {
-  const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
+  try {
+    const { locale, slug } = await params;
+    console.log('Loading post:', { locale, slug });
+    
+    const post = getPostBySlug(slug, locale);
+    
+    if (!post) {
+      console.log('Post not found:', { locale, slug });
+      return notFound();
+    }
 
-  if (!post) {
-    return notFound();
-  }
+    const relatedPosts = getRelatedPosts(post, locale, 3);
+    const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+    const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
 
-  const relatedPosts = getRelatedPosts(post, locale, 3);
-  const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
-  const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.publishedAt,
-    author: {
-      "@type": "Organization",
-      name: "Masteryhub Training Lab",
-      url: "https://masteryhub.se",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Masteryhub",
-    },
-    url: postUrl,
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
+    const articleJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.publishedAt,
+      author: {
+        "@type": "Organization",
+        name: "Masteryhub Training Lab",
+        url: "https://masteryhub.se",
+      },
+      publisher: {
+        "@type": "Organization",
         name: "Masteryhub",
-        item: "https://masteryhub.se",
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: "https://blog.masteryhub.se",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.title,
-        item: postUrl,
-      },
-    ],
-  };
+      url: postUrl,
+    };
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{"__html": JSON.stringify(articleJsonLd)}}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{"__html": JSON.stringify(breadcrumbJsonLd)}}
-      />
+    const breadcrumbJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Masteryhub",
+          item: "https://masteryhub.se",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: "https://blog.masteryhub.se",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: postUrl,
+        },
+      ],
+    };
 
-      <ScrollProgress />
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{"__html": JSON.stringify(articleJsonLd)}}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{"__html": JSON.stringify(breadcrumbJsonLd)}}
+        />
 
-      <article>
-        <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
-          <div className="mx-auto max-w-3xl">
-            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-text-secondary">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <a href="https://masteryhub.se" className="transition hover:text-accent">
-                    Masteryhub
-                  </a>
-                </li>
-                <li aria-hidden="true">→</li>
-                <li>
-                  <a href="https://blog.masteryhub.se" className="transition hover:text-accent">
-                    Blog
-                  </a>
-                </li>
-                <li aria-hidden="true">→</li>
-                <li className="text-white">{post.title}</li>
-              </ol>
-            </nav>
+        <ScrollProgress />
 
-            <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${badgeClass}`}>
-              {getCategoryLabel(post.category, locale)}
-            </span>
+        <article>
+          <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
+            <div className="mx-auto max-w-3xl">
+              <nav aria-label="Breadcrumb" className="mb-6 text-sm text-text-secondary">
+                <ol className="flex flex-wrap items-center gap-2">
+                  <li>
+                    <a href="https://masteryhub.se" className="transition hover:text-accent">
+                      Masteryhub
+                    </a>
+                  </li>
+                  <li aria-hidden="true">→</li>
+                  <li>
+                    <a href="https://blog.masteryhub.se" className="transition hover:text-accent">
+                      Blog
+                    </a>
+                  </li>
+                  <li aria-hidden="true">→</li>
+                  <li className="text-white">{post.title}</li>
+                </ol>
+              </nav>
 
-            <TranslatedPostHeader post={post} />
+              <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${badgeClass}`}>
+                {getCategoryLabel(post.category, locale)}
+              </span>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-text-secondary">
-              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
-              <span aria-hidden="true">·</span>
-              <span>{post.readingTime}</span>
-              <span aria-hidden="true">·</span>
-              <span>{post.author}</span>
+              <TranslatedPostHeader post={post} />
+
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-text-secondary">
+                <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
+                <span aria-hidden="true">·</span>
+                <span>{post.readingTime}</span>
+                <span aria-hidden="true">·</span>
+                <span>{post.author}</span>
+              </div>
             </div>
+          </header>
+
+          <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+            <TranslatedPostBody post={post} content={post.content} />
           </div>
-        </header>
+        </article>
 
-        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <TranslatedPostBody post={post} content={post.content} />
+        <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+          <CTABanner />
+
+          {relatedPosts.length > 0 && (
+            <section className="mt-16">
+              <TranslatedRelatedTitle category={post.category} locale={locale} />
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {relatedPosts.map((related) => (
+                  <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
-      </article>
-
-      <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
-        <CTABanner />
-
-        {relatedPosts.length > 0 && (
-          <section className="mt-16">
-            <TranslatedRelatedTitle category={post.category} locale={locale} />
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {relatedPosts.map((related) => (
-                <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
-              ))}
-            </div>
-          </section>
-        )}
+      </>
+    );
+  } catch (error) {
+    console.error('Error in PostPage:', error);
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Error Loading Article</h1>
+          <p className="text-gray-500">An error occurred while loading the article.</p>
+          <p className="text-sm text-gray-400 mt-2">Error: {error instanceof Error ? error.message : 'Unknown error'}</p>
+        </div>
       </div>
-    </>
-  );
+    );
+  }
 }
