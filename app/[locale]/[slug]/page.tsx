@@ -8,6 +8,9 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
+import { compile } from "@mdx-js/mdx";
+import { MDXProvider } from "@mdx-js/react";
+import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
 interface PageProps {
@@ -67,6 +70,25 @@ function formatDate(dateString: string, locale: string): string {
     month: 'short',
     year: 'numeric',
   }).format(new Date(dateString));
+}
+
+// Server component to render compiled MDX
+async function MdxContent({ content }: { content: string }) {
+  // Compile MDX to a function
+  const compiled = await compile(content, {
+    outputFormat: 'function',
+    development: false,
+  });
+  
+  // Execute the compiled function to get the React component
+  // @ts-ignore - compiled is a VFile with the function code
+  const MdxComponent = (compiled as any).default || compiled;
+  
+  return (
+    <MDXProvider components={mdxComponents}>
+      <MdxComponent />
+    </MDXProvider>
+  );
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -179,7 +201,9 @@ export default async function PostPage({ params }: PageProps) {
           </header>
 
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-            <TranslatedPostBody post={post} content={post.content} />
+            <TranslatedPostBody post={post}>
+              <MdxContent content={post.content} />
+            </TranslatedPostBody>
           </div>
         </article>
 
