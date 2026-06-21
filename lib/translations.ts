@@ -11,7 +11,7 @@ export const LANGUAGE_OPTIONS = [
   { code: "fi", label: "Suomi", nativeName: "Suomi" },
   { code: "de", label: "Deutsch", nativeName: "Deutsch" },
   { code: "fr", label: "Français", nativeName: "Français" },
-  { code: "es", label: "Español", nativeName: "Español" },
+  { code: "nl", label: "Nederlands", nativeName: "Nederlands" },
 ] as const;
 
 export const SUPPORTED_LOCALES = LANGUAGE_OPTIONS.map((option) => option.code);
@@ -32,4 +32,23 @@ export function getTranslationForLocale(locale: string, key: string) {
 
 export function getLocaleLabel(code: string) {
   return LANGUAGE_OPTIONS.find((option) => option.code === code)?.label ?? code;
+}
+
+// Get translated category label for display
+export function getCategoryLabel(category: string, locale: string): string {
+  const categoryTranslations = dictionary[locale]?.categories as Record<string, string> | undefined;
+  const categoryTranslationsDefault = dictionary[DEFAULT_LOCALE]?.categories as Record<string, string> | undefined;
+  
+  // Try to get translation for the category in the specified locale
+  if (categoryTranslations && categoryTranslations[category]) {
+    return categoryTranslations[category];
+  }
+  
+  // Fallback to default locale (sv)
+  if (categoryTranslationsDefault && categoryTranslationsDefault[category]) {
+    return categoryTranslationsDefault[category];
+  }
+  
+  // Fallback to the raw category value
+  return category;
 }
