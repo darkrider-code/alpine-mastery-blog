@@ -1,17 +1,19 @@
 "use client";
 
-import { useLanguage } from "@/components/LanguageProvider";
+import type { Post } from "@/types/post";
 
-export default function TranslatedPostHeader() {
-  const { t } = useLanguage();
+interface TranslatedPostHeaderProps {
+  post: Post;
+}
 
+export default function TranslatedPostHeader({ post }: TranslatedPostHeaderProps) {
   return (
     <div>
       <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-        {t("post.title")}
+        {post.title}
       </h1>
       <p className="mt-4 text-lg leading-8 text-text-secondary">
-        {t("post.description")}
+        {post.description}
       </p>
     </div>
   );
