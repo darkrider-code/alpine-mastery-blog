@@ -1,18 +1,18 @@
 "use client";
 
-import { MDX } from "@next/mdx";
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
+import type { ComponentType } from "react";
 
 interface TranslatedPostBodyProps {
   post: Post;
-  mdxString: string;
+  MdxComponent: ComponentType<any>;
 }
 
-export default function TranslatedPostBody({ post, mdxString }: TranslatedPostBodyProps) {
+export default function TranslatedPostBody({ post, MdxComponent }: TranslatedPostBodyProps) {
   return (
     <div className="prose prose-invert max-w-none">
-      <MDX source={mdxString} components={mdxComponents} />
+      <MdxComponent components={mdxComponents} />
     </div>
   );
 }
