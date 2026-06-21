@@ -6,9 +6,10 @@ import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
-import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
+import { getAllSlugs, getPostBySlug, getRelatedPosts } from "/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
 import { compile } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime";
 import type { Post } from "@/types/post";
 
 interface PageProps {
@@ -61,10 +62,16 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-// Compile MDX content to a string
+// Compile MDX content to a React component
 async function compileMdx(content: string) {
-  const compiled = await compile(content);
-  return String(compiled);
+  const compiled = await compile(content, {
+    outputFormat: 'function-body',
+    development: false,
+  });
+  
+  // Create a component from the compiled code
+  const MdxComponent = new Function('props', compiled) as (props: any) => React.ReactNode;
+  return MdxComponent;
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -79,8 +86,8 @@ export default async function PostPage({ params }: PageProps) {
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
   
-  // Compile the MDX content to string
-  const mdxString = await compileMdx(post.content);
+  // Compile the MDX content to a React component
+  const MdxComponent = await compileMdx(post.content);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -176,7 +183,7 @@ export default async function PostPage({ params }: PageProps) {
         </header>
 
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <TranslatedPostBody post={post} mdxString={mdxString} />
+          <TranslatedPostBody post={post} MdxComponent={MdxComponent} />
         </div>
       </article>
 
