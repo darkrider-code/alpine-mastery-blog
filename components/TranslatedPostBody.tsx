@@ -6,13 +6,13 @@ import type { Post } from "@/types/post";
 
 interface TranslatedPostBodyProps {
   post: Post;
-  mdxSource: string;
+  mdxString: string;
 }
 
-export default function TranslatedPostBody({ post, mdxSource }: TranslatedPostBodyProps) {
+export default function TranslatedPostBody({ post, mdxString }: TranslatedPostBodyProps) {
   return (
     <div className="prose prose-invert max-w-none">
-      <MDX source={mdxSource} components={mdxComponents} />
+      <MDX source={mdxString} components={mdxComponents} />
     </div>
   );
 }
