@@ -14,6 +14,8 @@ export const LANGUAGE_OPTIONS = [
   { code: "es", label: "Español", nativeName: "Español" },
 ] as const;
 
+export const SUPPORTED_LOCALES = LANGUAGE_OPTIONS.map((option) => option.code);
+
 export type SupportedLocale = (typeof LANGUAGE_OPTIONS)[number]["code"];
 
 export const dictionary = translations as Record<string, Record<string, unknown>>;
