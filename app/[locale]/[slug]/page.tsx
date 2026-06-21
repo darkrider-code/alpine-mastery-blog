@@ -7,7 +7,8 @@ import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
-import { SUPPORTED_LOCALES } from "@/lib/translations";
+import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
+import type { Post } from "@/types/post";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 function formatDate(dateString: string, locale: string): string {
-  const lang = locale === "sv" ? "sv-SE" : locale === "no" ? "nb-NO" : locale === "da" ? "da-DK" : locale === "fi" ? "fi-FI" : locale === "de" ? "de-DE" : locale === "fr" ? "fr-FR" : locale === "es" ? "es-ES" : "en-US";
+  const lang = locale === "sv" ? "sv-SE" : locale === "no" ? "nb-NO" : locale === "da" ? "da-DK" : locale === "fi" ? "fi-FI" : locale === "de" ? "de-DE" : locale === "fr" ? "fr-FR" : locale === "nl" ? "nl-NL" : "en-US";
   return new Intl.DateTimeFormat(lang, {
     day: 'numeric',
     month: 'short',
@@ -118,11 +119,11 @@ export default async function PostPage({ params }: PageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{"__html": JSON.stringify(articleJsonLd)}}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{"__html": JSON.stringify(breadcrumbJsonLd)}}
       />
 
       <ScrollProgress />
@@ -149,10 +150,10 @@ export default async function PostPage({ params }: PageProps) {
             </nav>
 
             <span className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${badgeClass}`}>
-              {post.category}
+              {getCategoryLabel(post.category, locale)}
             </span>
 
-            <TranslatedPostHeader />
+            <TranslatedPostHeader post={post} />
 
             <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-text-secondary">
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
@@ -165,7 +166,7 @@ export default async function PostPage({ params }: PageProps) {
         </header>
 
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <TranslatedPostBody />
+          <TranslatedPostBody post={post} />
         </div>
       </article>
 
@@ -174,7 +175,7 @@ export default async function PostPage({ params }: PageProps) {
 
         {relatedPosts.length > 0 && (
           <section className="mt-16">
-            <TranslatedRelatedTitle category={post.category} />
+            <TranslatedRelatedTitle category={post.category} locale={locale} />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((related) => (
                 <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
