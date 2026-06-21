@@ -1,22 +1,18 @@
 "use client";
 
-import { useMDXComponents } from "@mdx-js/react";
-import type { MDXComponents } from "mdx/types";
+import { MDX } from "@next/mdx";
+import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
 interface TranslatedPostBodyProps {
   post: Post;
-  mdxSource: any;
-  components: MDXComponents;
+  mdxSource: string;
 }
 
-export default function TranslatedPostBody({ post, mdxSource, components }: TranslatedPostBodyProps) {
-  const allComponents = useMDXComponents(components);
-  const Content = mdxSource.default;
-  
+export default function TranslatedPostBody({ post, mdxSource }: TranslatedPostBodyProps) {
   return (
     <div className="prose prose-invert max-w-none">
-      <Content components={allComponents} />
+      <MDX source={mdxSource} components={mdxComponents} />
     </div>
   );
 }
