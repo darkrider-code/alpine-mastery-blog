@@ -6,10 +6,8 @@ import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
-import { getAllSlugs, getPostBySlug, getRelatedPosts } from "/lib/posts";
+import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { compile } from "@mdx-js/mdx";
-import * as runtime from "react/jsx-runtime";
 import type { Post } from "@/types/post";
 
 interface PageProps {
@@ -62,18 +60,6 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-// Compile MDX content to a React component
-async function compileMdx(content: string) {
-  const compiled = await compile(content, {
-    outputFormat: 'function-body',
-    development: false,
-  });
-  
-  // Create a component from the compiled code
-  const MdxComponent = new Function('props', compiled) as (props: any) => React.ReactNode;
-  return MdxComponent;
-}
-
 export default async function PostPage({ params }: PageProps) {
   const { locale, slug } = await params;
   const post = getPostBySlug(slug, locale);
@@ -85,9 +71,6 @@ export default async function PostPage({ params }: PageProps) {
   const relatedPosts = getRelatedPosts(post, locale, 3);
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-  
-  // Compile the MDX content to a React component
-  const MdxComponent = await compileMdx(post.content);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -183,7 +166,7 @@ export default async function PostPage({ params }: PageProps) {
         </header>
 
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <TranslatedPostBody post={post} MdxComponent={MdxComponent} />
+          <TranslatedPostBody post={post} content={post.content} />
         </div>
       </article>
 
