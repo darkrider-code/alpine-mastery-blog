@@ -6,7 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
-import { getAllPosts, getPostBySlug, getRelatedPosts, DEFAULT_LOCALE } from "@/lib/posts";
+import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES } from "@/lib/translations";
 
 interface PageProps {
@@ -14,16 +14,11 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  const params: { locale: string; slug: string }[] = [];
-  
-  for (const locale of SUPPORTED_LOCALES) {
-    const posts = getAllPosts(locale);
-    for (const post of posts) {
-      params.push({ locale, slug: post.slug });
-    }
-  }
-  
-  return params;
+  const slugs = getAllSlugs();
+
+  return SUPPORTED_LOCALES.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

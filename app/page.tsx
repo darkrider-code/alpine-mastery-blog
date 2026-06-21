@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import BlogList from "@/components/BlogList";
 
 
@@ -18,14 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function HomePage() {
-  const posts = getAllPosts(DEFAULT_LOCALE);
-  const locale = await getLocaleFromCookies();
-
-  return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-      <HomeHero />
-      <BlogList posts={posts} locale={locale} />
-    </div>
-  );
+export default function HomePage() {
+  redirect("/sv");
 }

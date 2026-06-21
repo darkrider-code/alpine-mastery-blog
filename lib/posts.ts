@@ -24,34 +24,85 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
   };
 }
 
-// Get all unique slugs (directories in content/posts)
-function getAllSlugs(): string[] {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
+function getLocaleDirectory(locale: string): string {
+  return path.join(postsDirectory, locale);
+}
+
+function fileExists(filePath: string): boolean {
+  return fs.existsSync(filePath);
+}
+
+function getSlugDirectoriesFromLocale(locale: string): string[] {
+  const localeRoot = getLocaleDirectory(locale);
+  if (fileExists(localeRoot) && fs.statSync(localeRoot).isDirectory()) {
+    return fs.readdirSync(localeRoot)
+      .filter((name) => fs.statSync(path.join(localeRoot, name)).isDirectory())
+      .sort();
   }
 
   return fs.readdirSync(postsDirectory)
     .filter((name) => {
       const fullPath = path.join(postsDirectory, name);
       return fs.statSync(fullPath).isDirectory();
-    });
+    })
+    .sort();
 }
 
-// Get all posts for a specific locale
+export function getAllSlugs(): string[] {
+  if (!fileExists(postsDirectory)) {
+    return [];
+  }
+
+  const localeRoot = getLocaleDirectory(DEFAULT_LOCALE);
+  if (fileExists(localeRoot) && fs.statSync(localeRoot).isDirectory()) {
+    return fs.readdirSync(localeRoot)
+      .filter((name) => fs.statSync(path.join(localeRoot, name)).isDirectory())
+      .sort();
+  }
+
+  return fs.readdirSync(postsDirectory)
+    .filter((name) => {
+      const fullPath = path.join(postsDirectory, name);
+      return fs.statSync(fullPath).isDirectory();
+    })
+    .sort();
+}
+
+function getPostFilePath(slug: string, locale: string): string | null {
+  const localeDir = path.join(postsDirectory, locale);
+  const localeFirstPath = path.join(localeDir, slug, `${locale}.mdx`);
+  const localeFirstFallbackPath = path.join(localeDir, slug, "sv.mdx");
+
+  if (fileExists(localeFirstPath)) {
+    return localeFirstPath;
+  }
+
+  if (fileExists(localeFirstFallbackPath)) {
+    return localeFirstFallbackPath;
+  }
+
+  const legacyPath = path.join(postsDirectory, slug, `${locale}.mdx`);
+  const legacyFallbackPath = path.join(postsDirectory, slug, "sv.mdx");
+
+  if (fileExists(legacyPath)) {
+    return legacyPath;
+  }
+
+  if (fileExists(legacyFallbackPath)) {
+    return legacyFallbackPath;
+  }
+
+  return null;
+}
+
 function getPostsByLocale(locale: string): Post[] {
-  const slugs = getAllSlugs();
+  const slugs = getSlugDirectoriesFromLocale(locale);
   const posts: Post[] = [];
 
   for (const slug of slugs) {
-    const localePath = path.join(postsDirectory, slug, `${locale}.mdx`);
-    const fallbackPath = path.join(postsDirectory, slug, 'sv.mdx');
-    
-    let filePath = localePath;
-    if (!fs.existsSync(filePath)) {
-      filePath = fallbackPath;
-    }
-    
-    if (fs.existsSync(filePath)) {
+    const filePath = getPostFilePath(slug, locale);
+
+    if (filePath) {
       const fileContents = fs.readFileSync(filePath, "utf8");
       posts.push(parsePost(slug, locale, fileContents));
     }
@@ -67,15 +118,9 @@ export function getAllPosts(locale: string = DEFAULT_LOCALE): Post[] {
 }
 
 export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Post | null {
-  const localePath = path.join(postsDirectory, slug, `${locale}.mdx`);
-  const fallbackPath = path.join(postsDirectory, slug, 'sv.mdx');
-  
-  let filePath = localePath;
-  if (!fs.existsSync(filePath)) {
-    filePath = fallbackPath;
-  }
-  
-  if (!fs.existsSync(filePath)) {
+  const filePath = getPostFilePath(slug, locale);
+
+  if (!filePath) {
     return null;
   }
 
@@ -83,20 +128,26 @@ export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Po
   return parsePost(slug, locale, fileContents);
 }
 
-export function getRelatedPosts(post: Post, limit: number, locale: string = DEFAULT_LOCALE): Post[] {
+export function getRelatedPosts(post: Post, locale: string, limit: number): Post[] {
   return getAllPosts(locale)
     .filter((p) => p.category === post.category && p.slug !== post.slug)
     .slice(0, limit);
 }
 
-// Get all available locales for a specific post
 export function getPostLocales(slug: string): string[] {
-  const slugPath = path.join(postsDirectory, slug);
-  if (!fs.existsSync(slugPath)) {
-    return [];
+  const legacySlugPath = path.join(postsDirectory, slug);
+  if (fileExists(legacySlugPath) && fs.statSync(legacySlugPath).isDirectory()) {
+    return fs.readdirSync(legacySlugPath)
+      .filter((name) => name.endsWith(".mdx"))
+      .map((name) => name.replace(/\.mdx$/, ""));
   }
-  
-  return fs.readdirSync(slugPath)
-    .filter((name) => name.endsWith(".mdx"))
-    .map((name) => name.replace(/.mdx$/, ""));
+
+  const localeDirs = fs.readdirSync(postsDirectory)
+    .filter((name) => {
+      const fullPath = path.join(postsDirectory, name);
+      return fs.statSync(fullPath).isDirectory();
+    })
+    .filter((locale) => fileExists(path.join(postsDirectory, locale, slug)));
+
+  return localeDirs;
 }
