@@ -50,7 +50,7 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredPosts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <BlogCard key={post.slug} post={post} locale={locale ?? DEFAULT_LOCALE} />
         ))}
       </div>
 

@@ -26,8 +26,13 @@ function truncate(text: string, maxLength: number): string {
   return `${text.slice(0, maxLength).trimEnd()}…`;
 }
 
-export default function BlogCard({ post }: { post: Post }) {
-  const { locale, t } = useLanguage();
+interface BlogCardProps {
+  post: Post;
+  locale: string;
+}
+
+export default function BlogCard({ post, locale }: BlogCardProps) {
+  const { t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
 
   return (
@@ -39,7 +44,7 @@ export default function BlogCard({ post }: { post: Post }) {
         <span className="text-xs text-text-secondary">{post.readingTime}</span>
       </div>
 
-      <Link href={`/${post.slug}`}>
+      <Link href={`/${locale}/${post.slug}`}>
         <h2 className="text-xl font-bold text-white transition hover:text-accent">
           {post.title}
         </h2>
@@ -52,7 +57,7 @@ export default function BlogCard({ post }: { post: Post }) {
           {formatDate(post.publishedAt, locale)}
         </time>
         <Link
-          href={`/${post.slug}`}
+          href={`/${locale}/${post.slug}`}
           className="font-medium text-accent transition hover:text-accent-hover"
         >
           {t("site.readMore")}

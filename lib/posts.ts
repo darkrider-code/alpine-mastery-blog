@@ -17,108 +17,32 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
     description: data.description as string,
     publishedAt: data.publishedAt as string,
     category: data.category as string,
-    author: data.author as string,
-    readingTime: data.readingTime as string,
+    author: (data.author as string) ?? "Alpine Mastery",
+    readingTime: (data.readingTime as string) ?? "5 min",
     featured: Boolean(data.featured),
     content,
   };
 }
 
-function getLocaleDirectory(locale: string): string {
-  return path.join(postsDirectory, locale);
-}
-
-function fileExists(filePath: string): boolean {
-  return fs.existsSync(filePath);
-}
-
-function getSlugDirectoriesFromLocale(locale: string): string[] {
-  const localeRoot = getLocaleDirectory(locale);
-  if (fileExists(localeRoot) && fs.statSync(localeRoot).isDirectory()) {
-    return fs.readdirSync(localeRoot)
-      .filter((name) => fs.statSync(path.join(localeRoot, name)).isDirectory())
-      .sort();
-  }
-
-  return fs.readdirSync(postsDirectory)
-    .filter((name) => {
-      const fullPath = path.join(postsDirectory, name);
-      return fs.statSync(fullPath).isDirectory();
-    })
-    .sort();
-}
-
 export function getAllSlugs(): string[] {
-  if (!fileExists(postsDirectory)) {
+  if (!fs.existsSync(postsDirectory)) {
     return [];
   }
 
-  const localeRoot = getLocaleDirectory(DEFAULT_LOCALE);
-  if (fileExists(localeRoot) && fs.statSync(localeRoot).isDirectory()) {
-    return fs.readdirSync(localeRoot)
-      .filter((name) => fs.statSync(path.join(localeRoot, name)).isDirectory())
-      .sort();
-  }
-
-  return fs.readdirSync(postsDirectory)
-    .filter((name) => {
-      const fullPath = path.join(postsDirectory, name);
-      return fs.statSync(fullPath).isDirectory();
-    })
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((item) => fs.statSync(path.join(postsDirectory, item)).isDirectory())
     .sort();
 }
 
-function getPostFilePath(slug: string, locale: string): string | null {
-  const localeDir = path.join(postsDirectory, locale);
-  const localeFirstPath = path.join(localeDir, slug, `${locale}.mdx`);
-  const localeFirstFallbackPath = path.join(localeDir, slug, "sv.mdx");
-
-  if (fileExists(localeFirstPath)) {
-    return localeFirstPath;
-  }
-
-  if (fileExists(localeFirstFallbackPath)) {
-    return localeFirstFallbackPath;
-  }
-
-  const legacyPath = path.join(postsDirectory, slug, `${locale}.mdx`);
-  const legacyFallbackPath = path.join(postsDirectory, slug, "sv.mdx");
-
-  if (fileExists(legacyPath)) {
-    return legacyPath;
-  }
-
-  if (fileExists(legacyFallbackPath)) {
-    return legacyFallbackPath;
-  }
-
-  return null;
-}
-
-function getPostsByLocale(locale: string): Post[] {
-  const slugs = getSlugDirectoriesFromLocale(locale);
-  const posts: Post[] = [];
-
-  for (const slug of slugs) {
-    const filePath = getPostFilePath(slug, locale);
-
-    if (filePath) {
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      posts.push(parsePost(slug, locale, fileContents));
-    }
-  }
-
-  return posts.sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  );
-}
-
-export function getAllPosts(locale: string = DEFAULT_LOCALE): Post[] {
-  return getPostsByLocale(locale);
-}
-
 export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Post | null {
-  const filePath = getPostFilePath(slug, locale);
+  const targetPath = path.join(postsDirectory, slug, `${locale}.mdx`);
+  const fallbackPath = path.join(postsDirectory, slug, "sv.mdx");
+  const filePath = fs.existsSync(targetPath)
+    ? targetPath
+    : fs.existsSync(fallbackPath)
+      ? fallbackPath
+      : null;
 
   if (!filePath) {
     return null;
@@ -128,26 +52,30 @@ export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Po
   return parsePost(slug, locale, fileContents);
 }
 
+export function getAllPosts(locale: string = DEFAULT_LOCALE): Post[] {
+  return getAllSlugs()
+    .map((slug) => getPostBySlug(slug, locale))
+    .filter((post): post is Post => post !== null)
+    .sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
+}
+
 export function getRelatedPosts(post: Post, locale: string, limit: number): Post[] {
   return getAllPosts(locale)
-    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, limit);
 }
 
 export function getPostLocales(slug: string): string[] {
-  const legacySlugPath = path.join(postsDirectory, slug);
-  if (fileExists(legacySlugPath) && fs.statSync(legacySlugPath).isDirectory()) {
-    return fs.readdirSync(legacySlugPath)
+  const slugPath = path.join(postsDirectory, slug);
+
+  if (fs.existsSync(slugPath) && fs.statSync(slugPath).isDirectory()) {
+    return fs
+      .readdirSync(slugPath)
       .filter((name) => name.endsWith(".mdx"))
       .map((name) => name.replace(/\.mdx$/, ""));
   }
 
-  const localeDirs = fs.readdirSync(postsDirectory)
-    .filter((name) => {
-      const fullPath = path.join(postsDirectory, name);
-      return fs.statSync(fullPath).isDirectory();
-    })
-    .filter((locale) => fileExists(path.join(postsDirectory, locale, slug)));
-
-  return localeDirs;
+  return [];
 }

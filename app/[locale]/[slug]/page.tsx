@@ -64,10 +64,10 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
-    notFound();
+    return notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post, 3, locale);
+  const relatedPosts = getRelatedPosts(post, locale, 3);
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
 
@@ -177,7 +177,7 @@ export default async function PostPage({ params }: PageProps) {
             <TranslatedRelatedTitle category={post.category} />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((related) => (
-                <BlogCard key={`${related.slug}-${locale}`} post={related} />
+                <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
               ))}
             </div>
           </section>
