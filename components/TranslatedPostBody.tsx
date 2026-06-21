@@ -1,19 +1,20 @@
 "use client";
 
-import { MDX } from "@next/mdx";
+import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
 interface TranslatedPostBodyProps {
   post: Post;
-  content: string;
+  children: React.ReactNode;
 }
 
-export default function TranslatedPostBody({ post, content }: TranslatedPostBodyProps) {
+export default function TranslatedPostBody({ post, children }: TranslatedPostBodyProps) {
   return (
     <div className="prose prose-invert max-w-none">
-      {/* @ts-ignore - MDX component expects compiled content */}
-      <MDX source={content} components={mdxComponents} />
+      <MDXProvider components={mdxComponents}>
+        {children}
+      </MDXProvider>
     </div>
   );
 }
