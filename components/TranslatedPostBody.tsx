@@ -18,22 +18,30 @@ export default function TranslatedPostBody({ post, content }: TranslatedPostBody
   useEffect(() => {
     async function compileMdx() {
       try {
-        // Compile MDX to a function body
+        // Compile MDX to a program
         const result = await compile(content, {
-          outputFormat: 'function-body',
+          outputFormat: 'program',
           development: false,
         });
         
-        // Convert result to string - use type assertion to handle VFile
-        const compiledCode = (result as { toString: () => string }).toString();
+        // Convert result to string
+        const compiledCode = String(result);
         
-        // Create component from compiled code
-        const Component = new Function('props', compiledCode) as (props: any) => React.ReactNode;
+        // Create a component by executing the compiled program
+        // This should export a default component
+        const Component = (() => {
+          // @ts-ignore - We're executing compiled MDX code
+          const module = { exports: {} };
+          const require = () => {}; // Mock require
+          new Function('module', 'exports', 'require', compiledCode)(module, module.exports, require);
+          return module.exports.default;
+        })();
+        
         setMdxComponent(() => Component);
         setError(null);
       } catch (err) {
         console.error('MDX compilation error:', err);
-        setError('Failed to load article content');
+        setError('Failed to load article content: ' + (err as Error).message);
       }
     }
     
