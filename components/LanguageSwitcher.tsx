@@ -9,18 +9,11 @@ export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const switchLocale = (nextLocale: string) => {
-    const parts = pathname.split("/").filter(Boolean);
-
-    if (parts.length >= 2 && parts[0] === locale) {
-      router.push(`/${nextLocale}/${parts.slice(1).join("/")}`);
-    } else if (parts.length >= 1 && parts[0] !== locale && parts[0] !== "") {
-      router.push(`/${nextLocale}/${parts.join("/")}`);
-    } else {
-      router.push(`/${nextLocale}`);
-    }
-
-    setLocale(nextLocale);
+  const switchLocale = (newLocale: string) => {
+    const parts = pathname.split('/').filter(Boolean);
+    const rest = parts.slice(1).join('/');
+    router.push(rest ? `/${newLocale}/${rest}` : `/${newLocale}`);
+    setLocale(newLocale);
   };
 
   return (
