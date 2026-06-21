@@ -8,7 +8,9 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
+import { compile } from "@mdx-js/mdx";
 import type { Post } from "@/types/post";
+import { mdxComponents } from "@/components/mdx-components";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -60,6 +62,12 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
+// Compile MDX content to a React component
+async function compileMdx(content: string) {
+  const mdx = await compile(content);
+  return mdx;
+}
+
 export default async function PostPage({ params }: PageProps) {
   const { locale, slug } = await params;
   const post = getPostBySlug(slug, locale);
@@ -71,6 +79,9 @@ export default async function PostPage({ params }: PageProps) {
   const relatedPosts = getRelatedPosts(post, locale, 3);
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+  
+  // Compile the MDX content
+  const mdxSource = await compileMdx(post.content);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -166,7 +177,7 @@ export default async function PostPage({ params }: PageProps) {
         </header>
 
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-          <TranslatedPostBody post={post} />
+          <TranslatedPostBody post={post} mdxSource={mdxSource} components={mdxComponents} />
         </div>
       </article>
 
