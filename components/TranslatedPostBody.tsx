@@ -1,9 +1,5 @@
 "use client";
-
-import { MDXProvider } from "@mdx-js/react";
-import { mdxComponents } from "@/components/mdx-components";
-import { compile } from "@mdx-js/mdx";
-import { useEffect, useState } from "react";
+// DIAGNOSTIC MODE
 import type { Post } from "@/types/post";
 
 interface TranslatedPostBodyProps {
@@ -12,55 +8,14 @@ interface TranslatedPostBodyProps {
 }
 
 export default function TranslatedPostBody({ post, content }: TranslatedPostBodyProps) {
-  const [MdxComponent, setMdxComponent] = useState<React.ComponentType<any> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function compileMdx() {
-      try {
-        // Compile MDX to a program
-        const result = await compile(content, {
-          outputFormat: 'program',
-          development: false,
-        });
-        
-        // Convert result to string
-        const compiledCode = String(result);
-        
-        // Create a component by executing the compiled program
-        // This should export a default component
-        const Component = (() => {
-          // @ts-ignore - We're executing compiled MDX code
-          const module = { exports: {} };
-          const require = () => {}; // Mock require
-          new Function('module', 'exports', 'require', compiledCode)(module, module.exports, require);
-          return module.exports.default;
-        })();
-        
-        setMdxComponent(() => Component);
-        setError(null);
-      } catch (err) {
-        console.error('MDX compilation error:', err);
-        setError('Failed to load article content: ' + (err as Error).message);
-      }
-    }
-    
-    compileMdx();
-  }, [content]);
-
-  if (error) {
-    return <div className="prose prose-invert max-w-none text-red-500">{error}</div>;
-  }
-
-  if (!MdxComponent) {
-    return <div className="prose prose-invert max-w-none">Loading...</div>;
-  }
-
   return (
     <div className="prose prose-invert max-w-none">
-      <MDXProvider components={mdxComponents}>
-        <MdxComponent />
-      </MDXProvider>
+      <h2 className="text-white text-2xl mb-4">DIAGNOSTIC: Article Content</h2>
+      <p className="text-white mb-2">Title: {post.title}</p>
+      <p className="text-gray-400 mb-4">Description: {post.description}</p>
+      <div className="bg-gray-800 p-4 rounded-lg text-sm">
+        <pre className="whitespace-pre-wrap">{content.substring(0, 1000)}...</pre>
+      </div>
     </div>
   );
 }
