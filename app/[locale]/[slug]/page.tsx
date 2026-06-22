@@ -8,7 +8,7 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { evaluate } from "@mdx-js/mdx";
+import { compile } from "@mdx-js/mdx";
 import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/mdx-components";
 import * as runtime from "react/jsx-runtime";
@@ -78,14 +78,19 @@ async function MdxContent({ content }: { content: string }) {
   try {
     // Compile MDX content to React component using @mdx-js/mdx
     // This happens on the server, so Node.js modules are available
-    const result = await evaluate(content, {
+    const compiled = await compile(content, {
+      outputFormat: 'function-body',
+      development: false,
       ...runtime,
-      useDynamicImport: false,
     });
+
+    // Create a React component from the compiled function body
+    // @ts-ignore - compiled.value is the function body as string
+    const Component = new Function('props', `return ${compiled.value}`);
 
     return (
       <MDXProvider components={mdxComponents}>
-        {result}
+        <Component />
       </MDXProvider>
     );
   } catch (error) {
