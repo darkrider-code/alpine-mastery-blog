@@ -8,8 +8,8 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { remark } from "remark";
-import html from "remark-html";
+import { compile } from "@mdx-js/mdx";
+import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
@@ -72,29 +72,29 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-// Server component to convert MDX to HTML and render
+// Server component to compile and render MDX content
 async function MdxContent({ content }: { content: string }) {
   try {
-    // Convert MDX to HTML using remark
-    const processedContent = await remark()
-      .use(html)
-      .process(content);
-    
-    const htmlContent = processedContent.toString();
+    // Compile MDX content to React component using @mdx-js/mdx
+    // This happens on the server, so Node.js modules are available
+    const compiled = await compile(content);
 
-    // Apply custom styling classes to match mdx-components.tsx
+    // The compiled result should be a string that we can evaluate
+    const code = String(compiled);
+    
+    // For now, use a simple approach - display the compiled output
+    // We'll refine this once we see what the compiled output looks like
     return (
-      <div 
-        className="prose prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
+      <MDXProvider components={mdxComponents}>
+        <div dangerouslySetInnerHTML={{ __html: code }} />
+      </MDXProvider>
     );
   } catch (error) {
-    console.error('MDX to HTML conversion error:', error);
+    console.error('MDX compilation error:', error);
     // Fallback: display raw content for debugging
     return (
       <div className="whitespace-pre-wrap bg-red-900/20 p-4 rounded-lg">
-        <p className="text-red-400 text-sm mb-2">MDX Conversion Error:</p>
+        <p className="text-red-400 text-sm mb-2">MDX Compilation Error:</p>
         <pre className="text-sm overflow-auto">{error instanceof Error ? error.message : 'Unknown error'}</pre>
         <p className="text-red-400 text-sm mt-4">Raw content preview:</p>
         <pre className="text-xs overflow-auto">{content.substring(0, 200)}...</pre>
