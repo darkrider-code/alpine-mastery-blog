@@ -36,13 +36,19 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
   const { t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
 
+  // Fix excerpt: only show if description exists and is > 30 characters
+  const excerpt = post.description && post.description.length > 30
+    ? truncate(post.description, 120)
+    : null;
+
   return (
     <article className="rounded-xl border border-border bg-bg-card p-6 transition hover:border-accent/50">
-      <div className="mb-4 flex items-center justify-between gap-2">
+      <div className="mb-4 flex items-center gap-2">
         <span className={"rounded-full px-3 py-1 text-xs font-medium " + badgeClass}>
           {getCategoryLabel(post.category, locale)}
         </span>
-        <span className="text-xs text-text-secondary">{post.readingTime}</span>
+        <span className="text-text-secondary text-xs">·</span>
+        <span className="text-text-secondary text-xs">{post.readingTime}</span>
       </div>
 
       <Link href={"/" + locale + "/" + post.slug}>
@@ -51,7 +57,9 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
         </h2>
       </Link>
 
-      <p className="mt-3 text-text-secondary">{truncate(post.description, 120)}</p>
+      {excerpt && (
+        <p className="mt-3 text-text-secondary">{excerpt}</p>
+      )}
 
       <div className="mt-6 flex items-center justify-between text-sm">
         <time dateTime={post.publishedAt} className="text-text-secondary">
