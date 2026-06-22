@@ -9,7 +9,8 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { evaluate } from '@mdx-js/mdx'
+import * as runtime from 'react/jsx-runtime'
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
@@ -89,6 +90,12 @@ export default async function PostPage({ params }: PageProps) {
     const categoryLabel = getCategoryLabel(post.category, locale);
     const formattedDate = formatDate(post.publishedAt, locale);
     const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+
+    // Evaluate MDX content using @mdx-js/mdx
+    const { default: Content } = await evaluate(post.content, {
+      ...runtime,
+      development: false,
+    })
 
     const articleJsonLd = {
       "@context": "https://schema.org",
@@ -199,7 +206,7 @@ export default async function PostPage({ params }: PageProps) {
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
             <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
               <TranslatedPostBody post={post}>
-                <MDXRemote source={post.content} components={mdxComponents} />
+                <Content components={mdxComponents} />
               </TranslatedPostBody>
             </div>
           </div>
