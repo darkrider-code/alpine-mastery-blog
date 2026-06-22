@@ -149,7 +149,6 @@ export default async function PostPage({ params }: PageProps) {
         <article className="mx-auto max-w-6xl px-4 sm:px-6">
           <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
             <div className="mx-auto max-w-3xl">
-              {/* Fix 3: Breadcrumb without numbers */}
               <nav aria-label="breadcrumb" className="mb-6">
                 <ol className="flex items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary flex-wrap">
                   <li>
@@ -171,27 +170,21 @@ export default async function PostPage({ params }: PageProps) {
                 </ol>
               </nav>
 
-              {/* Fix 4: Hero section with visual separation */}
               <div className="relative mb-12 pb-10 border-b border-border">
-                {/* Subtil gradient-bakgrund */}
                 <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary to-transparent rounded-2xl -z-10 opacity-60" />
 
-                {/* Kategori-badge */}
                 <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${badgeClass}`}>
                   {categoryLabel}
                 </span>
 
-                {/* TranslatedPostHeader handles the title */}
                 <TranslatedPostHeader post={post} />
 
-                {/* Ingress/description */}
                 {post.description && (
                   <p className="text-lg text-text-secondary leading-relaxed mb-6 max-w-2xl">
                     {post.description}
                   </p>
                 )}
 
-                {/* Meta-rad */}
                 <div className="flex items-center gap-3 text-sm text-text-secondary">
                   <span>{formattedDate}</span>
                   <span className="text-border">·</span>
@@ -203,7 +196,6 @@ export default async function PostPage({ params }: PageProps) {
             </div>
           </header>
 
-          {/* Fix 5: Article body with prose styling */}
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
             <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
               <TranslatedPostBody post={post}>
