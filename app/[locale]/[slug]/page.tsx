@@ -231,7 +231,7 @@ export default async function PostPage({ params }: PageProps) {
               <TranslatedRelatedTitle category={post.category} locale={locale} />
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.map((related) => (
-                  <BlogCard key=`${related.slug}-${locale}` post={related} locale={locale} />
+                  <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
                 ))}
               </div>
             </section>
