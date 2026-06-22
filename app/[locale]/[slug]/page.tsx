@@ -8,10 +8,9 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { compile } from "@mdx-js/mdx";
-import { MDXProvider } from "@mdx-js/react";
+import { remark } from "remark";
+import html from "remark-html";
 import { mdxComponents } from "@/components/mdx-components";
-import * as runtime from "react/jsx-runtime";
 import type { Post } from "@/types/post";
 
 interface PageProps {
@@ -73,32 +72,29 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-// Server component to compile and render MDX content
+// Server component to convert MDX to HTML and render
 async function MdxContent({ content }: { content: string }) {
   try {
-    // Compile MDX content to React component using @mdx-js/mdx
-    // This happens on the server, so Node.js modules are available
-    const compiled = await compile(content, {
-      outputFormat: 'function-body',
-      development: false,
-      ...runtime,
-    });
+    // Convert MDX to HTML using remark
+    const processedContent = await remark()
+      .use(html)
+      .process(content);
+    
+    const htmlContent = processedContent.toString();
 
-    // Create a React component from the compiled function body
-    // @ts-ignore - compiled.value is the function body as string
-    const Component = new Function('props', `return ${compiled.value}`);
-
+    // Apply custom styling classes to match mdx-components.tsx
     return (
-      <MDXProvider components={mdxComponents}>
-        <Component />
-      </MDXProvider>
+      <div 
+        className="prose prose-invert max-w-none"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
     );
   } catch (error) {
-    console.error('MDX compilation error:', error);
+    console.error('MDX to HTML conversion error:', error);
     // Fallback: display raw content for debugging
     return (
       <div className="whitespace-pre-wrap bg-red-900/20 p-4 rounded-lg">
-        <p className="text-red-400 text-sm mb-2">MDX Compilation Error:</p>
+        <p className="text-red-400 text-sm mb-2">MDX Conversion Error:</p>
         <pre className="text-sm overflow-auto">{error instanceof Error ? error.message : 'Unknown error'}</pre>
         <p className="text-red-400 text-sm mt-4">Raw content preview:</p>
         <pre className="text-xs overflow-auto">{content.substring(0, 200)}...</pre>
