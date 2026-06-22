@@ -8,9 +8,10 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { compile } from "@mdx-js/mdx";
+import { evaluate } from "@mdx-js/mdx";
 import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/mdx-components";
+import * as runtime from "react/jsx-runtime";
 import type { Post } from "@/types/post";
 
 interface PageProps {
@@ -72,23 +73,33 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-// Server component to render compiled MDX
+// Server component to compile and render MDX content
 async function MdxContent({ content }: { content: string }) {
-  // Compile MDX to a function
-  const compiled = await compile(content, {
-    outputFormat: 'function',
-    development: false,
-  });
-  
-  // Execute the compiled function to get the React component
-  // @ts-ignore - compiled is a VFile with the function code
-  const MdxComponent = (compiled as any).default || compiled;
-  
-  return (
-    <MDXProvider components={mdxComponents}>
-      <MdxComponent />
-    </MDXProvider>
-  );
+  try {
+    // Compile MDX content to React component using @mdx-js/mdx
+    // This happens on the server, so Node.js modules are available
+    const result = await evaluate(content, {
+      ...runtime,
+      useDynamicImport: false,
+    });
+
+    return (
+      <MDXProvider components={mdxComponents}>
+        {result}
+      </MDXProvider>
+    );
+  } catch (error) {
+    console.error('MDX compilation error:', error);
+    // Fallback: display raw content for debugging
+    return (
+      <div className="whitespace-pre-wrap bg-red-900/20 p-4 rounded-lg">
+        <p className="text-red-400 text-sm mb-2">MDX Compilation Error:</p>
+        <pre className="text-sm overflow-auto">{error instanceof Error ? error.message : 'Unknown error'}</pre>
+        <p className="text-red-400 text-sm mt-4">Raw content preview:</p>
+        <pre className="text-xs overflow-auto">{content.substring(0, 200)}...</pre>
+      </div>
+    );
+  }
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -215,7 +226,7 @@ export default async function PostPage({ params }: PageProps) {
               <TranslatedRelatedTitle category={post.category} locale={locale} />
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.map((related) => (
-                  <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                  <BlogCard key=`${related.slug}-${locale}` post={related} locale={locale} />
                 ))}
               </div>
             </section>
