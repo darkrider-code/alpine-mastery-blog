@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   
   return {
-    title: "Progress starts with insight",
+    title: "Progress starts with insight | Masteryhub Training Lab",
     description:
       locale === "sv"
         ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
@@ -31,6 +31,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           : "Science-based articles on technique, training, mindset, and analysis for athletes.",
       url: "https://blog.masteryhub.se",
     },
+    alternates: {
+      canonical: "https://blog.masteryhub.se/" + locale,
+      languages: {
+        'sv': 'https://blog.masteryhub.se/sv',
+        'en': 'https://blog.masteryhub.se/en',
+        'no': 'https://blog.masteryhub.se/no',
+        'da': 'https://blog.masteryhub.se/da',
+        'fi': 'https://blog.masteryhub.se/fi',
+        'de': 'https://blog.masteryhub.se/de',
+        'fr': 'https://blog.masteryhub.se/fr',
+        'nl': 'https://blog.masteryhub.se/nl',
+        'x-default': 'https://blog.masteryhub.se/sv',
+      }
+    }
   };
 }
 
