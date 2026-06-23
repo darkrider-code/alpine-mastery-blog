@@ -23,7 +23,7 @@ export default function CTABanner({
   const displayDescription = description ?? t("site.homeDescription");
 
   return (
-    <section className="mt-16 p-8 sm:p-10 rounded-2xl
+    <section className="mt-16 mb-8 p-8 sm:p-10 rounded-2xl
                 bg-gradient-to-br from-bg-secondary to-bg-card
                 border border-accent/30 text-center">
       {showBrand && (
