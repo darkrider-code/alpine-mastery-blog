@@ -22,6 +22,7 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
     featured: Boolean(data.featured),
     content,
     sport: (data.sport as string) ?? "Alpine Skiing",
+    product: (data.product as string) ?? "Alpine Mastery",
   };
 }
 
