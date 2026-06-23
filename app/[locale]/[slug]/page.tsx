@@ -171,43 +171,48 @@ export default async function PostPage({ params }: PageProps) {
 
         <ScrollProgress />
 
+        <nav aria-label="breadcrumb" className="mb-8 mx-auto max-w-6xl px-4 sm:px-6">
+          <ol
+            style={{"listStyle": "none", "padding": 0, "margin": 0}}
+            className="flex flex-wrap items-center gap-2 text-sm text-text-secondary"
+          >
+            <li style={{"listStyle": "none", "display": "flex", "alignItems": "center"}}>
+              <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
+                Masteryhub
+              </a>
+            </li>
+            <li style={{"listStyle": "none"}} aria-hidden="true">»</li>
+            <li style={{"listStyle": "none", "display": "flex", "alignItems": "center"}}>
+              <Link href={"/" + locale} className="hover:text-accent transition-colors">
+                Blog
+              </Link>
+            </li>
+            <li style={{"listStyle": "none"}} aria-hidden="true">»</li>
+            <li style={{"listStyle": "none"}} className="text-white truncate max-w-[200px] sm:max-w-none">
+              {post.title}
+            </li>
+          </ol>
+        </nav>
+
         <article className="mx-auto max-w-6xl px-4 sm:px-6">
           <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
             <div className="mx-auto max-w-3xl">
-              <nav aria-label="breadcrumb" className="mb-6">
-                <ol className="flex items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary flex-wrap">
-                  <li>
-                    <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
-                      Masteryhub
-                    </a>
-                  </li>
-                  <li className="text-border">»</li>
-                  <li>
-                    <Link href={"/" + locale} className="hover:text-accent transition-colors">
-                      Blog
-                    </Link>
-                  </li>
-                  <li className="text-border">»</li>
-                  <li className="text-white truncate max-w-[200px] sm:max-w-none">
-                    {post.title}
-                  </li>
-                </ol>
-              </nav>
-
               <div className="relative mb-12 pb-10 border-b border-border">
                 <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary to-transparent rounded-2xl -z-10 opacity-60" />
+
+                {post.product && (
+                  <div className="mb-4">
+                    <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full text-accent/70">
+                      {post.product}
+                    </span>
+                  </div>
+                )}
 
                 <span className={"inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 " + badgeClass}>
                   {categoryLabel}
                 </span>
 
                 <TranslatedPostHeader post={post} />
-
-                {post.description && (
-                  <p className="text-lg text-text-secondary leading-relaxed mb-6 max-w-2xl">
-                    {post.description}
-                  </p>
-                )}
 
                 <div className="flex items-center gap-3 text-sm text-text-secondary">
                   <span>{formattedDate}</span>
@@ -229,7 +234,7 @@ export default async function PostPage({ params }: PageProps) {
           </div>
 
           <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
-            <CTABanner />
+            <CTABanner showBrand={false} />
 
             {relatedPosts.length > 0 && (
               <section className="mt-16">
