@@ -51,6 +51,14 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
         <span className="text-text-secondary text-xs">{post.readingTime}</span>
       </div>
 
+      {post.product && (
+        <div className="mb-3">
+          <span className="rounded-full px-2 py-1 text-xs font-medium text-accent/70">
+            {post.product}
+          </span>
+        </div>
+      )}
+
       <Link href={"/" + locale + "/" + post.slug}>
         <h2 className="text-xl font-bold text-white transition hover:text-accent">
           {post.title}
