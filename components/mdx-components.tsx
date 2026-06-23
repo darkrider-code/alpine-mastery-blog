@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
 
 export const mdxComponents: MDXComponents = {
+  h1: () => null,
   h2: (props) => (
     <h2
       className="mt-10 mb-4 border-l-4 border-accent pl-4 text-2xl font-bold text-white"
