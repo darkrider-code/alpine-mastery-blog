@@ -14,6 +14,10 @@ import * as runtime from 'react/jsx-runtime'
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
+const sportColors: Record<string, string> = {
+  "Alpine Skiing": "bg-cyan-900 text-cyan-300",
+};
+
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
@@ -87,6 +91,7 @@ export default async function PostPage({ params }: PageProps) {
 
     const relatedPosts = getRelatedPosts(post, locale, 3);
     const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+    const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
     const categoryLabel = getCategoryLabel(post.category, locale);
     const formattedDate = formatDate(post.publishedAt, locale);
     const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
@@ -179,6 +184,12 @@ export default async function PostPage({ params }: PageProps) {
 
               <div className="relative mb-12 pb-10 border-b border-border">
                 <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary to-transparent rounded-2xl -z-10 opacity-60" />
+
+                <div className="mb-4">
+                  <span className={`inline-block text-xs font-semibold px-2 py-1 rounded-full ${sportBadgeClass}`}>
+                    {post.sport}
+                  </span>
+                </div>
 
                 <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${badgeClass}`}>
                   {categoryLabel}
