@@ -21,6 +21,7 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
     readingTime: (data.readingTime as string) ?? "5 min",
     featured: Boolean(data.featured),
     content,
+    sport: (data.sport as string) ?? "Alpine Skiing",
   };
 }
 
