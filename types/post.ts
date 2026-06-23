@@ -9,4 +9,5 @@ export type Post = {
   readingTime: string;
   featured: boolean;
   content: string;
+  sport: string;
 };
