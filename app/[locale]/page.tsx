@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
         : "Science-based articles on technique, training, mindset, and analysis for athletes.",
     openGraph: {
-      title: "Progress starts with insight | Masteryhub Training Lab",
+      title: "Progress starts with insight | Alpine Mastery Blog",
       description:
         locale === "sv"
           ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
