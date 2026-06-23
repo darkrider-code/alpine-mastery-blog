@@ -14,10 +14,6 @@ const categoryColors: Record<string, string> = {
   Mental: "bg-orange-900 text-orange-300",
 };
 
-const sportColors: Record<string, string> = {
-  "Alpine Skiing": "bg-cyan-900 text-cyan-300",
-};
-
 function formatDate(dateString: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
@@ -39,7 +35,6 @@ interface BlogCardProps {
 export default function BlogCard({ post, locale }: BlogCardProps) {
   const { t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
-  const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
 
   // Fix excerpt: only show if description exists and is > 30 characters
   const excerpt = post.description && post.description.length > 30
@@ -56,13 +51,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
         <span className="text-text-secondary text-xs">{post.readingTime}</span>
       </div>
 
-      <div className="mb-3">
-        <span className={"rounded-full px-2 py-1 text-xs font-medium " + sportBadgeClass}>
-          {post.sport}
-        </span>
-      </div>
-
-      <Link href={`/${locale}/${post.slug}`}>
+      <Link href={"/" + locale + "/" + post.slug}>
         <h2 className="text-xl font-bold text-white transition hover:text-accent">
           {post.title}
         </h2>
@@ -77,7 +66,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
           {formatDate(post.publishedAt, locale)}
         </time>
         <Link
-          href={`/${locale}/${post.slug}`}
+          href={"/" + locale + "/" + post.slug}
           className="font-medium text-accent transition hover:text-accent-hover"
         >
           {t("site.readMore")}
