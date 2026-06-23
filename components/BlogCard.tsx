@@ -17,8 +17,8 @@ const categoryColors: Record<string, string> = {
 const sportColors: Record<string, string> = {
   "Alpine Skiing": "bg-sky-900 text-sky-300",
   "Cross Country": "bg-emerald-900 text-emerald-300",
-  "Foil": "bg-purple-900 text-purple-300",
-  "Running": "bg-orange-900 text-orange-300",
+  Foil: "bg-purple-900 text-purple-300",
+  Running: "bg-orange-900 text-orange-300",
 };
 
 function formatDate(dateString: string, locale: string): string {
