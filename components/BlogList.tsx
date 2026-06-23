@@ -63,8 +63,8 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
 
       <div className="mt-12">
         <CTABanner 
-          title="Progress starts with insight"
-          description="Science-based articles on technique, training, mindset, and analysis."
+          title="Tillämpa tekniken direkt"
+          description="Ladda upp ett videoklipp och få AI-analys av just din teknik."
           showBrand={true}
         />
       </div>
