@@ -10,4 +10,5 @@ export type Post = {
   featured: boolean;
   content: string;
   sport: string;
+  product?: string;
 };
