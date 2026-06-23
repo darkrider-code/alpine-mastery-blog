@@ -29,7 +29,7 @@ export default function CTABanner({
       {showBrand && (
         <p className="text-xs font-semibold text-accent uppercase
                     tracking-widest mb-3">
-          Alpine Mastery App
+          Masteryhub Training Lab
         </p>
       )}
       <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
