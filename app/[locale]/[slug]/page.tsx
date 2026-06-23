@@ -11,6 +11,7 @@ import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
 import { evaluate } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime'
+import type { MDXComponents } from "mdx/types"
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
 
@@ -87,7 +88,7 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
-async function MdxContent({ content, components }: { content: string; components: Record<string, React.ComponentType<Record<string, unknown>>> }) {
+async function MdxContent({ content, components }: { content: string; components: MDXComponents }) {
   const { default: Content } = await evaluate(content, {
     ...runtime,
     development: false,
