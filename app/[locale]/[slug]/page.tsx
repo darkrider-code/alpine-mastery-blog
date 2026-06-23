@@ -129,7 +129,7 @@ export default async function PostPage({ params }: PageProps) {
           "@type": "ListItem",
           position: 2,
           name: "Blog",
-          item: "https://blog.masteryhub.se",
+          item: `https://blog.masteryhub.se/${locale}`,
         },
         {
           "@type": "ListItem",
@@ -166,7 +166,7 @@ export default async function PostPage({ params }: PageProps) {
                   </li>
                   <li className="text-border">›</li>
                   <li>
-                    <Link href={"/" + locale} className="hover:text-accent transition-colors">
+                    <Link href={`/${locale}`} className="hover:text-accent transition-colors">
                       Blog
                     </Link>
                   </li>
