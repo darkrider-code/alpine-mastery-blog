@@ -14,6 +14,13 @@ const categoryColors: Record<string, string> = {
   Mental: "bg-orange-900 text-orange-300",
 };
 
+const sportColors: Record<string, string> = {
+  "Alpine Skiing": "bg-sky-900 text-sky-300",
+  "Cross Country": "bg-emerald-900 text-emerald-300",
+  "Foil": "bg-purple-900 text-purple-300",
+  "Running": "bg-orange-900 text-orange-300",
+};
+
 function formatDate(dateString: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
@@ -27,6 +34,16 @@ function truncate(text: string, maxLength: number): string {
   return text.slice(0, maxLength).trimEnd() + "…";
 }
 
+function getSportLabel(sport: string): string {
+  const sportLabels: Record<string, string> = {
+    "Alpine Skiing": "Alpine",
+    "Cross Country": "Längd",
+    Foil: "Foil",
+    Running: "Löpning",
+  };
+  return sportLabels[sport] ?? sport;
+}
+
 interface BlogCardProps {
   post: Post;
   locale: string;
@@ -35,6 +52,8 @@ interface BlogCardProps {
 export default function BlogCard({ post, locale }: BlogCardProps) {
   const { t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+  const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
+  const sportLabel = getSportLabel(post.sport);
 
   // Fix excerpt: only show if description exists and is > 30 characters
   const excerpt = post.description && post.description.length > 30
@@ -62,9 +81,14 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
       )}
 
       <div className="mt-6 flex items-center justify-between text-sm">
-        <time dateTime={post.publishedAt} className="text-text-secondary">
-          {formatDate(post.publishedAt, locale)}
-        </time>
+        <div className="flex items-center gap-2">
+          <span className={"rounded-full px-3 py-1 text-xs font-medium " + sportBadgeClass}>
+            {sportLabel}
+          </span>
+          <time dateTime={post.publishedAt} className="text-text-secondary">
+            {formatDate(post.publishedAt, locale)}
+          </time>
+        </div>
         <Link
           href={"/" + locale + "/" + post.slug}
           className="font-medium text-accent transition hover:text-accent-hover"
