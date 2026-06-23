@@ -18,6 +18,55 @@ const sportColors: Record<string, string> = {
   "Alpine Skiing": "bg-cyan-900 text-cyan-300",
 };
 
+// Function to clean up MDX content by removing duplicate titles and source references
+function cleanContent(content: string, title: string): string {
+  // Remove duplicate titles (keep only the first # title)
+  const lines = content.split('
+');
+  let firstTitleFound = false;
+  let cleanedLines = [];
+  
+  for (const line of lines) {
+    // Check if line is a title starting with #
+    if (line.startsWith('#') && line.includes(title)) {
+      if (!firstTitleFound) {
+        cleanedLines.push(line);
+        firstTitleFound = true;
+      }
+      // Skip duplicate titles
+    } else {
+      cleanedLines.push(line);
+    }
+  }
+  
+  // Remove duplicate source references (Källor: ...)
+  let sourceContent = cleanedLines.join('
+');
+  const sourceMatches = sourceContent.match(/Källor:[^
+]*(?:
+[^
+]*)*/gi) || [];
+  
+  if (sourceMatches.length > 1) {
+    const firstSource = sourceMatches[0];
+    // Remove all source sections except the first one
+    sourceContent = sourceContent.replace(/Källor:[^
+]*(?:
+[^
+]*)*/gi, (match, index) => {
+      return index === sourceContent.indexOf(firstSource) ? match : '';
+    });
+  }
+  
+  // Clean up multiple newlines
+  sourceContent = sourceContent.replace(/
+{3,}/g, '
+
+');
+  
+  return sourceContent.trim();
+}
+
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
@@ -96,8 +145,11 @@ export default async function PostPage({ params }: PageProps) {
     const formattedDate = formatDate(post.publishedAt, locale);
     const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
 
+    // Clean content to remove duplicates
+    const cleanedContent = cleanContent(post.content, post.title);
+
     // Evaluate MDX content using @mdx-js/mdx
-    const { default: Content } = await evaluate(post.content, {
+    const { default: Content } = await evaluate(cleanedContent, {
       ...runtime,
       development: false,
     })
