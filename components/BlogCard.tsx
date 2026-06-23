@@ -51,7 +51,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
         <span className="text-text-secondary text-xs">{post.readingTime}</span>
       </div>
 
-      <Link href={"/" + locale + "/" + post.slug}>
+      <Link href={`/${locale}/${post.slug}`}>
         <h2 className="text-xl font-bold text-white transition hover:text-accent">
           {post.title}
         </h2>
@@ -66,7 +66,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
           {formatDate(post.publishedAt, locale)}
         </time>
         <Link
-          href={"/" + locale + "/" + post.slug}
+          href={`/${locale}/${post.slug}`}
           className="font-medium text-accent transition hover:text-accent-hover"
         >
           {t("site.readMore")}
