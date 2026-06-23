@@ -64,8 +64,8 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
       <div className="mt-12">
         <CTABanner 
           title="Tillämpa tekniken direkt"
-          description="Ladda upp ett videoklipp och få AI-analys av just din teknik."
-          showBrand={true}
+          description="Ladda upp ett klipp och få AI-analys av din teknik på under 2 minuter."
+          showBrand={false}
         />
       </div>
     </>
