@@ -9,63 +9,10 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { evaluate } from '@mdx-js/mdx'
-import * as runtime from 'react/jsx-runtime'
+import { compile } from "@mdx-js/mdx";
+import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
-
-const sportColors: Record<string, string> = {
-  "Alpine Skiing": "bg-cyan-900 text-cyan-300",
-};
-
-// Function to clean up MDX content by removing duplicate titles and source references
-function cleanContent(content: string, title: string): string {
-  // Remove duplicate titles (keep only the first # title)
-  const lines = content.split('
-');
-  let firstTitleFound = false;
-  let cleanedLines = [];
-  
-  for (const line of lines) {
-    // Check if line is a title starting with #
-    if (line.startsWith('#') && line.includes(title)) {
-      if (!firstTitleFound) {
-        cleanedLines.push(line);
-        firstTitleFound = true;
-      }
-      // Skip duplicate titles
-    } else {
-      cleanedLines.push(line);
-    }
-  }
-  
-  // Remove duplicate source references (Källor: ...)
-  let sourceContent = cleanedLines.join('
-');
-  const sourceMatches = sourceContent.match(/Källor:[^
-]*(?:
-[^
-]*)*/gi) || [];
-  
-  if (sourceMatches.length > 1) {
-    const firstSource = sourceMatches[0];
-    // Remove all source sections except the first one
-    sourceContent = sourceContent.replace(/Källor:[^
-]*(?:
-[^
-]*)*/gi, (match, index) => {
-      return index === sourceContent.indexOf(firstSource) ? match : '';
-    });
-  }
-  
-  // Clean up multiple newlines
-  sourceContent = sourceContent.replace(/
-{3,}/g, '
-
-');
-  
-  return sourceContent.trim();
-}
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -92,8 +39,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return {};
     }
 
-    const title = `${post.title} | Masteryhub Training Lab`;
-    const url = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const title = post.title + " | Masteryhub Training Lab";
+    const url = "https://blog.masteryhub.se/" + locale + "/" + post.slug;
 
     return {
       title: post.title,
@@ -110,6 +57,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title,
         description: post.description,
       },
+      alternates: {
+        canonical: url,
+        languages: {
+          'sv': 'https://blog.masteryhub.se/sv/' + post.slug,
+          'en': 'https://blog.masteryhub.se/en/' + post.slug,
+          'no': 'https://blog.masteryhub.se/no/' + post.slug,
+          'da': 'https://blog.masteryhub.se/da/' + post.slug,
+          'fi': 'https://blog.masteryhub.se/fi/' + post.slug,
+          'de': 'https://blog.masteryhub.se/de/' + post.slug,
+          'fr': 'https://blog.masteryhub.se/fr/' + post.slug,
+          'nl': 'https://blog.masteryhub.se/nl/' + post.slug,
+          'x-default': 'https://blog.masteryhub.se/sv/' + post.slug,
+        }
+      }
     };
   } catch (error) {
     console.error('Error in generateMetadata:', error);
@@ -126,13 +87,28 @@ function formatDate(dateString: string, locale: string): string {
   }).format(new Date(dateString));
 }
 
+async function MdxContent({ content }: { content: string }) {
+  const compiled = await compile(content, {
+    outputFormat: 'function',
+    development: false,
+  });
+
+  const MdxComponent = (compiled as any).default || compiled;
+
+  return (
+    <MDXProvider components={mdxComponents}>
+      <MdxComponent />
+    </MDXProvider>
+  );
+}
+
 export default async function PostPage({ params }: PageProps) {
   try {
     const { locale, slug } = await params;
     console.log('Loading post:', { locale, slug });
-    
+
     const post = getPostBySlug(slug, locale);
-    
+
     if (!post) {
       console.log('Post not found:', { locale, slug });
       return notFound();
@@ -140,19 +116,9 @@ export default async function PostPage({ params }: PageProps) {
 
     const relatedPosts = getRelatedPosts(post, locale, 3);
     const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
-    const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
     const categoryLabel = getCategoryLabel(post.category, locale);
     const formattedDate = formatDate(post.publishedAt, locale);
-    const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-
-    // Clean content to remove duplicates
-    const cleanedContent = cleanContent(post.content, post.title);
-
-    // Evaluate MDX content using @mdx-js/mdx
-    const { default: Content } = await evaluate(cleanedContent, {
-      ...runtime,
-      development: false,
-    })
+    const postUrl = "https://blog.masteryhub.se/" + locale + "/" + post.slug;
 
     const articleJsonLd = {
       "@context": "https://schema.org",
@@ -160,6 +126,7 @@ export default async function PostPage({ params }: PageProps) {
       headline: post.title,
       description: post.description,
       datePublished: post.publishedAt,
+      inLanguage: locale,
       author: {
         "@type": "Organization",
         name: "Masteryhub Training Lab",
@@ -186,7 +153,7 @@ export default async function PostPage({ params }: PageProps) {
           "@type": "ListItem",
           position: 2,
           name: "Blog",
-          item: `https://blog.masteryhub.se/${locale}`,
+          item: "https://blog.masteryhub.se/" + locale,
         },
         {
           "@type": "ListItem",
@@ -216,18 +183,17 @@ export default async function PostPage({ params }: PageProps) {
               <nav aria-label="breadcrumb" className="mb-6">
                 <ol className="flex items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary flex-wrap">
                   <li>
-                    <a href="https://masteryhub.se" 
-                       className="hover:text-accent transition-colors">
+                    <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
                       Masteryhub
                     </a>
                   </li>
-                  <li className="text-border">›</li>
+                  <li className="text-border">»</li>
                   <li>
-                    <Link href={`/${locale}`} className="hover:text-accent transition-colors">
+                    <Link href={"/" + locale} className="hover:text-accent transition-colors">
                       Blog
                     </Link>
                   </li>
-                  <li className="text-border">›</li>
+                  <li className="text-border">»</li>
                   <li className="text-white truncate max-w-[200px] sm:max-w-none">
                     {post.title}
                   </li>
@@ -237,13 +203,7 @@ export default async function PostPage({ params }: PageProps) {
               <div className="relative mb-12 pb-10 border-b border-border">
                 <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary to-transparent rounded-2xl -z-10 opacity-60" />
 
-                <div className="mb-4">
-                  <span className={`inline-block text-xs font-semibold px-2 py-1 rounded-full ${sportBadgeClass}`}>
-                    {post.sport}
-                  </span>
-                </div>
-
-                <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${badgeClass}`}>
+                <span className={"inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 " + badgeClass}>
                   {categoryLabel}
                 </span>
 
@@ -269,7 +229,7 @@ export default async function PostPage({ params }: PageProps) {
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
             <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
               <TranslatedPostBody post={post}>
-                <Content components={mdxComponents} />
+                <MdxContent content={post.content} />
               </TranslatedPostBody>
             </div>
           </div>
@@ -282,7 +242,7 @@ export default async function PostPage({ params }: PageProps) {
                 <TranslatedRelatedTitle category={post.category} locale={locale} />
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedPosts.map((related) => (
-                    <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                    <BlogCard key={related.slug + "-" + locale} post={related} locale={locale} />
                   ))}
                 </div>
               </section>
