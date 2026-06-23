@@ -18,6 +18,67 @@ interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
+// Sport colors for badges
+const sportColors: Record<string, string> = {
+  "Alpine Skiing": "bg-sky-900 text-sky-300",
+  "Cross Country": "bg-emerald-900 text-emerald-300",
+  Foil: "bg-purple-900 text-purple-300",
+  Running: "bg-orange-900 text-orange-300",
+};
+
+// Sport labels for display
+function getSportLabel(sport: string): string {
+  const sportLabels: Record<string, string> = {
+    "Alpine Skiing": "Alpine",
+    "Cross Country": "Längd",
+    Foil: "Foil",
+    Running: "Löpning",
+  };
+  return sportLabels[sport] ?? sport;
+}
+
+// Content cleanup function to remove duplicate titles and source references
+function cleanContent(content: string): string {
+  if (!content) return content;
+
+  // Remove diagnostic lines
+  let cleaned = content;
+  cleaned = cleaned.replace(/DIAGNOSTIC:.*
+?/gi, '');
+  cleaned = cleaned.replace(/Article Content
+?/gi, '');
+  cleaned = cleaned.replace(/Title:.*
+?/gi, '');
+  cleaned = cleaned.replace(/Description:.*
+?/gi, '');
+
+  // Remove source sections
+  cleaned = cleaned.replace(/Källor:.*?(?=
+
+|
+#|\Z)/gis, '');
+  cleaned = cleaned.replace(/Sources:.*?(?=
+
+|
+#|\Z)/gis, '');
+  cleaned = cleaned.replace(/References:.*?(?=
+
+|
+#|\Z)/gis, '');
+
+  // Remove consecutive duplicate lines
+  cleaned = cleaned.replace(/^(.*)
+\1$/gm, '$1');
+
+  // Clean up multiple newlines
+  cleaned = cleaned.replace(/
+{3,}/g, '
+
+');
+
+  return cleaned.trim();
+}
+
 export function generateStaticParams() {
   try {
     const slugs = getAllSlugs();
@@ -39,8 +100,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return {};
     }
 
-    const title = `${post.title} | Masteryhub Training Lab`;
-    const url = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const title = post.title + " | Alpine Mastery Blog";
+    const url = "https://blog.masteryhub.se/" + locale + "/" + post.slug;
 
     return {
       title: post.title,
@@ -75,8 +136,11 @@ function formatDate(dateString: string, locale: string): string {
 
 // Server component to render compiled MDX
 async function MdxContent({ content }: { content: string }) {
+  // Clean the content first
+  const cleanedContent = cleanContent(content);
+  
   // Compile MDX to a function
-  const compiled = await compile(content, {
+  const compiled = await compile(cleanedContent, {
     outputFormat: 'function',
     development: false,
   });
@@ -106,9 +170,11 @@ export default async function PostPage({ params }: PageProps) {
 
     const relatedPosts = getRelatedPosts(post, locale, 3);
     const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+    const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
+    const sportLabel = getSportLabel(post.sport);
     const categoryLabel = getCategoryLabel(post.category, locale);
     const formattedDate = formatDate(post.publishedAt, locale);
-    const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const postUrl = "https://blog.masteryhub.se/" + locale + "/" + post.slug;
 
     const articleJsonLd = {
       "@context": "https://schema.org",
@@ -118,7 +184,7 @@ export default async function PostPage({ params }: PageProps) {
       datePublished: post.publishedAt,
       author: {
         "@type": "Organization",
-        name: "Masteryhub Training Lab",
+        name: "Alpine Mastery",
         url: "https://masteryhub.se",
       },
       publisher: {
@@ -169,7 +235,7 @@ export default async function PostPage({ params }: PageProps) {
         <article className="mx-auto max-w-6xl px-4 sm:px-6">
           <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
             <div className="mx-auto max-w-3xl">
-              {/* Fix 3: Breadcrumb without numbers */}
+              {/* Breadcrumb without numbers */}
               <nav aria-label="breadcrumb" className="mb-6">
                 <ol className="flex items-center gap-2 list-none p-0 m-0
                            text-sm text-text-secondary flex-wrap">
@@ -192,17 +258,23 @@ export default async function PostPage({ params }: PageProps) {
                 </ol>
               </nav>
 
-              {/* Fix 4: Hero section with visual separation */}
+              {/* Hero section with visual separation */}
               <div className="relative mb-12 pb-10 border-b border-border">
                 {/* Subtil gradient-bakgrund */}
                 <div className="absolute inset-0 bg-gradient-to-b from-bg-secondary
                             to-transparent rounded-2xl -z-10 opacity-60" />
 
-                {/* Kategori-badge */}
-                <span className={"inline-block text-xs font-semibold px-3 py-1
-                              rounded-full mb-4 " + badgeClass}>
-                  {categoryLabel}
-                </span>
+                {/* Sport and Category badges */}
+                <div className="flex items-center gap-2 mb-4">
+                  <span className={"inline-block text-xs font-semibold px-3 py-1
+                              rounded-full " + sportBadgeClass}>
+                    {sportLabel}
+                  </span>
+                  <span className={"inline-block text-xs font-semibold px-3 py-1
+                              rounded-full " + badgeClass}>
+                    {categoryLabel}
+                  </span>
+                </div>
 
                 {/* TranslatedPostHeader handles the title */}
                 <TranslatedPostHeader post={post} />
@@ -227,7 +299,7 @@ export default async function PostPage({ params }: PageProps) {
             </div>
           </header>
 
-          {/* Fix 5: Article body with prose styling */}
+          {/* Article body with prose styling */}
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
             <div className="prose prose-invert prose-lg max-w-none
                         prose-headings:text-white prose-headings:font-bold
@@ -258,7 +330,7 @@ export default async function PostPage({ params }: PageProps) {
                 <TranslatedRelatedTitle category={post.category} locale={locale} />
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedPosts.map((related) => (
-                    <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                    <BlogCard key={related.slug + "-" + locale} post={related} locale={locale} />
                   ))}
                 </div>
               </section>
