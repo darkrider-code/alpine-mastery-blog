@@ -38,7 +38,6 @@ export default function CTABanner({
   const { t } = useLanguage();
   const urls = getProductUrls(product);
 
-  // Use props if provided, otherwise fall back to translations
   const displayTitle = title ?? t("site.homeTitle");
   const displayDescription = description ?? t("site.homeDescription");
 
