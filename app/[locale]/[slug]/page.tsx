@@ -43,14 +43,13 @@ function cleanContent(content: string): string {
 
   // Remove diagnostic lines
   let cleaned = content;
-  cleaned = cleaned.replace(/DIAGNOSTIC:.*?/gi, '');
-  cleaned = cleaned.replace(/Article Content?/gi, '');
-  cleaned = cleaned.replace(/Title:.*?/gi, '');
-  cleaned = cleaned.replace(/Description:.*?/gi, '');
+  cleaned = cleaned.replace(/DIAGNOSTIC:.*\n?/gi, '');;
+  cleaned = cleaned.replace(/Article Content\n?/gi, '');;
+  cleaned = cleaned.replace(/Title:.*\n?/gi, '');;
+  cleaned = cleaned.replace(/Description:.*\n?/gi, '');;
 
   // Remove source sections
-  cleaned = cleaned.replace(/Källor:.*?(?=
-
+  cleaned = cleaned.replace(/Källor:.*?(?=\n
 |
 #|\Z)/gis, '');
   cleaned = cleaned.replace(/Sources:.*?(?=
