@@ -37,42 +37,7 @@ function getSportLabel(sport: string): string {
   return sportLabels[sport] ?? sport;
 }
 
-// Content cleanup function to remove duplicate titles and source references
-function cleanContent(content: string): string {
-  if (!content) return content;
 
-  // Remove diagnostic lines
-  let cleaned = content;
-  cleaned = cleaned.replace(/DIAGNOSTIC:.*\n?/gi, '');;
-  cleaned = cleaned.replace(/Article Content\n?/gi, '');;
-  cleaned = cleaned.replace(/Title:.*\n?/gi, '');;
-  cleaned = cleaned.replace(/Description:.*\n?/gi, '');;
-
-  // Remove source sections
-  cleaned = cleaned.replace(/Källor:.*?(?=\n
-|
-#|\Z)/gis, '');
-  cleaned = cleaned.replace(/Sources:.*?(?=
-
-|
-#|\Z)/gis, '');
-  cleaned = cleaned.replace(/References:.*?(?=
-
-|
-#|\Z)/gis, '');
-
-  // Remove consecutive duplicate lines
-  cleaned = cleaned.replace(/^(.*)
-\1$/gm, '$1');
-
-  // Clean up multiple newlines
-  cleaned = cleaned.replace(/
-{3,}/g, '
-
-');
-
-  return cleaned.trim();
-}
 
 export function generateStaticParams() {
   try {
@@ -132,7 +97,7 @@ function formatDate(dateString: string, locale: string): string {
 // Server component to render compiled MDX
 async function MdxContent({ content }: { content: string }) {
   // Clean the content first
-  const cleanedContent = cleanContent(content);
+  const cleanedContent = content;
   
   // Compile MDX to a function
   const compiled = await compile(cleanedContent, {
