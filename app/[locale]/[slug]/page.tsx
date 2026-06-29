@@ -5,7 +5,7 @@ import { evaluate } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime'
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/posts'
 import { SUPPORTED_LOCALES, getCategoryLabel } from '@/lib/translations'
-import { CTABanner } from '@/components/CTABanner'
+import CTABanner from '@/components/CTABanner'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import BlogCard from '@/components/BlogCard'
 
