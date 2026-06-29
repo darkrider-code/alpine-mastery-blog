@@ -37,7 +37,12 @@ function getSportLabel(sport: string): string {
   return sportLabels[sport] ?? sport;
 }
 
+/g, '
 
+');
+
+  return cleaned.trim();
+}
 
 export function generateStaticParams() {
   try {
