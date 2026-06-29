@@ -6,7 +6,7 @@ import * as runtime from 'react/jsx-runtime'
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/posts'
 import { SUPPORTED_LOCALES, getCategoryLabel } from '@/lib/translations'
 import CTABanner from '@/components/CTABanner'
-import { ScrollProgress } from '@/components/ScrollProgress'
+import ScrollProgress from '@/components/ScrollProgress'
 import BlogCard from '@/components/BlogCard'
 
 export async function generateStaticParams() {
@@ -16,29 +16,37 @@ export async function generateStaticParams() {
   )
 }
 
-export async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
-  const post = getPostBySlug(params.slug, params.locale)
-  if (!post) return {}
-  const url = 'https://blog.masteryhub.se/' + params.locale + '/' + params.slug
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  const post = getPostBySlug(slug, locale);
+  if (!post) return {};
+  const url = "https://blog.masteryhub.se/" + locale + "/" + slug;
   return {
     title: post.title,
     description: post.description,
     alternates: {
       canonical: url,
       languages: Object.fromEntries([
-        ...SUPPORTED_LOCALES.map(l => [l, 'https://blog.masteryhub.se/' + l + '/' + params.slug]),
-        ['x-default', 'https://blog.masteryhub.se/sv/' + params.slug],
+        ...SUPPORTED_LOCALES.map((l) => [
+          l,
+          "https://blog.masteryhub.se/" + l + "/" + slug,
+        ]),
+        ["x-default", "https://blog.masteryhub.se/sv/" + slug],
       ]),
     },
     openGraph: {
       title: post.title,
       description: post.description,
-      type: 'article',
+      type: "article",
       publishedTime: post.publishedAt,
       url: url,
     },
-    twitter: { card: 'summary_large_image' },
-  }
+    twitter: { card: "summary_large_image" },
+  };
 }
 
 async function MdxContent({ content, components }: { content: string; components: MDXComponents }) {
@@ -87,24 +95,29 @@ const mdxComponents: MDXComponents = {
   ),
 }
 
-export default async function ArticlePage({ params }: { params: { locale: string; slug: string } }) {
-  const post = getPostBySlug(params.slug, params.locale)
-  if (!post) return notFound()
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  const post = getPostBySlug(slug, locale);
+  if (!post) return notFound();
 
-  const relatedPosts = getRelatedPosts(post, params.locale, 3)
-  const categoryLabel = getCategoryLabel(post.category, params.locale)
+  const relatedPosts = getRelatedPosts(post, locale, 3);
+  const categoryLabel = getCategoryLabel(post.category, locale);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline: post.title,
     description: post.description,
     datePublished: post.publishedAt,
-    inLanguage: params.locale,
-    author: { '@type': 'Organization', name: 'Masteryhub' },
-    publisher: { '@type': 'Organization', name: 'Masteryhub' },
-    url: 'https://blog.masteryhub.se/' + params.locale + '/' + params.slug,
-  }
+    inLanguage: locale,
+    author: { "@type": "Organization", name: "Masteryhub" },
+    publisher: { "@type": "Organization", name: "Masteryhub" },
+    url: "https://blog.masteryhub.se/" + locale + "/" + slug,
+  };
 
   return (
     <>
@@ -126,7 +139,7 @@ export default async function ArticlePage({ params }: { params: { locale: string
             </li>
             <li style={{ listStyle: 'none' }} aria-hidden="true">&raquo;</li>
             <li style={{ listStyle: 'none' }}>
-              <Link href={'/' + params.locale} className="hover:text-accent transition-colors">
+              <Link href={"/" + locale} className="hover:text-accent transition-colors">
                 Blog
               </Link>
             </li>
@@ -145,7 +158,7 @@ export default async function ArticlePage({ params }: { params: { locale: string
             {post.title}
           </h1>
           <div className="flex items-center gap-3 text-sm text-text-secondary">
-            <span>{new Date(post.publishedAt).toLocaleDateString(params.locale, { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            <span>{new Date(post.publishedAt).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" })}</span>
             <span className="text-border">&middot;</span>
             <span>{post.readingTime}</span>
             <span className="text-border">&middot;</span>
@@ -166,7 +179,7 @@ export default async function ArticlePage({ params }: { params: { locale: string
             </h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedPosts.map((related) => (
-                <BlogCard key={related.slug + '-' + params.locale} post={related} locale={params.locale} />
+                <BlogCard key={related.slug + "-" + locale} post={related} locale={locale} />
               ))}
             </div>
           </section>
