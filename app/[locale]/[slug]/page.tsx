@@ -9,10 +9,8 @@ import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
-import { compile } from "@mdx-js/mdx";
-import { MDXProvider } from "@mdx-js/react";
-import { mdxComponents } from "@/components/mdx-components";
 import type { Post } from "@/types/post";
+import { RenderMdx } from "@/lib/render-mdx";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -43,38 +41,21 @@ function cleanContent(content: string): string {
 
   // Remove diagnostic lines
   let cleaned = content;
-  cleaned = cleaned.replace(/DIAGNOSTIC:.*
-?/gi, '');
-  cleaned = cleaned.replace(/Article Content
-?/gi, '');
-  cleaned = cleaned.replace(/Title:.*
-?/gi, '');
-  cleaned = cleaned.replace(/Description:.*
-?/gi, '');
+  cleaned = cleaned.replace(/DIAGNOSTIC:.*\n?/gi, '');
+  cleaned = cleaned.replace(/Article Content\n?/gi, '');
+  cleaned = cleaned.replace(/Title:.*\n?/gi, '');
+  cleaned = cleaned.replace(/Description:.*\n?/gi, '');
 
   // Remove source sections
-  cleaned = cleaned.replace(/Källor:.*?(?=
-
-|
-#|\Z)/gis, '');
-  cleaned = cleaned.replace(/Sources:.*?(?=
-
-|
-#|\Z)/gis, '');
-  cleaned = cleaned.replace(/References:.*?(?=
-
-|
-#|\Z)/gis, '');
+  cleaned = cleaned.replace(/Källor:[\s\S]*?(?=\n\n|\n#|$)/gi, '');
+  cleaned = cleaned.replace(/Sources:[\s\S]*?(?=\n\n|\n#|$)/gi, '');
+  cleaned = cleaned.replace(/References:[\s\S]*?(?=\n\n|\n#|$)/gi, '');
 
   // Remove consecutive duplicate lines
-  cleaned = cleaned.replace(/^(.*)
-\1$/gm, '$1');
+  cleaned = cleaned.replace(/^(.*)\n\1$/gm, '$1');
 
   // Clean up multiple newlines
-  cleaned = cleaned.replace(/
-{3,}/g, '
-
-');
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
 
   return cleaned.trim();
 }
@@ -136,24 +117,8 @@ function formatDate(dateString: string, locale: string): string {
 
 // Server component to render compiled MDX
 async function MdxContent({ content }: { content: string }) {
-  // Clean the content first
   const cleanedContent = cleanContent(content);
-  
-  // Compile MDX to a function
-  const compiled = await compile(cleanedContent, {
-    outputFormat: 'function',
-    development: false,
-  });
-  
-  // Execute the compiled function to get the React component
-  // @ts-ignore - compiled is a VFile with the function code
-  const MdxComponent = (compiled as any).default || compiled;
-  
-  return (
-    <MDXProvider components={mdxComponents}>
-      <MdxComponent />
-    </MDXProvider>
-  );
+  return <RenderMdx source={cleanedContent} />;
 }
 
 export default async function PostPage({ params }: PageProps) {

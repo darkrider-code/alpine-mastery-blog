@@ -21,6 +21,8 @@ export default function CTABanner({
   // Use props if provided, otherwise fall back to translations
   const displayTitle = title ?? t("site.homeTitle");
   const displayDescription = description ?? t("site.homeDescription");
+  const primaryButtonLabel = t("site.ctaPrimary");
+  const secondaryButtonLabel = t("site.ctaSecondary");
 
   return (
     <section className="mt-16 p-8 sm:p-10 rounded-2xl
@@ -43,13 +45,13 @@ export default function CTABanner({
           href={FREE_ANALYSIS_URL}
           className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
         >
-          Testa gratis analys
+          {primaryButtonLabel}
         </a>
         <a
           href={CREATE_ACCOUNT_URL}
           className="inline-flex items-center justify-center rounded-xl border border-accent px-8 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
         >
-          Skapa konto
+          {secondaryButtonLabel}
         </a>
       </div>
     </section>

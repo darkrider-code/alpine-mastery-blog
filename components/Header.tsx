@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -31,15 +30,13 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
         <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-white">
-            <MountainIcon />
-            <span>{t("site.title")}</span>
-          </Link>
           <a
             href="https://masteryhub.se"
-            className="hidden text-sm text-text-secondary transition hover:text-accent sm:inline"
+            className="flex items-center gap-2 font-semibold text-white"
+            aria-label="Go to Masteryhub"
           >
-            masteryhub.se
+            <MountainIcon />
+            <span>{t("site.title")}</span>
           </a>
         </div>
         <div className="flex items-center gap-3">
