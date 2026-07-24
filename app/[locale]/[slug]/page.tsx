@@ -81,23 +81,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return {};
     }
 
-    const title = post.title + " | Alpine Mastery Blog";
-    const url = "https://blog.masteryhub.se/" + locale + "/" + post.slug;
+    const canonicalUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const languages = Object.fromEntries(
+      SUPPORTED_LOCALES.map((supportedLocale) => [
+        supportedLocale,
+        `https://blog.masteryhub.se/${supportedLocale}/${post.slug}`,
+      ])
+    ) as Record<string, string>;
 
     return {
       title: post.title,
       description: post.description,
       openGraph: {
-        title,
+        title: post.title,
         description: post.description,
         type: "article",
         publishedTime: post.publishedAt,
-        url,
+        url: canonicalUrl,
       },
       twitter: {
         card: "summary_large_image",
-        title,
+        title: post.title,
         description: post.description,
+      },
+      alternates: {
+        canonical: canonicalUrl,
+        languages: {
+          ...languages,
+          "x-default": `https://blog.masteryhub.se/sv/${post.slug}`,
+        },
       },
     };
   } catch (error) {

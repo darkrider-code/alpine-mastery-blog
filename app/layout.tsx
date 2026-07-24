@@ -13,13 +13,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.masteryhub.se"),
   title: {
-    default: "Masteryhub Training Lab",
-    template: "%s | Masteryhub Training Lab",
+    default: "Masteryhub",
+    template: "%s",
   },
   description:
     "Vetenskapsbaserade artiklar om alpinteknik, träningsplanering och mental förberedelse.",
   openGraph: {
-    siteName: "Masteryhub Training Lab",
+    siteName: "Masteryhub",
     locale: "sv_SE",
     type: "website",
   },
