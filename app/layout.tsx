@@ -22,6 +22,18 @@ export const metadata: Metadata = {
     siteName: "Masteryhub Training Lab",
     locale: "sv_SE",
     type: "website",
+    images: [
+      {
+        url: "https://blog.masteryhub.se/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Masteryhub Training Lab",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://blog.masteryhub.se/og-image.png"],
   },
 };
 

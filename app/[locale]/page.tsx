@@ -29,7 +29,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         locale === "sv"
           ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
           : "Science-based articles on technique, training, mindset, and analysis for athletes.",
-      url: "https://blog.masteryhub.se",
+      url: "https://blog.masteryhub.se/" + locale,
+      images: [
+        {
+          url: "https://blog.masteryhub.se/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Masteryhub Training Lab",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["https://blog.masteryhub.se/og-image.png"],
     },
     alternates: {
       canonical: "https://blog.masteryhub.se/" + locale,
