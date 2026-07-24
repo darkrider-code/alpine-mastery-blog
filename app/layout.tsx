@@ -22,13 +22,6 @@ export const metadata: Metadata = {
     siteName: "Masteryhub",
     locale: "sv_SE",
     type: "website",
-<<<<<<< HEAD
-    images: ["https://blog.masteryhub.se/og-image-blog.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["https://blog.masteryhub.se/og-image-blog.png"],
-=======
     images: [
       {
         url: "https://blog.masteryhub.se/og-image.png",
@@ -41,7 +34,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: ["https://blog.masteryhub.se/og-image.png"],
->>>>>>> acd4f8fa449ba4cba46b0734ca5c706542405997
   },
 };
 

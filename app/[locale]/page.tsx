@@ -36,22 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         locale === "sv"
           ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
           : "Science-based articles on technique, training, mindset, and analysis for athletes.",
-<<<<<<< HEAD
       url: canonicalUrl,
-      images: ["https://blog.masteryhub.se/og-image-blog.png"],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: ["https://blog.masteryhub.se/og-image-blog.png"],
-    },
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        ...languages,
-        "x-default": "https://blog.masteryhub.se/sv",
-      },
-=======
-      url: "https://blog.masteryhub.se/" + locale,
       images: [
         {
           url: "https://blog.masteryhub.se/og-image.png",
@@ -64,21 +49,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       images: ["https://blog.masteryhub.se/og-image.png"],
->>>>>>> acd4f8fa449ba4cba46b0734ca5c706542405997
     },
     alternates: {
-      canonical: "https://blog.masteryhub.se/" + locale,
+      canonical: canonicalUrl,
       languages: {
-        'sv': 'https://blog.masteryhub.se/sv',
-        'en': 'https://blog.masteryhub.se/en',
-        'no': 'https://blog.masteryhub.se/no',
-        'da': 'https://blog.masteryhub.se/da',
-        'fi': 'https://blog.masteryhub.se/fi',
-        'de': 'https://blog.masteryhub.se/de',
-        'fr': 'https://blog.masteryhub.se/fr',
-        'nl': 'https://blog.masteryhub.se/nl',
-        'x-default': 'https://blog.masteryhub.se/sv',
-      }
+        ...languages,
+        "x-default": "https://blog.masteryhub.se/sv",
+      },
     }
   };
 }
