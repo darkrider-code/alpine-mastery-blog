@@ -82,6 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
       title: post.title,
       description: post.description,
+<<<<<<< HEAD
       openGraph: {
         title: post.title,
         description: post.description,
@@ -108,6 +109,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     console.error("Error in generateMetadata:", error);
     return {};
   }
+=======
+      type: "article",
+      publishedTime: post.publishedAt,
+      url: url,
+      images: [
+        {
+          url: "https://blog.masteryhub.se/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["https://blog.masteryhub.se/og-image.png"],
+    },
+  };
+>>>>>>> acd4f8fa449ba4cba46b0734ca5c706542405997
 }
 
 function formatDate(dateString: string, locale: string): string {
