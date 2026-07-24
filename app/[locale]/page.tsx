@@ -37,6 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
           : "Science-based articles on technique, training, mindset, and analysis for athletes.",
       url: canonicalUrl,
+      images: ["https://blog.masteryhub.se/og-image-blog.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["https://blog.masteryhub.se/og-image-blog.png"],
     },
     alternates: {
       canonical: canonicalUrl,

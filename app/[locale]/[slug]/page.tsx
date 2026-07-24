@@ -98,11 +98,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         type: "article",
         publishedTime: post.publishedAt,
         url: canonicalUrl,
+        images: ["https://blog.masteryhub.se/og-image-blog.png"],
       },
       twitter: {
         card: "summary_large_image",
         title: post.title,
         description: post.description,
+        images: ["https://blog.masteryhub.se/og-image-blog.png"],
       },
       alternates: {
         canonical: canonicalUrl,

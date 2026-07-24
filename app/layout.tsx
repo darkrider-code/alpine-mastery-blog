@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     siteName: "Masteryhub",
     locale: "sv_SE",
     type: "website",
+    images: ["https://blog.masteryhub.se/og-image-blog.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://blog.masteryhub.se/og-image-blog.png"],
   },
 };
 
