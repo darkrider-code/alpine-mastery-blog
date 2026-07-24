@@ -1,190 +1,299 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import type { MDXComponents } from 'mdx/types'
-import { evaluate } from '@mdx-js/mdx'
-import * as runtime from 'react/jsx-runtime'
-import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/posts'
-import { SUPPORTED_LOCALES, getCategoryLabel } from '@/lib/translations'
-import CTABanner from '@/components/CTABanner'
-import ScrollProgress from '@/components/ScrollProgress'
-import BlogCard from '@/components/BlogCard'
+﻿import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import BlogCard, { categoryColors } from "@/components/BlogCard";
+import CTABanner from "@/components/CTABanner";
+import ScrollProgress from "@/components/ScrollProgress";
+import TranslatedPostBody from "@/components/TranslatedPostBody";
+import TranslatedPostHeader from "@/components/TranslatedPostHeader";
+import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
+import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
+import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
+import { RenderMdx } from "@/lib/render-mdx";
 
-export async function generateStaticParams() {
-  const slugs = getAllSlugs()
-  return SUPPORTED_LOCALES.flatMap(locale =>
-    slugs.map(slug => ({ locale, slug }))
-  )
+interface PageProps {
+  params: Promise<{ locale: string; slug: string }>;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>;
-}) {
-  const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
-  if (!post) return {};
-  const url = "https://blog.masteryhub.se/" + locale + "/" + slug;
-  return {
-    title: post.title,
-    description: post.description,
-    alternates: {
-      canonical: url,
-      languages: Object.fromEntries([
-        ...SUPPORTED_LOCALES.map((l) => [
-          l,
-          "https://blog.masteryhub.se/" + l + "/" + slug,
-        ]),
-        ["x-default", "https://blog.masteryhub.se/sv/" + slug],
-      ]),
-    },
-    openGraph: {
+const sportColors: Record<string, string> = {
+  "Alpine Skiing": "bg-sky-900 text-sky-300",
+  "Cross Country": "bg-emerald-900 text-emerald-300",
+  Foil: "bg-purple-900 text-purple-300",
+  Running: "bg-orange-900 text-orange-300",
+};
+
+function getSportLabel(sport: string): string {
+  const sportLabels: Record<string, string> = {
+    "Alpine Skiing": "Alpine",
+    "Cross Country": "Längd",
+    Foil: "Foil",
+    Running: "Löpning",
+  };
+
+  return sportLabels[sport] ?? sport;
+}
+
+function cleanContent(content: string): string {
+  if (!content) return content;
+
+  let cleaned = content;
+  cleaned = cleaned.replace(/DIAGNOSTIC:.*\n?/gi, "");
+  cleaned = cleaned.replace(/Article Content\n?/gi, "");
+  cleaned = cleaned.replace(/Title:.*\n?/gi, "");
+  cleaned = cleaned.replace(/Description:.*\n?/gi, "");
+  cleaned = cleaned.replace(/Källor:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
+  cleaned = cleaned.replace(/Sources:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
+  cleaned = cleaned.replace(/References:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
+  cleaned = cleaned.replace(/^(.*)\n\1$/gm, "$1");
+  cleaned = cleaned.replace(/\n{3,}/g, "\n\n");
+
+  return cleaned.trim();
+}
+
+export function generateStaticParams() {
+  try {
+    const slugs = getAllSlugs();
+    return SUPPORTED_LOCALES.flatMap((locale) =>
+      slugs.map((slug) => ({ locale, slug }))
+    );
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const { locale, slug } = await params;
+    const post = getPostBySlug(slug, locale);
+
+    if (!post) {
+      return {};
+    }
+
+    const canonicalUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const languages = Object.fromEntries(
+      SUPPORTED_LOCALES.map((supportedLocale) => [
+        supportedLocale,
+        `https://blog.masteryhub.se/${supportedLocale}/${post.slug}`,
+      ])
+    ) as Record<string, string>;
+
+    return {
       title: post.title,
       description: post.description,
-      type: "article",
-      publishedTime: post.publishedAt,
-      url: url,
-    },
-    twitter: { card: "summary_large_image" },
-  };
+      openGraph: {
+        title: post.title,
+        description: post.description,
+        type: "article",
+        publishedTime: post.publishedAt,
+        url: canonicalUrl,
+        images: ["https://blog.masteryhub.se/og-image-blog.png"],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.description,
+        images: ["https://blog.masteryhub.se/og-image-blog.png"],
+      },
+      alternates: {
+        canonical: canonicalUrl,
+        languages: {
+          ...languages,
+          "x-default": `https://blog.masteryhub.se/sv/${post.slug}`,
+        },
+      },
+    };
+  } catch (error) {
+    console.error("Error in generateMetadata:", error);
+    return {};
+  }
 }
 
-async function MdxContent({ content, components }: { content: string; components: MDXComponents }) {
-  const { default: Content } = await evaluate(content, {
-    ...runtime,
-    development: false,
-  })
-  return <Content components={components} />
+function formatDate(dateString: string, locale: string): string {
+  const lang =
+    locale === "sv"
+      ? "sv-SE"
+      : locale === "no"
+        ? "nb-NO"
+        : locale === "da"
+          ? "da-DK"
+          : locale === "fi"
+            ? "fi-FI"
+            : locale === "de"
+              ? "de-DE"
+              : locale === "fr"
+                ? "fr-FR"
+                : locale === "nl"
+                  ? "nl-NL"
+                  : "en-US";
+
+  return new Intl.DateTimeFormat(lang, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(dateString));
 }
 
-const mdxComponents: MDXComponents = {
-  h1: () => null,
-  h2: ({ children }) => (
-    <h2 className="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-accent pl-4">
-      {children}
-    </h2>
-  ),
-  h3: ({ children }) => (
-    <h3 className="text-xl font-semibold text-white mt-8 mb-3">{children}</h3>
-  ),
-  p: ({ children }) => (
-    <p className="text-text-secondary leading-relaxed mb-4">{children}</p>
-  ),
-  blockquote: ({ children }) => (
-    <blockquote className="border-l-4 border-accent pl-6 italic text-text-secondary my-6 bg-bg-card rounded-r-lg py-4 pr-4">
-      {children}
-    </blockquote>
-  ),
-  a: ({ href, children }) => (
-    <a href={href} className="text-accent hover:text-accent-hover underline">
-      {children}
-    </a>
-  ),
-  table: ({ children }) => (
-    <table className="w-full border-collapse my-6">{children}</table>
-  ),
-  th: ({ children }) => (
-    <th className="bg-bg-card text-white px-4 py-3 text-left border border-border">
-      {children}
-    </th>
-  ),
-  td: ({ children }) => (
-    <td className="px-4 py-3 border border-border text-text-secondary">
-      {children}
-    </td>
-  ),
+async function MdxContent({ content }: { content: string }) {
+  const cleanedContent = cleanContent(content);
+  return <RenderMdx source={cleanedContent} />;
 }
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>;
-}) {
-  const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
-  if (!post) return notFound();
+export default async function PostPage({ params }: PageProps) {
+  try {
+    const { locale, slug } = await params;
+    const post = getPostBySlug(slug, locale);
 
-  const relatedPosts = getRelatedPosts(post, locale, 3);
-  const categoryLabel = getCategoryLabel(post.category, locale);
+    if (!post) {
+      return notFound();
+    }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.publishedAt,
-    inLanguage: locale,
-    author: { "@type": "Organization", name: "Masteryhub" },
-    publisher: { "@type": "Organization", name: "Masteryhub" },
-    url: "https://blog.masteryhub.se/" + locale + "/" + slug,
-  };
+    const relatedPosts = getRelatedPosts(post, locale, 3);
+    const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+    const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
+    const sportLabel = getSportLabel(post.sport);
+    const categoryLabel = getCategoryLabel(post.category, locale);
+    const formattedDate = formatDate(post.publishedAt, locale);
+    const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <ScrollProgress />
-      <main className="max-w-3xl mx-auto px-4 py-12">
-        <nav aria-label="breadcrumb" className="mb-8">
-          <ol
-            style={{ listStyle: 'none', padding: 0, margin: 0 }}
-            className="flex flex-wrap items-center gap-2 text-sm text-text-secondary"
-          >
-            <li style={{ listStyle: 'none' }}>
-              <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
-                Masteryhub
-              </a>
-            </li>
-            <li style={{ listStyle: 'none' }} aria-hidden="true">&raquo;</li>
-            <li style={{ listStyle: 'none' }}>
-              <Link href={"/" + locale} className="hover:text-accent transition-colors">
-                Blog
-              </Link>
-            </li>
-            <li style={{ listStyle: 'none' }} aria-hidden="true">&raquo;</li>
-            <li style={{ listStyle: 'none' }} className="text-white">
-              {post.title}
-            </li>
-          </ol>
-        </nav>
+    const articleJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.publishedAt,
+      author: {
+        "@type": "Organization",
+        name: "Alpine Mastery",
+        url: "https://masteryhub.se",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Masteryhub",
+      },
+      url: postUrl,
+    };
 
-        <div className="mb-12 pb-10 border-b border-border">
-          <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 bg-cyan-900 text-cyan-300">
-            {categoryLabel}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-6">
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-3 text-sm text-text-secondary">
-            <span>{new Date(post.publishedAt).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" })}</span>
-            <span className="text-border">&middot;</span>
-            <span>{post.readingTime}</span>
-            <span className="text-border">&middot;</span>
-            <span>{post.author}</span>
-          </div>
-        </div>
+    const breadcrumbJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Masteryhub",
+          item: "https://masteryhub.se",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: "https://blog.masteryhub.se",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: postUrl,
+        },
+      ],
+    };
 
-        <article className="prose prose-invert prose-lg max-w-none mb-16">
-          <MdxContent content={post.content} components={mdxComponents} />
-        </article>
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
 
-        <CTABanner product={post.product} />
+        <ScrollProgress />
 
-        {relatedPosts.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-xl font-bold text-white mb-6">
-              Fler artiklar i {categoryLabel}
-            </h2>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {relatedPosts.map((related) => (
-                <BlogCard key={related.slug + "-" + locale} post={related} locale={locale} />
-              ))}
+        <article className="mx-auto max-w-6xl px-4 sm:px-6">
+          <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
+            <div className="mx-auto max-w-3xl">
+              <nav aria-label="breadcrumb" className="mb-6">
+                <ol className="flex flex-wrap items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary">
+                  <li>
+                    <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
+                      Masteryhub
+                    </a>
+                  </li>
+                  <li className="text-border">›</li>
+                  <li>
+                    <Link href={`/${locale}`} className="hover:text-accent transition-colors">
+                      Blog
+                    </Link>
+                  </li>
+                  <li className="text-border">›</li>
+                  <li className="truncate text-white max-w-[200px] sm:max-w-none">
+                    {post.title}
+                  </li>
+                </ol>
+              </nav>
+
+              <div className="relative mb-12 pb-10 border-b border-border">
+                <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-b from-bg-secondary to-transparent opacity-60" />
+
+                <div className="mb-4 flex items-center gap-2">
+                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${sportBadgeClass}`}>
+                    {sportLabel}
+                  </span>
+                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}`}>
+                    {categoryLabel}
+                  </span>
+                </div>
+
+                <TranslatedPostHeader post={post} />
+
+                {post.description && (
+                  <p className="mb-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
+                    {post.description}
+                  </p>
+                )}
+
+                <div className="flex items-center gap-3 text-sm text-text-secondary">
+                  <span>{formattedDate}</span>
+                  <span className="text-border">·</span>
+                  <span>{post.readingTime}</span>
+                  <span className="text-border">·</span>
+                  <span>{post.author}</span>
+                </div>
+              </div>
             </div>
-          </section>
-        )}
-      </main>
-    </>
-  )
+          </header>
+
+          <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+            <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
+              <TranslatedPostBody post={post}>
+                <MdxContent content={post.content} />
+              </TranslatedPostBody>
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+            <CTABanner product={post.product} />
+
+            {relatedPosts.length > 0 && (
+              <section className="mt-16">
+                <TranslatedRelatedTitle category={post.category} locale={locale} />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {relatedPosts.map((related) => (
+                    <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        </article>
+      </>
+    );
+  } catch (error) {
+    console.error("Error rendering post page:", error);
+    return notFound();
+  }
 }

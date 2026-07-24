@@ -16,7 +16,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  
+  const canonicalUrl = `https://blog.masteryhub.se/${locale}`;
+  const languages = Object.fromEntries(
+    SUPPORTED_LOCALES.map((supportedLocale) => [
+      supportedLocale,
+      `https://blog.masteryhub.se/${supportedLocale}`,
+    ])
+  ) as Record<string, string>;
+
   return {
     title: "Progress starts with insight | Masteryhub Training Lab",
     description:
@@ -24,12 +31,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
         : "Science-based articles on technique, training, mindset, and analysis for athletes.",
     openGraph: {
-      title: "Progress starts with insight | Masteryhub Training Lab",
+      title: "Progress starts with insight",
       description:
         locale === "sv"
           ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
           : "Science-based articles on technique, training, mindset, and analysis for athletes.",
-      url: "https://blog.masteryhub.se",
+      url: canonicalUrl,
+      images: ["https://blog.masteryhub.se/og-image-blog.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["https://blog.masteryhub.se/og-image-blog.png"],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        ...languages,
+        "x-default": "https://blog.masteryhub.se/sv",
+      },
     },
     alternates: {
       canonical: "https://blog.masteryhub.se/" + locale,
