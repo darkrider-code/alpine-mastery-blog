@@ -17,7 +17,9 @@
       "relatedTitle": "Fler artiklar i",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blogg",
-      "noPosts": "Inga artiklar i denna kategori ännu."
+      "noPosts": "Inga artiklar i denna kategori ännu.",
+      "ctaBannerTitle": "Tillämpa tekniken direkt",
+      "ctaBannerDescription": "Ladda upp ett klipp och få AI-analys av din teknik på under 2 minuter."
     },
     "categories": {
       "Technique": "Teknik",
@@ -46,7 +48,9 @@
       "relatedTitle": "More articles in",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blog",
-      "noPosts": "No articles in this category yet."
+      "noPosts": "No articles in this category yet.",
+      "ctaBannerTitle": "Apply the technique directly",
+      "ctaBannerDescription": "Upload a clip and get AI analysis of your technique in under 2 minutes."
     },
     "categories": {
       "Technique": "Technique",
@@ -75,7 +79,9 @@
       "relatedTitle": "Flere artikler i",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blogg",
-      "noPosts": "Ingen artikler i denne kategorien ennå."
+      "noPosts": "Ingen artikler i denne kategorien ennå.",
+      "ctaBannerTitle": "Bruk teknikken direkte",
+      "ctaBannerDescription": "Last opp en klipp og få AI-analyse av teknikken din på under 2 minutter."
     },
     "categories": {
       "Technique": "Teknikk",
@@ -104,7 +110,9 @@
       "relatedTitle": "Flere artikler i",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blog",
-      "noPosts": "Ingen artikler i denne kategori endnu."
+      "noPosts": "Ingen artikler i denne kategori endnu.",
+      "ctaBannerTitle": "Brug teknikken direkte",
+      "ctaBannerDescription": "Upload et klip og få AI-analyse af din teknik på under 2 minutter."
     },
     "categories": {
       "Technique": "Teknik",
@@ -133,7 +141,9 @@
       "relatedTitle": "Lisää artikkeleita kategorian",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blogi",
-      "noPosts": "Ei artikkeleita tässä kategoriassa vielä."
+      "noPosts": "Ei artikkeleita tässä kategoriassa vielä.",
+      "ctaBannerTitle": "Käytä tekniikkaa suoraan",
+      "ctaBannerDescription": "Lataa video ja saat AI-analyysin tekniikastasi alle 2 minuutissa."
     },
     "categories": {
       "Technique": "Tekniikka",
@@ -162,7 +172,9 @@
       "relatedTitle": "Weitere Artikel in",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blog",
-      "noPosts": "Noch keine Artikel in dieser Kategorie."
+      "noPosts": "Noch keine Artikel in dieser Kategorie.",
+      "ctaBannerTitle": "Technik direkt anwenden",
+      "ctaBannerDescription": "Laden Sie ein Video hoch und erhalten Sie eine KI-Analyse Ihrer Technik in unter 2 Minuten."
     },
     "categories": {
       "Technique": "Technik",
@@ -191,7 +203,9 @@
       "relatedTitle": "Plus d'articles dans",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blog",
-      "noPosts": "Aucun article dans cette catégorie pour l'instant."
+      "noPosts": "Aucun article dans cette catégorie pour l'instant.",
+      "ctaBannerTitle": "Appliquer la technique directement",
+      "ctaBannerDescription": "Téléchargez une vidéo et obtenez une analyse IA de votre technique en moins de 2 minutes."
     },
     "categories": {
       "Technique": "Technique",
@@ -220,7 +234,9 @@
       "relatedTitle": "Meer artikelen in",
       "breadcrumbMasteryhub": "Masteryhub",
       "breadcrumbBlog": "Blog",
-      "noPosts": "Nog geen artikelen in deze categorie."
+      "noPosts": "Nog geen artikelen in deze categorie.",
+      "ctaBannerTitle": "Pas de techniek direct toe",
+      "ctaBannerDescription": "Upload een video en krijg AI-analyse van je techniek in minder dan 2 minuten."
     },
     "categories": {
       "Technique": "Techniek",
