@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     description:
       "Science-based articles on technique, training, mindset, and analysis for athletes.",
     url: "https://blog.masteryhub.se",
-    images: ["https://blog.masteryhub.se/og-image-blog.png"],
+    images: ["https://blog.masteryhub.se/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://blog.masteryhub.se/og-image-blog.png"],
+    images: ["https://blog.masteryhub.se/og-image.png"],
   },
 };
 
