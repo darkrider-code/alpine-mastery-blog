@@ -1,7 +1,11 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
+import CTABanner from "./CTABanner";
+import InlineCTA from "./InlineCTA";
 
 export const mdxComponents: MDXComponents = {
+  CTABanner,
+  InlineCTA,
   h1: () => null,
   h2: (props) => (
     <h2
