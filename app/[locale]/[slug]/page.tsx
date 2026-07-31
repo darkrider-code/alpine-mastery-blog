@@ -50,6 +50,8 @@ function cleanContent(content: string): string {
   return cleaned.trim();
 }
 
+export const revalidate = 3600; // Revalidate every hour to pick up content changes
+
 export function generateStaticParams() {
   try {
     const slugs = getAllSlugs();
