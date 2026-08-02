@@ -50,11 +50,32 @@ function cleanContent(content: string): string {
   return cleaned.trim();
 }
 
+function warnIfInvalidDescription(post: { slug: string; locale: string; description?: string }) {
+  const description = (post.description ?? "").trim();
+  const matchesCitationPattern = /(?:^|\s)(?:Källor:|Sources:|References:)/i.test(description);
+
+  if (!description || matchesCitationPattern) {
+    console.warn(
+      `[metadata] Invalid description for ${post.slug} (${post.locale}): ${description || "<empty>"}`
+    );
+  }
+}
+
 export const revalidate = 3600; // Revalidate every hour to pick up content changes
 
 export function generateStaticParams() {
   try {
     const slugs = getAllSlugs();
+
+    for (const locale of SUPPORTED_LOCALES) {
+      for (const slug of slugs) {
+        const post = getPostBySlug(slug, locale);
+        if (post) {
+          warnIfInvalidDescription(post);
+        }
+      }
+    }
+
     return SUPPORTED_LOCALES.flatMap((locale) =>
       slugs.map((slug) => ({ locale, slug }))
     );
@@ -72,6 +93,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (!post) {
       return {};
     }
+
+    warnIfInvalidDescription(post);
 
     const canonicalUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
     const languages = Object.fromEntries(
