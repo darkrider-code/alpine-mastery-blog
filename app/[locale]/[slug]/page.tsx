@@ -41,9 +41,6 @@ function cleanContent(content: string): string {
   cleaned = cleaned.replace(/Article Content\n?/gi, "");
   cleaned = cleaned.replace(/Title:.*\n?/gi, "");
   cleaned = cleaned.replace(/Description:.*\n?/gi, "");
-  cleaned = cleaned.replace(/Källor:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
-  cleaned = cleaned.replace(/Sources:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
-  cleaned = cleaned.replace(/References:[\s\S]*?(?=\n\n|\n#|$)/gi, "");
   cleaned = cleaned.replace(/^(.*)\n\1$/gm, "$1");
   cleaned = cleaned.replace(/\n{3,}/g, "\n\n");
 
