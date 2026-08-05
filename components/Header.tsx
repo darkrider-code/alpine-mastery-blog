@@ -24,7 +24,7 @@ function MountainIcon() {
 }
 
 export default function Header() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-md">
@@ -40,6 +40,12 @@ export default function Header() {
           </a>
         </div>
         <div className="flex items-center gap-3">
+          <a
+            href={`/${locale}/ai-skidanalys`}
+            className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
+          >
+            {t("site.aiSkidanalys")}
+          </a>
           <LanguageSwitcher />
         </div>
       </div>

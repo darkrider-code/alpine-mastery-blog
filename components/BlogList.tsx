@@ -21,7 +21,7 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div className="mb-8 flex flex-wrap items-center gap-2">
         <button
           type="button"
           onClick={() => setActiveCategory("All")}
@@ -47,6 +47,12 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
             {getCategoryLabel(category, displayLocale)}
           </button>
         ))}
+        <a
+          href={`/${displayLocale}/ai-skidanalys`}
+          className="rounded-full border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent hover:text-bg-primary"
+        >
+          {t("site.aiSkidanalys")} →
+        </a>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
