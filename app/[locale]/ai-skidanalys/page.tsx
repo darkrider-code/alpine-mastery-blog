@@ -1432,6 +1432,7 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
                   <video
                     className="h-full w-full object-contain"
                     src="/videos/landing-video.mp4"
+                    poster="/videos/poster.jpg"
                     controls
                     preload="metadata"
                     aria-label={copy.demoLabel}
