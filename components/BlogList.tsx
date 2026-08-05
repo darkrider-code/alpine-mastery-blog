@@ -5,7 +5,7 @@ import BlogCard from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
-import { DEFAULT_LOCALE, getCategoryLabel } from "@/lib/translations";
+import { DEFAULT_LOCALE, getCategoryLabel, getTranslationForLocale } from "@/lib/translations";
 
 const CATEGORIES = ["Technique", "Strength & Conditioning", "Mindset", "AI & Analysis", "Athlete Stories"] as const;
 
@@ -51,7 +51,7 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
           href={`/${displayLocale}/ai-skidanalys`}
           className="rounded-full border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent hover:text-bg-primary"
         >
-          {t("site.aiSkidanalys")} →
+          {getTranslationForLocale(displayLocale, "site.aiSkidanalys")} →
         </a>
       </div>
 

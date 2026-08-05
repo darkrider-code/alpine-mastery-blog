@@ -1,7 +1,9 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getTranslationForLocale } from "@/lib/translations";
 
 function MountainIcon() {
   return (
@@ -24,7 +26,15 @@ function MountainIcon() {
 }
 
 export default function Header() {
-  const { t, locale } = useLanguage();
+  const { t } = useLanguage();
+  const pathname = usePathname();
+
+  // Derive the current locale from the URL path (e.g. /en/... -> en)
+  const pathLocale = SUPPORTED_LOCALES.find(
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  );
+  const currentLocale = pathLocale ?? DEFAULT_LOCALE;
+  const aiSkidanalysLabel = getTranslationForLocale(currentLocale, "site.aiSkidanalys");
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-md">
@@ -41,10 +51,10 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href={`/${locale}/ai-skidanalys`}
+            href={`/${currentLocale}/ai-skidanalys`}
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
-            {t("site.aiSkidanalys")}
+            {aiSkidanalysLabel}
           </a>
           <LanguageSwitcher />
         </div>
