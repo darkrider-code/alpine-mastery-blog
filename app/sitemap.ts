@@ -22,9 +22,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
+  const landingPages = SUPPORTED_LOCALES.map(locale => ({
+    url: baseUrl + "/" + locale + "/ai-skidanalys",
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: locale === 'sv' ? 0.9 : 0.7,
+  }));
+
   return [
     { url: baseUrl, lastModified: new Date(), priority: 1.0 },
     ...localeRoots,
+    ...landingPages,
     ...articles,
   ];
 }
