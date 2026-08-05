@@ -1,0 +1,6 @@
+# CLI Command Rules
+
+- Prefer non-interactive commands
+- Never run commands that wait for user input
+- Always add an explicit echo/completion marker at the end of shell commands so output is never empty
+- Avoid commands with no expected output (e.g. grep with no matches) — pipe to `|| echo "no matches"`
