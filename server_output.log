@@ -13,3 +13,10 @@
  Detected additional lockfiles: 
    * C:\Users\danie\OneDrive\Dokument\GitHub\alpine-mastery-blog\package-lock.json
 
+Error rendering post page: Error: NEXT_HTTP_ERROR_FALLBACK;404
+    at f (C:\Users\danie\OneDrive\Dokument\GitHub\alpine-mastery-blog\.next\server\chunks\ssr\04tm_next_dist_16s18p4._.js:1:4923)
+    at f4 (C:\Users\danie\OneDrive\Dokument\GitHub\alpine-mastery-blog\.next\server\chunks\ssr\[root-of-the-server]__0dui9ix._.js:1:474459) {
+  digest: 'NEXT_HTTP_ERROR_FALLBACK;404'
+}
+
+C:\Users\danie\OneDrive\Dokument\GitHub\alpine-mastery-blog>More? 

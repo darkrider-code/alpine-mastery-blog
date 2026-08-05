@@ -99,7 +99,7 @@ const localeContent: Record<string, LocaleCopy> = {
     scoreLabel: "Totalpoäng",
     scoreValue: 95,
     headline:
-      "En elitnivåslalom som visar exceptionell teknisk precision, mycket stora kantvinklar och en världsklass-quiet upper body på en brant race-linje.",
+      "En elitnivåslalom som visar exceptionell teknisk precision, mycket stora kantvinklar och en världsklass-lugn överkropp på en brant race-linje.",
     problemsLabel: "Identifierade problem",
     problems: [
       "Lätt höftlutning vid avslutningen av svängen i den brantaste sektionen.",
@@ -1428,10 +1428,14 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
 
             <div className="relative">
               <div className="rounded-3xl border border-border bg-bg-card/80 p-5 shadow-2xl shadow-sky-500/10">
-                <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-4">
-                  <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-accent/40 bg-slate-950/60 text-center text-sm text-text-secondary">
-                    {copy.demoPlaceholder}
-                  </div>
+                <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-slate-950">
+                  <video
+                    className="h-full w-full object-contain"
+                    src="/videos/landing-video.mp4"
+                    controls
+                    preload="metadata"
+                    aria-label={copy.demoLabel}
+                  />
                 </div>
               </div>
             </div>
