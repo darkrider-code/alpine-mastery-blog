@@ -456,7 +456,7 @@ const localeContent: Record<string, LocaleCopy> = {
       exercisesLabel: "Eksempeløvelser",
       exercises: [
         "Single-Leg Wall Sit – Isometrisk styrke for belastning av ytre ski",
-        "Lateral Bounds – Etterligner kraftoverføring mellom svängene",
+        "Lateral Bounds – Etterligner kraftoverføring mellom svingene",
         "Pallof Press Hold – Reduserer uønsket rotasjon i overkroppen",
       ],
       tag: "Personalisert basert på analysehistorikken din",
