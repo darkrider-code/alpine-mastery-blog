@@ -217,13 +217,13 @@ export default async function PostPage({ params }: PageProps) {
         {
           "@type": "ListItem",
           position: 1,
-          name: "Masteryhub",
+          name: breadcrumbMasteryhub,
           item: "https://masteryhub.se",
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Blog",
+          name: breadcrumbBlog,
           item: "https://blog.masteryhub.se",
         },
         {
