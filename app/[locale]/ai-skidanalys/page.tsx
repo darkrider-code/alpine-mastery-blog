@@ -1006,7 +1006,7 @@ const localeContent: Record<string, LocaleCopy> = {
       "Alpine Mastery analyse tes descentes image par image et te donne un retour personnalisé qui s’améliore avec toi au fil du temps.",
     howHeading: "Comment fonctionne notre analyse IA du ski",
     howBody1:
-      "Alpine Mastery utilise une IA avancée pour analyser ta technique de ski image par image – angle de carotte, répartition de la pression, timing et choix de ligne. Parfait pour les skieurs, entraîneurs et clubs.",
+      "Alpine Mastery utilise une IA avancée pour analyser ta technique de ski image par image – angle de carre, répartition de la pression, timing et choix de ligne. Parfait pour les skieurs, entraîneurs et clubs.",
     howBody2:
       "Alpine Mastery utilise l’IA pour analyser ta technique de ski à partir d’une courte vidéo. Télécharge une séquence, obtiens une analyse personnelle en quelques secondes – avec conseils d’amélioration, exercices et note. Essaie gratuitement.",
     demoHeading: "Voir une vraie analyse",
@@ -1017,7 +1017,7 @@ const localeContent: Record<string, LocaleCopy> = {
     scoreLabel: "Score total",
     scoreValue: 95,
     headline:
-      "Une descente de slalom de haut niveau démontrant une précision technique exceptionnelle, de très grands angles de carotte et un haut du corps très calme sur une pente raide.",
+      "Une descente de slalom de haut niveau démontrant une précision technique exceptionnelle, de très grands angles de carre et un haut du corps très calme sur une pente raide.",
     problemsLabel: "Problèmes identifiés",
     problems: [
       "Léger basculement du bassin à la fin du virage sur la partie la plus raide.",
@@ -1044,15 +1044,15 @@ const localeContent: Record<string, LocaleCopy> = {
     cards: [
       {
         title: "Télécharge ta descente",
-        text: "Partage une courte vidéo de ta descente. Notre analyse IA du ski examine chaque image – angle de carotte, timing, choix de ligne et plus encore.",
+        text: "Partage une courte vidéo de ta descente. Notre analyse IA du ski examine chaque image – angle de carre, timing, choix de ligne et plus encore.",
       },
       {
         title: "Analyse IA instantanée",
         text: "Reçois une analyse personnelle de ta technique en quelques secondes avec conseils d’amélioration, exercices et note.",
       },
       {
-        title: "Demander une revue de coach",
-        text: "Tu veux un retour plus approfondi ? Demande une revue manuelle d’un coach en un clic, quand tu en as besoin.",
+        title: "Demander un examen par un coach",
+        text: "Tu veux un retour plus approfondi ? Demande un examen manuel par un coach en un clic, quand tu en as besoin.",
       },
     ],
     barmark: {
@@ -1069,7 +1069,7 @@ const localeContent: Record<string, LocaleCopy> = {
       exercises: [
         "Single-Leg Wall Sit – Force isométrique pour la charge du ski extérieur",
         "Lateral Bounds – Imite le transfert de force entre les virages",
-        "Pallof Press Hold – Réduit la rotation non désirée du haut du corps",
+        "Pallof Press Hold – Réduit la rotation indésirable du haut du corps",
       ],
       tag: "Personnalisé selon ton historique d’analyse",
     },
@@ -1077,10 +1077,10 @@ const localeContent: Record<string, LocaleCopy> = {
       badge: "Outil exclusif pour les entraîneurs",
       heading: "Assistant IA entraîneur",
       body:
-        "Les entraîneurs obtiennent un assistant IA qui connaît l’historique vidéo, les schémas techniques et la progression de chaque athlète. Pose des questions, obtiens des insights, planifie l’entraînement – tout en un seul endroit.",
+        "Les entraîneurs obtiennent un assistant IA qui connaît l’historique vidéo, les schémas techniques et la progression de chaque athlète. Pose des questions, obtiens des informations, planifie l’entraînement – tout en un seul endroit.",
       checklist: [
         "Pose des questions sur la technique de tous les athlètes",
-        "Obtiens des insights sur la progression et les faiblesses",
+        "Obtiens des informations sur la progression et les faiblesses",
         "Disponible exclusivement dans le tableau de bord entraîneur",
         "Basé sur l’historique complet des analyses",
       ],
@@ -1089,7 +1089,7 @@ const localeContent: Record<string, LocaleCopy> = {
       chatA: "R",
       chatQuestion: "Quelles sont les plus grandes limites techniques d’Emma en ce moment ?",
       chatAnswer:
-        "Emma montre une tendance au collapsus de hanche dans le virage intérieur, une initiation de pression tardive et un engagement de bord légèrement tardif pendant la phase de transition.",
+        "Emma montre une tendance à l’affaissement de la hanche dans le virage intérieur, une mise en pression tardive et un engagement de bord légèrement tardif pendant la phase de transition.",
     },
     coachFlow: {
       badge: "Outil gratuit pour gérer tes athlètes — aucun abonnement requis.",
@@ -1128,11 +1128,11 @@ const localeContent: Record<string, LocaleCopy> = {
       paidLabel: "Abonnement complet",
       rows: [
         ["Analyses vidéo", "1 analyse IA du ski (historique limité)", "Analyses IA illimitées + suivi complet de la progression"],
-        ["Profondeur du retour", "Revue technique complète", "Revue technique complète"],
+        ["Profondeur du retour", "Examen technique complet", "Examen technique complet"],
         ["Historique d’analyse", "Limité à 1 analyse", "Suivi complet de la progression"],
         ["Entraînement dryland", "Programmes personnels", "Programmes personnels de dryland et de ski basés sur ta technique"],
         ["Chat IA entraîneur", "Pour les entraîneurs", "Pour les entraîneurs"],
-        ["Domaines de focus personnels", "Priorisés par l’IA", "Priorisés par l’IA"],
+        ["Domaines d’attention personnels", "Priorisés par l’IA", "Priorisés par l’IA"],
         ["Courbes de progression", "Nécessite plus d’analyses", "Suivi visuel"],
         ["Outils entraîneur", "Suite complète", "Suite complète"],
         ["Support", "Communauté", "Prioritaire"],
@@ -1141,14 +1141,14 @@ const localeContent: Record<string, LocaleCopy> = {
     pricing: {
       heading: "✨ Abonnement Alpine Mastery – Ton chemin vers une meilleure technique de ski",
       body:
-        "Obtiens des analyses IA de ski illimitées et un retour personnel direct. Demande une revue manuelle de coach quand tu veux, et suis ta progression technique dans le temps. Retour rapide avec possibilité de coaching approfondi quand tu en as besoin.",
+        "Obtiens des analyses IA de ski illimitées et un retour personnel direct. Demande un examen manuel par un coach quand tu veux, et suis ta progression technique dans le temps. Retour rapide avec possibilité de coaching approfondi quand tu en as besoin.",
       badge: "🎉 1 mois gratuit — Aucune contrainte, résiliation à tout moment. Prix habituel : 199 € / mois · ~$18/mois · ~€16/mois",
       cta: "Démarrer gratuitement",
     },
     mainCta: "Analyse gratuite",
     secondaryCta: "Démarrer gratuitement",
     metaDescription:
-      "Analyse IA du ski pour skieurs, entraîneurs et clubs. Télécharge une vidéo et reçois un retour personnel sur la technique, le timing, l’angle de carotte et le choix de ligne.",
+      "Analyse IA du ski pour skieurs, entraîneurs et clubs. Télécharge une vidéo et reçois un retour personnel sur la technique, le timing, l’angle de carre et le choix de ligne.",
     schemaName: "Alpine Mastery Analyse IA du ski",
   },
   nl: {

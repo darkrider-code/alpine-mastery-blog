@@ -8,7 +8,7 @@ import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
-import { SUPPORTED_LOCALES, getCategoryLabel } from "@/lib/translations";
+import { SUPPORTED_LOCALES, getCategoryLabel, getTranslationForLocale } from "@/lib/translations";
 import { RenderMdx } from "@/lib/render-mdx";
 
 interface PageProps {
@@ -22,15 +22,19 @@ const sportColors: Record<string, string> = {
   Running: "bg-orange-900 text-orange-300",
 };
 
-function getSportLabel(sport: string): string {
-  const sportLabels: Record<string, string> = {
-    "Alpine Skiing": "Alpine",
-    "Cross Country": "Längd",
-    Foil: "Foil",
-    Running: "Löpning",
-  };
+function getSportLabel(sport: string, locale: string): string {
+  if (locale === "sv") {
+    const sportLabels: Record<string, string> = {
+      "Alpine Skiing": "Alpine",
+      "Cross Country": "Längd",
+      Foil: "Foil",
+      Running: "Löpning",
+    };
 
-  return sportLabels[sport] ?? sport;
+    return sportLabels[sport] ?? sport;
+  }
+
+  return sport;
 }
 
 function cleanContent(content: string): string {
@@ -181,10 +185,12 @@ export default async function PostPage({ params }: PageProps) {
     const relatedPosts = getRelatedPosts(post, locale, 3);
     const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
     const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
-    const sportLabel = getSportLabel(post.sport);
+    const sportLabel = getSportLabel(post.sport, locale);
     const categoryLabel = getCategoryLabel(post.category, locale);
     const formattedDate = formatDate(post.publishedAt, locale);
     const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+    const breadcrumbMasteryhub = getTranslationForLocale(locale, "site.breadcrumbMasteryhub") ?? "Masteryhub";
+    const breadcrumbBlog = getTranslationForLocale(locale, "site.breadcrumbBlog") ?? "Blog";
 
     const articleJsonLd = {
       "@context": "https://schema.org",
@@ -249,13 +255,13 @@ export default async function PostPage({ params }: PageProps) {
                 <ol className="flex flex-wrap items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary">
                   <li>
                     <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
-                      Masteryhub
+                      {breadcrumbMasteryhub}
                     </a>
                   </li>
                   <li className="text-border">›</li>
                   <li>
                     <Link href={`/${locale}`} className="hover:text-accent transition-colors">
-                      Blog
+                      {breadcrumbBlog}
                     </Link>
                   </li>
                   <li className="text-border">›</li>

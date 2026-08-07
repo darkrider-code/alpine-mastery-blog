@@ -20,15 +20,19 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState(DEFAULT_LOCALE);
+export function LanguageProvider({
+  children,
+  locale: initialLocale,
+}: {
+  children: React.ReactNode;
+  locale: string;
+}) {
+  const [locale, setLocaleState] = useState(initialLocale);
 
+  // Keep the provider in sync with the URL path locale (e.g. client-side nav)
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      setLocaleState(stored);
-    }
-  }, []);
+    setLocaleState(initialLocale);
+  }, [initialLocale]);
 
   useEffect(() => {
     document.documentElement.lang = locale;

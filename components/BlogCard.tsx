@@ -34,14 +34,17 @@ function truncate(text: string, maxLength: number): string {
   return text.slice(0, maxLength).trimEnd() + "…";
 }
 
-function getSportLabel(sport: string): string {
-  const sportLabels: Record<string, string> = {
-    "Alpine Skiing": "Alpine",
-    "Cross Country": "Längd",
-    Foil: "Foil",
-    Running: "Löpning",
-  };
-  return sportLabels[sport] ?? sport;
+function getSportLabel(sport: string, locale: string): string {
+  if (locale === "sv") {
+    const sportLabels: Record<string, string> = {
+      "Alpine Skiing": "Alpine",
+      "Cross Country": "Längd",
+      Foil: "Foil",
+      Running: "Löpning",
+    };
+    return sportLabels[sport] ?? sport;
+  }
+  return sport;
 }
 
 interface BlogCardProps {
@@ -53,7 +56,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
   const { t } = useLanguage();
   const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
   const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
-  const sportLabel = getSportLabel(post.sport);
+  const sportLabel = getSportLabel(post.sport, locale);
 
   // Fix excerpt: only show if description exists and is > 30 characters
   const excerpt = post.description && post.description.length > 30

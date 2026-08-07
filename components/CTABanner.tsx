@@ -33,8 +33,8 @@ function getProductUrls(product?: string) {
 export default function CTABanner({ title, description, showBrand = true, product }: CTABannerProps) {
   const { t } = useLanguage();
   const urls = getProductUrls(product);
-  const displayTitle = title ?? t("site.homeTitle");
-  const displayDescription = description ?? t("site.homeDescription");
+  const displayTitle = title ?? t("site.ctaBannerTitle");
+  const displayDescription = description ?? t("site.ctaBannerDescription");
   const primaryButtonLabel = t("site.ctaPrimary");
   const secondaryButtonLabel = t("site.ctaSecondary");
 

@@ -4,7 +4,7 @@ import BlogList from "@/components/BlogList";
 import HomeHero from "@/components/HomeHero";
 import { getAllPosts, DEFAULT_LOCALE } from "@/lib/posts";
 import { getLocaleFromCookies } from "@/lib/language";
-import { SUPPORTED_LOCALES } from "@/lib/translations";
+import { SUPPORTED_LOCALES, getTranslationForLocale } from "@/lib/translations";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -24,18 +24,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ])
   ) as Record<string, string>;
 
+  const homeTitle = getTranslationForLocale(locale, "site.homeTitle") ?? "Progress starts with insight";
+  const homeDescription =
+    getTranslationForLocale(locale, "site.homeDescription") ??
+    "Science-based articles on technique, training, mindset, and analysis for athletes.";
+
   return {
-    title: "Progress starts with insight | Masteryhub Training Lab",
-    description:
-      locale === "sv"
-        ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
-        : "Science-based articles on technique, training, mindset, and analysis for athletes.",
+    title: `${homeTitle} | Masteryhub Training Lab`,
+    description: homeDescription,
     openGraph: {
-      title: "Progress starts with insight",
-      description:
-        locale === "sv"
-          ? "Vetenskapsbaserade artiklar om teknik, träningsplanering, mindset och AI-analys för idrottare."
-          : "Science-based articles on technique, training, mindset, and analysis for athletes.",
+      title: homeTitle,
+      description: homeDescription,
       url: canonicalUrl,
       images: [
         {
