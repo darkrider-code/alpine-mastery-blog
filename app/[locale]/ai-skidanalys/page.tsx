@@ -1455,14 +1455,18 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
             <p className="mt-6 text-lg leading-8 text-text-secondary">{copy.howBody2}</p>
           </div>
 
-          <div className="rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-slate-900 p-8">
-            <div className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+          <a
+            href="https://alpine.masteryhub.se/"
+            className="group block rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-slate-900 p-8 transition hover:border-accent/50"
+          >
+            <div className="mb-4 flex items-center justify-between text-sm font-semibold uppercase tracking-[0.18em] text-accent">
               {copy.demoLabel}
+              <span className="transition group-hover:translate-x-1" aria-hidden="true">→</span>
             </div>
             <div className="rounded-2xl border border-dashed border-accent/40 bg-slate-950/60 p-4 text-sm text-text-secondary">
               {copy.demoSubtext}
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
