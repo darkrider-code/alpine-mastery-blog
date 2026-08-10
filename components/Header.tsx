@@ -35,6 +35,7 @@ export default function Header() {
   );
   const currentLocale = pathLocale ?? DEFAULT_LOCALE;
   const aiSkidanalysLabel = getTranslationForLocale(currentLocale, "site.aiSkidanalys");
+  const klubbpaketLabel = getTranslationForLocale(currentLocale, "site.klubbpaket");
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-md">
@@ -55,6 +56,12 @@ export default function Header() {
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
             {aiSkidanalysLabel}
+          </a>
+          <a
+            href={`/${currentLocale}/klubbpaket`}
+            className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
+          >
+            {klubbpaketLabel}
           </a>
           <LanguageSwitcher />
         </div>

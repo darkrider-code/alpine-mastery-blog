@@ -29,10 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: locale === 'sv' ? 0.9 : 0.7,
   }));
 
+  const klubbpaketPages = SUPPORTED_LOCALES.map(locale => ({
+    url: baseUrl + "/" + locale + "/klubbpaket",
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: locale === 'sv' ? 0.9 : 0.7,
+  }));
+
   return [
     { url: baseUrl, lastModified: new Date(), priority: 1.0 },
     ...localeRoots,
     ...landingPages,
+    ...klubbpaketPages,
     ...articles,
   ];
 }
