@@ -8,7 +8,8 @@ const productUrls = {
   bookDemo:
     "https://alpine.masteryhub.se/contact?demo=true&utm_source=alpine_mastery&utm_medium=cta&utm_campaign=club_conversion&utm_content=book_demo",
   contact: "https://alpine.masteryhub.se/contact",
-  bookDemoMailto: "mailto:info@masteryhub.se?subject=Club%20demo%20request",
+  bookDemoFooter:
+    "https://alpine.masteryhub.se/contact?demo=true&utm_source=alpine_mastery&utm_medium=cta&utm_campaign=club_conversion&utm_content=book_demo_footer",
   demoVideo: "https://alpine.masteryhub.se/demo-video.mp4",
 };
 
@@ -1645,7 +1646,7 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
             {copy.ctaStartOrg}
           </a>
           <a
-            href={productUrls.bookDemoMailto}
+            href={productUrls.bookDemoFooter}
             className="inline-flex items-center justify-center rounded-xl border border-accent px-8 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
           >
             {copy.ctaBookDemo}
