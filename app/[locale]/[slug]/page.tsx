@@ -285,12 +285,6 @@ export default async function PostPage({ params }: PageProps) {
 
                 <TranslatedPostHeader post={post} />
 
-                {post.description && (
-                  <p className="mb-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
-                    {post.description}
-                  </p>
-                )}
-
                 <div className="flex items-center gap-3 text-sm text-text-secondary">
                   <span>{formattedDate}</span>
                   <span className="text-border">·</span>
