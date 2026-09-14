@@ -15,7 +15,7 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
     locale,
     title: data.title as string,
     description: data.description as string,
-    publishedAt: data.publishedAt as string,
+    publishedAt: (data.publishedAt ?? data.date) as string,
     category: data.category as string,
     author: (data.author as string) ?? "Alpine Mastery",
     readingTime: (data.readingTime as string) ?? "5 min",

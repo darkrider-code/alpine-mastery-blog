@@ -2,7 +2,9 @@ import Link from "next/link";
 
 interface InlineCTAProps {
   product?: string;
-  children: React.ReactNode;
+  url?: string;
+  text?: string;
+  children?: React.ReactNode;
 }
 
 function getProductUrls(product?: string) {
@@ -26,15 +28,18 @@ function getProductUrls(product?: string) {
   };
 }
 
-export default function InlineCTA({ product, children }: InlineCTAProps) {
+export default function InlineCTA({ product, url, text, children }: InlineCTAProps) {
   const urls = getProductUrls(product);
+  const targetUrl = url || urls.freeAnalysis;
+  const content = text || children;
 
   return (
     <Link
-      href={urls.freeAnalysis}
+      href={targetUrl}
       className="inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-hover underline"
     >
-      👉 {children}
+      👉 {content}
     </Link>
   );
 }
+
