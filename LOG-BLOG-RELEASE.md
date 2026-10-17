@@ -45,3 +45,7 @@ Baseline before fixes: {"typecheck": {"exit": 0}, "lint": {"exit": 1, "errors": 
 Item1 BEFORE: consumerPricing.ts; ai-skidanalys/page.tsx; test pageSource fixture and price tests. Remove unused hardcoded pricing badges in all8 locales, use formatter for every family monthly amount, leave club pricing unchanged. Rate/date/source uncertainty explicit.
 
 Item1 AFTER: typecheck PASS; changed files lint0 errors/0 warnings;4 helper tests PASS including all8 real family-price dictionaries. Removed8 unused stale price badges, English family price normalized. Club price definitions unchanged. No install/dependency changes.
+
+Item2 BEFORE: preserve utm_term in the one shared campaign allowlist; add regression test including truncation and private-parameter exclusion.
+
+Item2 AFTER: typecheck PASS, touched-file lint0/0,5 tests PASS. utm_term shares the same bounded whitelist as source/medium/campaign/content; private params excluded.

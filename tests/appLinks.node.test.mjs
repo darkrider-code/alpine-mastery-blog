@@ -19,3 +19,12 @@ test("fallback and remembered campaign retain only allowed parameters", () => {
   const url = new URL(buildAppLink("https://alpine.masteryhub.se/free-analysis", { search: "", locale: "nl", slug: "post", placement: "banner" }));
   assert.equal(url.searchParams.get("utm_source"), "masteryhub_blog");
 });
+
+test("search terms survive alongside the complete original campaign",()=>{
+ const search="?utm_source=instagram&utm_medium=social&utm_campaign=test&utm_content=parent&utm_term=x&email=private";
+ const kept=campaignSearch(search);
+ const url=new URL(buildAppLink("https://alpine.masteryhub.se/free-analysis",{search:kept,locale:"fr",slug:"ai-skidanalys",placement:"header"}));
+ for(const [key,value] of new URLSearchParams(search)) if(key.startsWith("utm_")) assert.equal(url.searchParams.get(key),value);
+ assert.equal(url.searchParams.get("email"),null);
+ assert.equal(new URLSearchParams(campaignSearch("?utm_term="+"x".repeat(250))).get("utm_term").length,200);
+});
