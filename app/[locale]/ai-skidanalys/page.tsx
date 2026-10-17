@@ -1389,22 +1389,22 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
 
       <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-slate-950 via-slate-900 to-bg-primary">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.20),transparent_40%),linear-gradient(135deg,_rgba(14,165,233,0.10),transparent_60%)]" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-12 sm:px-6 lg:px-8">
-          <div className="mb-8 inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12 lg:px-8">
+          <div className="mb-4 inline-flex sm:mb-8 items-center rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             {copy.badge}
           </div>
 
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <h1 className="max-w-xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-xl text-3xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
                 {individualCopy(locale).title}
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg text-text-secondary sm:text-xl">
+              <p className="mt-4 max-w-xl text-lg sm:mt-6 text-text-secondary sm:text-xl">
                 {individualCopy(locale).body}
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-4 sm:mt-8 sm:flex-row">
                 <InlineCTA url={productUrls.freeAnalysis} placement="analysis_landing"
                   className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
                 >

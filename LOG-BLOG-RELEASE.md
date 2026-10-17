@@ -59,3 +59,7 @@ Item3 AFTER: typecheck PASS; all6 touched components/pages lint0/0;5 helper test
 Item4 BEFORE: campaignSession.ts; useCampaignSearch; useAppLink; BlogLink; existing internal navigation links and LanguageSwitcher; behavioral tests. URL parsed before optional storage access. Carry5 allowed UTM keys in internal hrefs to survive full navigation/reload even if storage throws. No global click interception, new dependency, or app changes.
 
 Item4 AFTER: typecheck PASS, changed-file lint37 existing errors/3 warnings with no per-file increases,10 tests PASS. Behavioral tests cover available storage, throwing storage getter/methods, internal full-document navigation, language changes and fresh reload with storage both available/blocked. All existing internal navigation components and language router now carry allowed campaign query fields; no URL text enters copy. Baseline test count confirmed3/3.
+
+Item5 BEFORE: ai-skidanalys hero mobile spacing/type only plus localized message regression test. Desktop breakpoints unchanged. Primary free CTA remains first, before secondary CTA/video. No parent headline variant existed in blog; existing localized body covers self/child and parent UTM passes to app. Browser390x844 unavailable: cannot claim measured fold visibility; manual preview check required.
+
+Item5 AFTER: typecheck PASS, changed-file lint0/0,11 tests PASS. All8 intros retain individual benefit without AI-led headline. Reduced mobile spacing/type, primary CTA remains first; no measured390x844 or phone screenshot claimed. Desktop breakpoints unchanged.
