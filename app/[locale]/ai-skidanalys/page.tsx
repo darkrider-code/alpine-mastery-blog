@@ -1,3 +1,4 @@
+import { getOpenGraphLocale } from "@/lib/landingMetadata";
 import AppLink from "@/components/AppLink";
 import { individualCopy } from "@/lib/individualCopy";
 import InlineCTA from "@/components/InlineCTA";
@@ -1311,7 +1312,6 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const copy = getLocaleCopy(locale);
   const canonicalUrl = `https://blog.masteryhub.se/${locale}/ai-skidanalys`;
   const languages = Object.fromEntries(
     SUPPORTED_LOCALES.map((supportedLocale) => [
@@ -1321,8 +1321,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   ) as Record<string, string>;
 
   return {
-    title: copy.highlight,
-    description: copy.metaDescription,
+    title: individualCopy(locale).title,
+    description: individualCopy(locale).body,
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -1331,8 +1331,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: copy.highlight,
-      description: copy.metaDescription,
+      locale: getOpenGraphLocale(locale),
+      title: individualCopy(locale).title,
+      description: individualCopy(locale).body,
       url: canonicalUrl,
       type: "website",
       siteName: "Alpine Mastery Blog",
@@ -1341,14 +1342,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           url: "https://blog.masteryhub.se/og-image.png",
           width: 1200,
           height: 630,
-          alt: copy.highlight,
+          alt: individualCopy(locale).title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: copy.highlight,
-      description: copy.metaDescription,
+      title: individualCopy(locale).title,
+      description: individualCopy(locale).body,
       images: ["https://blog.masteryhub.se/og-image.png"],
     },
   };

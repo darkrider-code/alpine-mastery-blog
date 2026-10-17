@@ -63,3 +63,7 @@ Item4 AFTER: typecheck PASS, changed-file lint37 existing errors/3 warnings with
 Item5 BEFORE: ai-skidanalys hero mobile spacing/type only plus localized message regression test. Desktop breakpoints unchanged. Primary free CTA remains first, before secondary CTA/video. No parent headline variant existed in blog; existing localized body covers self/child and parent UTM passes to app. Browser390x844 unavailable: cannot claim measured fold visibility; manual preview check required.
 
 Item5 AFTER: typecheck PASS, changed-file lint0/0,11 tests PASS. All8 intros retain individual benefit without AI-led headline. Reduced mobile spacing/type, primary CTA remains first; no measured390x844 or phone screenshot claimed. Desktop breakpoints unchanged.
+
+Item6 BEFORE: three landing metadata objects replace layout openGraph and lose its locale. Move existing locale mapping to shared landingMetadata helper and reuse in layout/three pages. Align analysis title/description/OG/Twitter with existing individual hero copy in all8 languages; no new SEO claims/content. Canonical/hreflang already correct. Existing OG image verified PNG1200x630; social platform rendering still manual.
+
+Item6 AFTER: typecheck PASS, all7 touched files lint0/0,15 tests PASS. Actual metadata generators tested for all24 route/locale combinations: title/description, canonical,8 hreflang+x-default, OG locale/url/title/description/image and Twitter. PNG dimensions confirmed1200x630. Canonical/hreflang values unchanged. Social debugger/UI render unverified.

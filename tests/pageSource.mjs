@@ -16,7 +16,7 @@ export async function pageSource(route) {
  const code=ts.transpileModule(`export const localeContent=${copy};\n${functions.join("\n")}`,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
  const exports={};const { individualCopy }=await loadTs(resolve("lib/individualCopy.ts"));
  const locales=["sv","en","no","da","fi","de","fr","nl"];
- const og={sv:"sv_SE",en:"en_US",no:"nb_NO",da:"da_DK",fi:"fi_FI",de:"de_DE",fr:"fr_FR",nl:"nl_NL"};
- new Function("exports","SUPPORTED_LOCALES","individualCopy","getOpenGraphLocale",code)(exports,locales,individualCopy,(locale)=>og[locale]);
+ const {getOpenGraphLocale}=await loadTs(resolve("lib/landingMetadata.ts"));
+ new Function("exports","SUPPORTED_LOCALES","individualCopy","getOpenGraphLocale",code)(exports,locales,individualCopy,getOpenGraphLocale);
  return { copy:exports.localeContent, metadata:exports.generateMetadata, source };
 }

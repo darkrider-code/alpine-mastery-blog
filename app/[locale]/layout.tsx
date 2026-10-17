@@ -1,3 +1,4 @@
+import { getOpenGraphLocale } from "@/lib/landingMetadata";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
@@ -11,16 +12,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const ogLocales: Record<string, string> = {
-  sv: "sv_SE",
-  en: "en_US",
-  no: "nb_NO",
-  da: "da_DK",
-  fi: "fi_FI",
-  de: "de_DE",
-  fr: "fr_FR",
-  nl: "nl_NL",
-};
+
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
@@ -45,7 +37,7 @@ export async function generateMetadata({
     description,
     openGraph: {
       siteName: "Masteryhub",
-      locale: ogLocales[locale] ?? "sv_SE",
+      locale: getOpenGraphLocale(locale),
       type: "website",
       images: [
         {

@@ -1,3 +1,4 @@
+import { getOpenGraphLocale } from "@/lib/landingMetadata";
 import AppLink from "@/components/AppLink";
 import type { Metadata } from "next";
 import CTABanner from "@/components/CTABanner";
@@ -993,6 +994,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
+      locale: getOpenGraphLocale(locale),
       title: copy.heroTitle,
       description: copy.metaDescription,
       url: canonicalUrl,
