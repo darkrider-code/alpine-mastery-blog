@@ -1,3 +1,4 @@
+import { individualCopy } from "@/lib/individualCopy";
 import InlineCTA from "@/components/InlineCTA";
 import { BASE_MONTHLY_SEK, consumerPricing, formatConsumerPrice } from "@/lib/consumerPricing";
 import type { Metadata } from "next";
@@ -1404,12 +1405,11 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <h1 className="max-w-xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
-                {copy.title}
-                <span className="text-accent">{copy.highlight}</span>
+                {individualCopy(locale).title}
               </h1>
 
               <p className="mt-6 max-w-xl text-lg text-text-secondary sm:text-xl">
-                {copy.subtext}
+                {individualCopy(locale).body}
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">

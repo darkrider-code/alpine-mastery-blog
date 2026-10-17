@@ -12,3 +12,6 @@ W1.1 AFTER: typecheck PASS; changed files lint 0; runnable pricing test PASS. FR
 
 W2.6 BEFORE: shared app-link builder preserves original UTM, adds blog context and active language. Files: lib/appLinks.ts; components/useAppLink.ts; InlineCTA.tsx; CTABanner.tsx; ai-skidanalys route shared links; tests. No MDX edits.
 W2.6 AFTER: typecheck PASS; all changed files lint 0; 3 pure tests PASS across eight locales, original UTM, nested redirect and parameter allowlist. Tracking click URLs verified through helper tests, browser not available.
+
+W3.9 BEFORE: individual-benefit heading and ordinary-phone introduction on existing ai-skidanalys landing, all eight locales. No new demo or MDX edits.
+W3 AFTER: Typecheck PASS, changed-file lint 0, all 3 runnable helper tests PASS. Landing heading and introduction use individual benefits in all eight locales. No MDX edits. Browser verification unavailable.
