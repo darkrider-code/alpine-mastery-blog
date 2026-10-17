@@ -1,3 +1,4 @@
+import InlineCTA from "@/components/InlineCTA";
 import { BASE_MONTHLY_SEK, consumerPricing, formatConsumerPrice } from "@/lib/consumerPricing";
 import type { Metadata } from "next";
 import CTABanner from "@/components/CTABanner";
@@ -1412,18 +1413,16 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <a
-                  href={productUrls.freeAnalysis}
+                <InlineCTA url={productUrls.freeAnalysis} placement="analysis_landing"
                   className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
                 >
                   {copy.mainCta}
-                </a>
-                <a
-                  href={productUrls.createAccount}
+                </InlineCTA>
+                <InlineCTA url={productUrls.createAccount} placement="analysis_landing"
                   className="inline-flex items-center justify-center rounded-xl border border-accent px-6 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
                 >
                   {copy.secondaryCta}
-                </a>
+                </InlineCTA>
               </div>
             </div>
 
@@ -1651,12 +1650,11 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
           </div>
 
           <div className="mt-10 text-center">
-            <a
-              href={productUrls.createAccount}
+            <InlineCTA url={productUrls.createAccount} placement="analysis_landing"
               className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
             >
               {copy.familyFlow.cta}
-            </a>
+            </InlineCTA>
           </div>
         </div>
       </section>

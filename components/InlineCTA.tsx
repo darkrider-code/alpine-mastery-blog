@@ -1,3 +1,5 @@
+"use client";
+import { useAppLink } from "./useAppLink";
 import Link from "next/link";
 
 interface InlineCTAProps {
@@ -5,6 +7,8 @@ interface InlineCTAProps {
   url?: string;
   text?: string;
   children?: React.ReactNode;
+  className?: string;
+  placement?: string;
 }
 
 function getProductUrls(product?: string) {
@@ -28,15 +32,16 @@ function getProductUrls(product?: string) {
   };
 }
 
-export default function InlineCTA({ product, url, text, children }: InlineCTAProps) {
+export default function InlineCTA({ product, url, text, children, className, placement = "inline" }: InlineCTAProps) {
   const urls = getProductUrls(product);
   const targetUrl = url || urls.freeAnalysis;
   const content = text || children;
+  const href = useAppLink(targetUrl, placement);
 
   return (
     <Link
-      href={targetUrl}
-      className="inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-hover underline"
+      href={href}
+      className={className ?? "inline-flex items-center gap-2 font-semibold text-accent hover:text-accent-hover underline"}
     >
       👉 {content}
     </Link>

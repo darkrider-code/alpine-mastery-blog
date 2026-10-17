@@ -9,3 +9,6 @@ Blog: lib/consumerPricing.ts; lib/appLinks.ts; shared CTA components; app/[local
 Protected files: uploadManager, VideoInput/anonymous flow, lead-videos, analysis invocation, Supabase schema/RLS/migrations/edge functions, Stripe quantity/config, compression constant. Unchanged.
 W1 pricing BEFORE: consolidate price presentation using existing May 2026 approximate rates. Billing remains SEK. Files: consumerPricing, currency/LanguageContext (app); consumerPricing and ai-skidanalys (blog).
 W1.1 AFTER: typecheck PASS; changed files lint 0; runnable pricing test PASS. FR/NL family price comes from central formatter. Full build remains baseline EPERM.
+
+W2.6 BEFORE: shared app-link builder preserves original UTM, adds blog context and active language. Files: lib/appLinks.ts; components/useAppLink.ts; InlineCTA.tsx; CTABanner.tsx; ai-skidanalys route shared links; tests. No MDX edits.
+W2.6 AFTER: typecheck PASS; all changed files lint 0; 3 pure tests PASS across eight locales, original UTM, nested redirect and parameter allowlist. Tracking click URLs verified through helper tests, browser not available.
