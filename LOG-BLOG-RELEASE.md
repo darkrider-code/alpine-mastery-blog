@@ -67,3 +67,7 @@ Item5 AFTER: typecheck PASS, changed-file lint0/0,11 tests PASS. All8 intros ret
 Item6 BEFORE: three landing metadata objects replace layout openGraph and lose its locale. Move existing locale mapping to shared landingMetadata helper and reuse in layout/three pages. Align analysis title/description/OG/Twitter with existing individual hero copy in all8 languages; no new SEO claims/content. Canonical/hreflang already correct. Existing OG image verified PNG1200x630; social platform rendering still manual.
 
 Item6 AFTER: typecheck PASS, all7 touched files lint0/0,15 tests PASS. Actual metadata generators tested for all24 route/locale combinations: title/description, canonical,8 hreflang+x-default, OG locale/url/title/description/image and Twitter. PNG dimensions confirmed1200x630. Canonical/hreflang values unchanged. Social debugger/UI render unverified.
+
+Item7 BEFORE: source safety tests for actual sitemap function/routes, active MDX CTA policy and remaining direct app anchors. No new posts/dependencies/lockfile changes. Legacy unserved MDX exception reported; existing content untouched.
+
+Item7 AFTER: typecheck PASS, new safety test lint0/0,18 tests PASS. Actual sitemap returns unique clean URLs covering all8 locales,3 landings and existing post slugs; every article has Swedish fallback. Active MDX passes shared-CTA policy; AST scan finds no raw direct app anchors in components/pages. Existing legacy unserved raw CTA reported, no MDX edits.
