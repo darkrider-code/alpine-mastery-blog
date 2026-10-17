@@ -1,7 +1,8 @@
 export const BASE_MONTHLY_SEK = 199;
 
-// Retained estimates from existing app currency.ts (May 2026), inspected 2026-10-17.
-// Not live market rates. Daniel must review the rate date, values and rounding.
+// Approximate local units per 1 SEK: SEK=1, NOK=1.02, DKK=0.69, EUR=0.087, USD=0.094, GBP=0.074.
+// Retained May 2026 estimates (2026-05); exact source day was not recorded.
+// Inspected 2026-10-17, not live rates. Rates, date and rounding must be reviewed by Daniel before release.
 // English defaults to USD; an English visitor may instead need GBP.
 export const SEK_RATES = { SEK: 1, NOK: 1.02, DKK: 0.69, EUR: 0.087, USD: 0.094, GBP: 0.074 } as const;
 export type ConsumerCurrency = keyof typeof SEK_RATES;

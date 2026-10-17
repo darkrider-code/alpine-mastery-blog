@@ -41,3 +41,7 @@ Export encountered an error on /[locale]/ambassador/page: /nl/ambassador, exitin
 ```
 
 Baseline before fixes: {"typecheck": {"exit": 0}, "lint": {"exit": 1, "errors": 41, "warnings": 8}, "tests": {"exit": 0}}
+
+Item1 BEFORE: consumerPricing.ts; ai-skidanalys/page.tsx; test pageSource fixture and price tests. Remove unused hardcoded pricing badges in all8 locales, use formatter for every family monthly amount, leave club pricing unchanged. Rate/date/source uncertainty explicit.
+
+Item1 AFTER: typecheck PASS; changed files lint0 errors/0 warnings;4 helper tests PASS including all8 real family-price dictionaries. Removed8 unused stale price badges, English family price normalized. Club price definitions unchanged. No install/dependency changes.

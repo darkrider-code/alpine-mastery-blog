@@ -15,3 +15,14 @@ test("consumer rates preserve base SEK and safe approximate local presentation",
   }
   assert.ok(p.formatConsumerPrice(945, "fr").includes("945 SEK"));
 });
+
+test("all eight landing family prices use the shared formatter and no stale price badge",async()=>{
+ const {pageSource}=await import("./pageSource.mjs");const {copy}=await pageSource("ai-skidanalys");
+ for(const locale of ["sv","en","no","da","fi","de","fr","nl"]){
+  const step=copy[locale].familyFlow.steps[2];
+  assert.ok(step.includes("{monthlyPrice}"),`${locale}: ${step}`);
+  const rendered=step.replace("{monthlyPrice}",p.formatConsumerPrice(p.BASE_MONTHLY_SEK,locale));
+  assert.ok(rendered.includes(locale==="sv"?"199":"199 SEK"));
+  assert.equal(copy[locale].pricing.badge,undefined);
+ }
+});

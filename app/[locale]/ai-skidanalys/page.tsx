@@ -73,7 +73,6 @@ interface LocaleCopy {
   pricing: {
     heading: string;
     body: string;
-    badge: string;
     cta: string;
   };
   mainCta: string;
@@ -227,7 +226,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Medlemskap – Din väg till bättre skidteknik",
       body:
         "Få obegränsade AI-skidanalyser och personlig feedback direkt. Begär manuell coachgranskning när du vill, och spåra din teknikprogression över tid. Snabb återkoppling med möjlighet till fördjupad coaching när du behöver det.",
-      badge: "🎉 1 månad gratis — Ingen bindningstid, avsluta när du vill. Ordinarie pris: {monthlyPrice} / månad · ~$18/mån · ~€16/mån",
       cta: "Starta Gratis",
     },
     mainCta: "Gratis Analys",
@@ -353,7 +351,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "One login for the parent",
         "Add multiple skiers under one account",
-        "$19/month per skier",
+        "{monthlyPrice}/month per skier",
         "Coaches only see athletes who chose them",
       ],
       cta: "Create account and add your first skier",
@@ -380,7 +378,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Membership – Your path to better skiing",
       body:
         "Get unlimited AI ski analyses and direct personal feedback. Request manual coach review whenever you want, and track your technical progression over time. Fast feedback with deeper coaching options when you need them.",
-      badge: "🎉 1 month free — No commitment, cancel anytime. Regular price: $19 / month · ~€16 / month",
       cta: "Start Free",
     },
     mainCta: "Free Analysis",
@@ -533,7 +530,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery-medlemskap – Veien til bedre skiteknikk",
       body:
         "Få ubegrensede AI-skiteknikanalyser og personlig tilbakemelding direkte. Be om manuell trenergranskning når du vil, og spor teknikkutviklingen over tid. Rask tilbakemelding med mulighet for dypere coaching når du trenger det.",
-      badge: "🎉 1 måned gratis — Ingen bindingstid, avslutt når du vil. Ordinær pris: {monthlyPrice} / måned · ~$18/måned · ~€16/måned",
       cta: "Start gratis",
     },
     mainCta: "Gratis analyse",
@@ -686,7 +682,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery-medlemskab – Din vej til bedre skidteknik",
       body:
         "Få ubegrænsede AI-skidteknikanalyser og direkte personlig feedback. Anmod om manuel trænergennemgang, når du vil, og følg din tekniske progression over tid. Hurtig feedback med mulighed for dybere coaching, når du har brug for det.",
-      badge: "🎉 1 måned gratis — Ingen binding, opsig når du vil. Normalpris: {monthlyPrice} / måned · ~$18/måned · ~€16/måned",
       cta: "Start gratis",
     },
     mainCta: "Gratis analyse",
@@ -839,7 +834,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery -jäsenyys – Tie parempaan laskutekniikkaan",
       body:
         "Saat rajoittamattomat tekoälyanalyysit ja suoran henkilökohtaisen palautteen. Pyydä manuaalinen valmentajan arvio milloin haluat ja seuraa tekniikkasi kehitystä ajan myötä. Nopea palaute mahdollisuudella syvempään valmennukseen, kun tarvitset sitä.",
-      badge: "🎉 1 kuukausi ilmaiseksi — Ei sitoutumista, peruuta milloin haluat. Normaalihinta: {monthlyPrice} / kk · ~$18/kk · ~€16/kk",
       cta: "Aloita ilmaiseksi",
     },
     mainCta: "Ilmainen analyysi",
@@ -992,7 +986,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Mitgliedschaft – Dein Weg zu besserer Skitechnik",
       body:
         "Erhalte unbegrenzte KI-Skianalysen und direktes persönliches Feedback. Fordere jederzeit eine manuelle Coach-Überprüfung an und verfolge deine technische Entwicklung im Laufe der Zeit. Schnelles Feedback mit der Möglichkeit zu tieferem Coaching, wenn du es brauchst.",
-      badge: "🎉 1 Monat kostenlos — Keine Bindung, jederzeit kündbar. Regulärer Preis: {monthlyPrice} / Monat · ~$18/Monat · ~€16/Monat",
       cta: "Kostenlos starten",
     },
     mainCta: "Kostenlose Analyse",
@@ -1145,7 +1138,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Abonnement Alpine Mastery – Ton chemin vers une meilleure technique de ski",
       body:
         "Obtiens des analyses IA de ski illimitées et un retour personnel direct. Demande un examen manuel par un coach quand tu veux, et suis ta progression technique dans le temps. Retour rapide avec possibilité de coaching approfondi quand tu en as besoin.",
-      badge: "🎉 1 mois gratuit — Aucune contrainte, résiliation à tout moment. Prix habituel : {monthlyPrice} / mois · ~$18/mois · ~€16/mois",
       cta: "Démarrer gratuitement",
     },
     mainCta: "Analyse gratuite",
@@ -1298,7 +1290,6 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Lidmaatschap – Je weg naar betere skitechniek",
       body:
         "Krijg onbeperkte AI-skianalyses en directe persoonlijke feedback. Vraag wanneer je wilt een handmatige coachreview aan en volg je techniekprogressie in de tijd. Snelle feedback met de mogelijkheid tot diepere coaching wanneer je die nodig hebt.",
-      badge: "🎉 1 maand gratis — Geen verplichting, op elk moment opzegbaar. Normale prijs: {monthlyPrice} / maand · ~$18/maand · ~€16/maand",
       cta: "Gratis starten",
     },
     mainCta: "Gratis analyse",
