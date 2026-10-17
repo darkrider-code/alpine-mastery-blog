@@ -71,3 +71,7 @@ Item6 AFTER: typecheck PASS, all7 touched files lint0/0,15 tests PASS. Actual me
 Item7 BEFORE: source safety tests for actual sitemap function/routes, active MDX CTA policy and remaining direct app anchors. No new posts/dependencies/lockfile changes. Legacy unserved MDX exception reported; existing content untouched.
 
 Item7 AFTER: typecheck PASS, new safety test lint0/0,18 tests PASS. Actual sitemap returns unique clean URLs covering all8 locales,3 landings and existing post slugs; every article has Swedish fallback. Active MDX passes shared-CTA policy; AST scan finds no raw direct app anchors in components/pages. Existing legacy unserved raw CTA reported, no MDX edits.
+
+Item4 follow-up BEFORE: LanguageProvider.tsx currently has an unguarded localStorage write; blocked storage could crash client despite campaign fallback. Guard that optional write and exercise its actual effect callback with throwing/available storage. No locale ownership/model change.
+
+Item4 storage guard AFTER: typecheck PASS, provider lint1 existing error/1 warning unchanged,19 tests PASS. Actual language effect callback exercised with available/throwing localStorage; document.lang remains nl and no exception escapes. Full club localeContent compared byte-for-byte with current main: unchanged, including every club price/copy field.

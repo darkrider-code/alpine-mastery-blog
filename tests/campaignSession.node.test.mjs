@@ -41,3 +41,15 @@ test("internal URL decoration preserves explicit new campaigns and external/hash
  const session=createCampaignSession();session.remember("?utm_source=old",()=>memoryStorage());
  assert.equal(new URLSearchParams(session.read("?utm_source=new",()=>memoryStorage())).get("utm_source"),"new");
 });
+
+test("actual language persistence effect retains document locale when localStorage throws",async()=>{
+ const {readFile}=await import("node:fs/promises");const {default:ts}=await import("typescript");
+ const source=await readFile("components/LanguageProvider.tsx","utf8");const ast=ts.createSourceFile("provider.tsx",source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);let callback;
+ function visit(node){if(ts.isCallExpression(node)&&node.expression.getText(ast)==="useEffect"&&node.arguments[0]?.getText(ast).includes("document.documentElement.lang")) callback=node.arguments[0].getText(ast);ts.forEachChild(node,visit);}visit(ast);assert.ok(callback);
+ const code=ts.transpileModule(`export const run=${callback};`,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+ for(const blocked of [false,true]){
+  const document={documentElement:{lang:"sv"}};const values=new Map();const window={get localStorage(){if(blocked) throw Error("blocked");return {setItem:(key,value)=>values.set(key,value)};}};
+  const exports={};new Function("exports","document","window","locale","STORAGE_KEY",code)(exports,document,window,"nl","alpine-mastery-language");
+  assert.doesNotThrow(()=>exports.run());assert.equal(document.documentElement.lang,"nl");if(!blocked) assert.equal(values.get("alpine-mastery-language"),"nl");
+ }
+});

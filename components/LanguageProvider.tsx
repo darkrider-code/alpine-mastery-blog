@@ -36,7 +36,7 @@ export function LanguageProvider({
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    window.localStorage.setItem(STORAGE_KEY, locale);
+    try { window.localStorage.setItem(STORAGE_KEY, locale); } catch { /* URL locale remains authoritative */ }
   }, [locale]);
 
   const setLocale = useCallback((nextLocale: string) => {
