@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppLink } from "./useAppLink";
 import { useLanguage } from "@/components/LanguageProvider";
 
 interface CTABannerProps {
@@ -45,6 +46,8 @@ function getProductPrimaryLabel(product: string | undefined, t: (key: string) =>
 export default function CTABanner({ title, description, showBrand = true, product }: CTABannerProps) {
   const { t } = useLanguage();
   const urls = getProductUrls(product);
+  const freeHref = useAppLink(urls.freeAnalysis, "banner_free");
+  const accountHref = useAppLink(urls.createAccount, "banner_account");
   const displayTitle = title ?? t("site.ctaBannerTitle");
   const displayDescription = description ?? t("site.ctaBannerDescription");
   const primaryButtonLabel = getProductPrimaryLabel(product, t);
@@ -68,13 +71,13 @@ export default function CTABanner({ title, description, showBrand = true, produc
 
       <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
         <a
-          href={urls.freeAnalysis}
+          href={freeHref}
           className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
         >
           {primaryButtonLabel}
         </a>
         <a
-          href={urls.createAccount}
+          href={accountHref}
           className="inline-flex items-center justify-center rounded-xl border border-accent px-8 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
         >
           {secondaryButtonLabel}
