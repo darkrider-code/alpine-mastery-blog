@@ -1,3 +1,4 @@
+import BlogLink from "@/components/BlogLink";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import BlogList from "@/components/BlogList";
@@ -122,12 +123,12 @@ export default async function HomePage({ params }: PageProps) {
             <p className="mt-3 text-text-secondary">{copy.description}</p>
           </div>
           <div className="text-left lg:text-right">
-            <a
+            <BlogLink
               href={`/${locale}/ai-skidanalys`}
               className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
             >
               {copy.cta}
-            </a>
+            </BlogLink>
           </div>
         </div>
       </section>

@@ -1,4 +1,6 @@
 "use client";
+import BlogLink from "@/components/BlogLink";
+
 
 import AppLink from "@/components/AppLink";
 
@@ -108,14 +110,14 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-bg-primary/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
         <div className="flex items-center gap-4">
-          <a
+          <BlogLink
             href={`/${currentLocale}`}
             className="flex items-center gap-2 font-semibold text-white"
             aria-label={blogLabel}
           >
             <BlogIcon />
             <span>{blogLabel}</span>
-          </a>
+          </BlogLink>
           <span className="hidden h-6 w-px bg-border sm:block" aria-hidden="true" />
           <div className="hidden items-center gap-4 sm:flex">
             <AppLink placement="header_desktop"
@@ -145,24 +147,24 @@ export default function Header() {
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <a
+          <BlogLink
             href={`/${currentLocale}/ai-skidanalys`}
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
             {aiSkidanalysLabel}
-          </a>
-          <a
+          </BlogLink>
+          <BlogLink
             href={`/${currentLocale}/klubbpaket`}
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
             {klubbpaketLabel}
-          </a>
-          <a
+          </BlogLink>
+          <BlogLink
             href={`/${currentLocale}/ambassador`}
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
             {ambassadorLabel}
-          </a>
+          </BlogLink>
           <LanguageSwitcher />
         </div>
       </div>

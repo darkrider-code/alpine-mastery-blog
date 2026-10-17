@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import Link from "@/components/BlogLink";
 import BlogCard, { categoryColors } from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
 import ScrollProgress from "@/components/ScrollProgress";

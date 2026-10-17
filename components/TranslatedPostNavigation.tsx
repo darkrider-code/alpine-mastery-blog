@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/BlogLink";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function TranslatedPostNavigation({ category }: { category: string }) {

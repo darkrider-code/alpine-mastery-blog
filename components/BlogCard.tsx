@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/BlogLink";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { Post } from "@/types/post";
 import { getCategoryLabel } from "@/lib/translations";

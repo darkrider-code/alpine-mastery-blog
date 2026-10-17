@@ -1,4 +1,6 @@
 "use client";
+import BlogLink from "@/components/BlogLink";
+
 
 import { useMemo, useState } from "react";
 import BlogCard from "@/components/BlogCard";
@@ -47,12 +49,12 @@ export default function BlogList({ posts, locale }: { posts: Post[]; locale?: st
             {getCategoryLabel(category, displayLocale)}
           </button>
         ))}
-        <a
+        <BlogLink
           href={`/${displayLocale}/ai-skidanalys`}
           className="rounded-full border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent hover:text-bg-primary"
         >
           {getTranslationForLocale(displayLocale, "site.aiSkidanalys")} →
-        </a>
+        </BlogLink>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

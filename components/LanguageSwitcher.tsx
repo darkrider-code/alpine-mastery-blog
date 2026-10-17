@@ -1,5 +1,7 @@
 "use client";
 
+import { useCampaignSearch } from "./useCampaignSearch";
+import { buildBlogLink } from "@/lib/campaignSession";
 import { usePathname, useRouter } from "next/navigation";
 import { LANGUAGE_OPTIONS } from "@/lib/translations";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -7,12 +9,13 @@ import { useLanguage } from "@/components/LanguageProvider";
 export default function LanguageSwitcher() {
   const { locale, setLocale, t } = useLanguage();
   const router = useRouter();
+  const campaign = useCampaignSearch();
   const pathname = usePathname();
 
   const switchLocale = (newLocale: string) => {
     const parts = pathname.split('/').filter(Boolean);
     const rest = parts.slice(1).join('/');
-    router.push(rest ? `/${newLocale}/${rest}` : `/${newLocale}`);
+    router.push(buildBlogLink(rest ? `/${newLocale}/${rest}` : `/${newLocale}`, campaign));
     setLocale(newLocale);
   };
 
