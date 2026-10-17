@@ -1,5 +1,8 @@
 "use client";
 
+import AppLink from "@/components/AppLink";
+
+
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
@@ -19,9 +22,9 @@ export default function Footer() {
           <a href="https://masteryhub.se" className="transition hover:text-accent">
             masteryhub.se
           </a>
-          <a href="https://alpine.masteryhub.se" className="transition hover:text-accent">
+          <AppLink placement="footer_1" href="https://alpine.masteryhub.se" className="transition hover:text-accent">
             {t("site.footerAlpineCta")}
-          </a>
+          </AppLink>
         </div>
       </div>
     </footer>

@@ -49,3 +49,9 @@ Item1 AFTER: typecheck PASS; changed files lint0 errors/0 warnings;4 helper test
 Item2 BEFORE: preserve utm_term in the one shared campaign allowlist; add regression test including truncation and private-parameter exclusion.
 
 Item2 AFTER: typecheck PASS, touched-file lint0/0,5 tests PASS. utm_term shares the same bounded whitelist as source/medium/campaign/content; private params excluded.
+
+Item3 BEFORE: one thin AppLink adapter delegates to existing useAppLink. Replace Header desktop/mobile, Footer, analysis demo and all clickable app anchors on club/ambassador pages. Leave asset src and JSON-LD identity URLs untracked. Preserve text, destinations, classes and club pricing.
+
+Item3 search: all13 remaining clickable Alpine app anchors now use shared hook through AppLink. CTABanner/InlineCTA already use it. Literal endpoint configuration, video sources and JSON-LD application identities intentionally remain. Legacy posts/5-vanligaste-skidteknik-felen.mdx has a pre-existing raw CTA, but lib/posts.ts loads content/posts only; unchanged, not introduced or served. Active MDX CTAs use shared components.
+
+Item3 AFTER: typecheck PASS; all6 touched components/pages lint0/0;5 helper tests PASS. Destinations/markup retained through thin AppLink adapter, new localized header aria-label reuses existing site.title. React review: no conditional hooks, handlers or new fetches; plain-anchor semantics retained.

@@ -1,3 +1,4 @@
+import AppLink from "@/components/AppLink";
 import type { Metadata } from "next";
 import CTABanner from "@/components/CTABanner";
 import { SUPPORTED_LOCALES } from "@/lib/translations";
@@ -1414,18 +1415,18 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <a
+                <AppLink placement="club_1"
                   href={productUrls.startOrg}
                   className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
                 >
                   {copy.ctaStartOrg}
-                </a>
-                <a
+                </AppLink>
+                <AppLink placement="club_2"
                   href={productUrls.bookDemo}
                   className="inline-flex items-center justify-center rounded-xl border border-accent px-6 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
                 >
                   {copy.ctaBookDemo}
-                </a>
+                </AppLink>
               </div>
             </div>
 
@@ -1639,24 +1640,24 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
         <h2 className="text-3xl font-bold text-white sm:text-4xl">{copy.finalTitle}</h2>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
+          <AppLink placement="club_3"
             href={productUrls.startOrg}
             className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-base font-bold text-bg-primary transition hover:bg-accent-hover"
           >
             {copy.ctaStartOrg}
-          </a>
-          <a
+          </AppLink>
+          <AppLink placement="club_4"
             href={productUrls.bookDemoFooter}
             className="inline-flex items-center justify-center rounded-xl border border-accent px-8 py-4 text-base font-semibold text-accent transition hover:bg-accent/10"
           >
             {copy.ctaBookDemo}
-          </a>
-          <a
+          </AppLink>
+          <AppLink placement="club_5"
             href={productUrls.contact}
             className="inline-flex items-center justify-center rounded-xl border border-border px-8 py-4 text-base font-semibold text-text-secondary transition hover:bg-bg-card"
           >
             {copy.ctaContact}
-          </a>
+          </AppLink>
         </div>
       </section>
 

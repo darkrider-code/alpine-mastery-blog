@@ -1,3 +1,4 @@
+import AppLink from "@/components/AppLink";
 import { individualCopy } from "@/lib/individualCopy";
 import InlineCTA from "@/components/InlineCTA";
 import { BASE_MONTHLY_SEK, consumerPricing, formatConsumerPrice } from "@/lib/consumerPricing";
@@ -1446,7 +1447,7 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
             <p className="mt-6 text-lg leading-8 text-text-secondary">{copy.howBody2}</p>
           </div>
 
-          <a
+          <AppLink placement="analysis_demo"
             href="https://alpine.masteryhub.se/"
             className="group block rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-slate-900 p-8 transition hover:border-accent/50"
           >
@@ -1457,7 +1458,7 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
             <div className="rounded-2xl border border-dashed border-accent/40 bg-slate-950/60 p-4 text-sm text-text-secondary">
               {copy.demoSubtext}
             </div>
-          </a>
+          </AppLink>
         </div>
       </section>
 

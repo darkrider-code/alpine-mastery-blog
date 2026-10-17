@@ -1,5 +1,8 @@
 "use client";
 
+import AppLink from "@/components/AppLink";
+
+
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -115,14 +118,14 @@ export default function Header() {
           </a>
           <span className="hidden h-6 w-px bg-border sm:block" aria-hidden="true" />
           <div className="hidden items-center gap-4 sm:flex">
-            <a
+            <AppLink placement="header_desktop"
               href="https://alpine.masteryhub.se/"
               className="flex items-center gap-2 font-semibold text-white"
-              aria-label="Go to Alpine Mastery"
+              aria-label={t("site.title")}
             >
               <MountainIcon />
               <span>{t("site.title")}</span>
-            </a>
+            </AppLink>
             <a
               href="https://run.masteryhub.se/"
               className="flex items-center gap-2 font-semibold text-white"
@@ -164,14 +167,14 @@ export default function Header() {
         </div>
       </div>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 pb-3 sm:hidden">
-        <a
+        <AppLink placement="header_mobile"
           href="https://alpine.masteryhub.se/"
           className="flex items-center gap-2 text-sm font-semibold text-white"
-          aria-label="Go to Alpine Mastery"
+          aria-label={t("site.title")}
         >
           <MountainIcon />
           <span>{t("site.title")}</span>
-        </a>
+        </AppLink>
         <a
           href="https://run.masteryhub.se/"
           className="flex items-center gap-2 text-sm font-semibold text-white"
