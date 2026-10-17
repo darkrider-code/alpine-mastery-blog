@@ -1,3 +1,4 @@
+import { BASE_MONTHLY_SEK, consumerPricing, formatConsumerPrice } from "@/lib/consumerPricing";
 import type { Metadata } from "next";
 import CTABanner from "@/components/CTABanner";
 import { SUPPORTED_LOCALES } from "@/lib/translations";
@@ -197,7 +198,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "En inloggning för föräldern",
         "Lägg till flera åkare under ett konto",
-        "199 kr/mån per åkare",
+        "{monthlyPrice}/mån per åkare",
         "Tränare ser bara åkare som valt dem",
       ],
       cta: "Skapa konto och lägg till din första åkare",
@@ -224,7 +225,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Medlemskap – Din väg till bättre skidteknik",
       body:
         "Få obegränsade AI-skidanalyser och personlig feedback direkt. Begär manuell coachgranskning när du vill, och spåra din teknikprogression över tid. Snabb återkoppling med möjlighet till fördjupad coaching när du behöver det.",
-      badge: "🎉 1 månad gratis — Ingen bindningstid, avsluta när du vill. Ordinarie pris: 199 kr / månad · ~$18/mån · ~€16/mån",
+      badge: "🎉 1 månad gratis — Ingen bindningstid, avsluta när du vill. Ordinarie pris: {monthlyPrice} / månad · ~$18/mån · ~€16/mån",
       cta: "Starta Gratis",
     },
     mainCta: "Gratis Analys",
@@ -503,7 +504,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Én innlogging for forelderen",
         "Legg til flere utøvere under én konto",
-        "199 kr/måned per utøver",
+        "{monthlyPrice}/måned per utøver",
         "Trenere ser bare utøvere som valgte dem",
       ],
       cta: "Opprett konto og legg til din første utøver",
@@ -530,7 +531,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery-medlemskap – Veien til bedre skiteknikk",
       body:
         "Få ubegrensede AI-skiteknikanalyser og personlig tilbakemelding direkte. Be om manuell trenergranskning når du vil, og spor teknikkutviklingen over tid. Rask tilbakemelding med mulighet for dypere coaching når du trenger det.",
-      badge: "🎉 1 måned gratis — Ingen bindingstid, avslutt når du vil. Ordinær pris: 199 kr / måned · ~$18/måned · ~€16/måned",
+      badge: "🎉 1 måned gratis — Ingen bindingstid, avslutt når du vil. Ordinær pris: {monthlyPrice} / måned · ~$18/måned · ~€16/måned",
       cta: "Start gratis",
     },
     mainCta: "Gratis analyse",
@@ -656,7 +657,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Én login til forælderen",
         "Tilføj flere udøvere under én konto",
-        "199 kr/måned per udøver",
+        "{monthlyPrice}/måned per udøver",
         "Trænere ser kun udøvere, der har valgt dem",
       ],
       cta: "Opret konto og tilføj din første udøver",
@@ -683,7 +684,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery-medlemskab – Din vej til bedre skidteknik",
       body:
         "Få ubegrænsede AI-skidteknikanalyser og direkte personlig feedback. Anmod om manuel trænergennemgang, når du vil, og følg din tekniske progression over tid. Hurtig feedback med mulighed for dybere coaching, når du har brug for det.",
-      badge: "🎉 1 måned gratis — Ingen binding, opsig når du vil. Normalpris: 199 kr / måned · ~$18/måned · ~€16/måned",
+      badge: "🎉 1 måned gratis — Ingen binding, opsig når du vil. Normalpris: {monthlyPrice} / måned · ~$18/måned · ~€16/måned",
       cta: "Start gratis",
     },
     mainCta: "Gratis analyse",
@@ -809,7 +810,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Yksi kirjautuminen vanhemmalle",
         "Lisää useita laskijoita yhden tilin alle",
-        "199 kr/kk per laskija",
+        "{monthlyPrice}/kk per laskija",
         "Valmentajat näkevät vain urheilijat, jotka valitsivat heidät",
       ],
       cta: "Luo tili ja lisää ensimmäinen laskijasi",
@@ -836,7 +837,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery -jäsenyys – Tie parempaan laskutekniikkaan",
       body:
         "Saat rajoittamattomat tekoälyanalyysit ja suoran henkilökohtaisen palautteen. Pyydä manuaalinen valmentajan arvio milloin haluat ja seuraa tekniikkasi kehitystä ajan myötä. Nopea palaute mahdollisuudella syvempään valmennukseen, kun tarvitset sitä.",
-      badge: "🎉 1 kuukausi ilmaiseksi — Ei sitoutumista, peruuta milloin haluat. Normaalihinta: 199 kr / kk · ~$18/kk · ~€16/kk",
+      badge: "🎉 1 kuukausi ilmaiseksi — Ei sitoutumista, peruuta milloin haluat. Normaalihinta: {monthlyPrice} / kk · ~$18/kk · ~€16/kk",
       cta: "Aloita ilmaiseksi",
     },
     mainCta: "Ilmainen analyysi",
@@ -962,7 +963,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Ein Login für die Eltern",
         "Mehrere Skifahrer unter einem Konto hinzufügen",
-        "199 kr/Monat pro Skifahrer",
+        "{monthlyPrice}/Monat pro Skifahrer",
         "Trainer sehen nur Athleten, die sie gewählt haben",
       ],
       cta: "Konto erstellen und deinen ersten Skifahrer hinzufügen",
@@ -989,7 +990,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Mitgliedschaft – Dein Weg zu besserer Skitechnik",
       body:
         "Erhalte unbegrenzte KI-Skianalysen und direktes persönliches Feedback. Fordere jederzeit eine manuelle Coach-Überprüfung an und verfolge deine technische Entwicklung im Laufe der Zeit. Schnelles Feedback mit der Möglichkeit zu tieferem Coaching, wenn du es brauchst.",
-      badge: "🎉 1 Monat kostenlos — Keine Bindung, jederzeit kündbar. Regulärer Preis: 199 kr / Monat · ~$18/Monat · ~€16/Monat",
+      badge: "🎉 1 Monat kostenlos — Keine Bindung, jederzeit kündbar. Regulärer Preis: {monthlyPrice} / Monat · ~$18/Monat · ~€16/Monat",
       cta: "Kostenlos starten",
     },
     mainCta: "Kostenlose Analyse",
@@ -1115,7 +1116,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Une connexion pour le parent",
         "Ajouter plusieurs athlètes sous un même compte",
-        "199 € / mois par athlète",
+        "{monthlyPrice} / mois par athlète",
         "Les entraîneurs ne voient que les athlètes qui les ont choisis",
       ],
       cta: "Créer un compte et ajouter ton premier athlète",
@@ -1142,7 +1143,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Abonnement Alpine Mastery – Ton chemin vers une meilleure technique de ski",
       body:
         "Obtiens des analyses IA de ski illimitées et un retour personnel direct. Demande un examen manuel par un coach quand tu veux, et suis ta progression technique dans le temps. Retour rapide avec possibilité de coaching approfondi quand tu en as besoin.",
-      badge: "🎉 1 mois gratuit — Aucune contrainte, résiliation à tout moment. Prix habituel : 199 € / mois · ~$18/mois · ~€16/mois",
+      badge: "🎉 1 mois gratuit — Aucune contrainte, résiliation à tout moment. Prix habituel : {monthlyPrice} / mois · ~$18/mois · ~€16/mois",
       cta: "Démarrer gratuitement",
     },
     mainCta: "Analyse gratuite",
@@ -1268,7 +1269,7 @@ const localeContent: Record<string, LocaleCopy> = {
       steps: [
         "Eén login voor de ouder",
         "Voeg meerdere atleten toe onder één account",
-        "199 € / maand per atleet",
+        "{monthlyPrice} / maand per atleet",
         "Coaches zien alleen atleten die hen hebben gekozen",
       ],
       cta: "Account aanmaken en je eerste atleet toevoegen",
@@ -1295,7 +1296,7 @@ const localeContent: Record<string, LocaleCopy> = {
       heading: "✨ Alpine Mastery Lidmaatschap – Je weg naar betere skitechniek",
       body:
         "Krijg onbeperkte AI-skianalyses en directe persoonlijke feedback. Vraag wanneer je wilt een handmatige coachreview aan en volg je techniekprogressie in de tijd. Snelle feedback met de mogelijkheid tot diepere coaching wanneer je die nodig hebt.",
-      badge: "🎉 1 maand gratis — Geen verplichting, op elk moment opzegbaar. Normale prijs: 199 € / maand · ~$18/maand · ~€16/maand",
+      badge: "🎉 1 maand gratis — Geen verplichting, op elk moment opzegbaar. Normale prijs: {monthlyPrice} / maand · ~$18/maand · ~€16/maand",
       cta: "Gratis starten",
     },
     mainCta: "Gratis analyse",
@@ -1644,7 +1645,7 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {copy.familyFlow.steps.map((step) => (
               <div key={step} className="rounded-3xl border border-border bg-bg-card p-5 text-center text-text-secondary">
-                {step}
+                {step.replace("{monthlyPrice}", formatConsumerPrice(BASE_MONTHLY_SEK, locale))}
               </div>
             ))}
           </div>
@@ -1684,6 +1685,10 @@ export default async function AiskidanalysPage({ params }: { params: Promise<{ l
       </section>
 
       <section className="mx-auto max-w-5xl px-4 pb-20 pt-4 sm:px-6 lg:px-8">
+        <p className="text-center text-sm text-text-secondary">
+          {formatConsumerPrice(BASE_MONTHLY_SEK, locale)} / {consumerPricing(locale)[2]}
+          <br />{consumerPricing(locale)[3]}
+        </p>
         <CTABanner
           title={copy.pricing.heading}
           description={copy.pricing.body}
