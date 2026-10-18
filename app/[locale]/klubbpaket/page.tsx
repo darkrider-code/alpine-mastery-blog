@@ -2,6 +2,8 @@ import { getOpenGraphLocale } from "@/lib/landingMetadata";
 import AppLink from "@/components/AppLink";
 import type { Metadata } from "next";
 import CTABanner from "@/components/CTABanner";
+import ClubPricing from "@/components/ClubPricing";
+import { CLUB_PRICES_SEK } from "@/lib/consumerPricing";
 import { SUPPORTED_LOCALES } from "@/lib/translations";
 
 const productUrls = {
@@ -32,12 +34,10 @@ interface LocaleCopy {
   billingMonthly: string;
   billingYearly: string;
   saveBadge: string;
-  perAthlete: string;
   contactVolume: string;
   plans: {
+    id: "small" | "pro" | "unlimited";
     name: string;
-    price: string;
-    perAthlete: string;
     features: string[];
     badge?: string;
   }[];
@@ -101,13 +101,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månadsvis",
     billingYearly: "Årsvis",
     saveBadge: "Spara 50%",
-    perAthlete: "SEK / åkare / månad",
     contactVolume: "Kontakta oss för volympris",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/mån",
-        perAthlete: "119 SEK / åkare / månad",
         features: [
           "Upp till 10 åkare",
           "Obegränsat antal tränare",
@@ -115,9 +113,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/mån",
-        perAthlete: "80 SEK / åkare / månad",
         badge: "Mest populär",
         features: [
           "Upp till 50 åkare",
@@ -127,9 +124,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/mån",
-        perAthlete: "Kontakta oss för volympris",
         features: [
           "Obegränsat antal åkare",
           "Obegränsat antal tränare",
@@ -252,19 +248,16 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monthly",
     billingYearly: "Yearly",
     saveBadge: "Save 50%",
-    perAthlete: "SEK / skier / month",
     contactVolume: "Contact for volume pricing",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 SEK/mo",
-        perAthlete: "119 SEK / skier / month",
         features: ["Up to 10 skiers", "Unlimited coaches", "Unlimited analyses"],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 SEK/mo",
-        perAthlete: "80 SEK / skier / month",
         badge: "Most popular",
         features: [
           "Up to 50 skiers",
@@ -274,9 +267,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 SEK/mo",
-        perAthlete: "Contact for volume pricing",
         features: [
           "Unlimited skiers",
           "Unlimited coaches",
@@ -399,13 +391,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedlig",
     billingYearly: "Årlig",
     saveBadge: "Spar 50%",
-    perAthlete: "SEK / løper / måned",
     contactVolume: "Kontakt oss for volumpris",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/måned",
-        perAthlete: "119 SEK / løper / måned",
         features: [
           "Opptil 10 løpere",
           "Ubegrenset antall trenere",
@@ -413,9 +403,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/måned",
-        perAthlete: "80 SEK / løper / måned",
         badge: "Mest populær",
         features: [
           "Opptil 50 løpere",
@@ -425,9 +414,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/måned",
-        perAthlete: "Kontakt oss for volumpris",
         features: [
           "Ubegrenset antall løpere",
           "Ubegrenset antall trenere",
@@ -550,13 +538,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedligt",
     billingYearly: "Årligt",
     saveBadge: "Spar 50%",
-    perAthlete: "SEK / atlet / måned",
     contactVolume: "Kontakt os for volumenpris",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/måned",
-        perAthlete: "119 SEK / atlet / måned",
         features: [
           "Op til 10 atleter",
           "Ubegrænset antal trænere",
@@ -564,9 +550,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/måned",
-        perAthlete: "80 SEK / atlet / måned",
         badge: "Mest populær",
         features: [
           "Op til 50 atleter",
@@ -576,9 +561,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/måned",
-        perAthlete: "Kontakt os for volumenpris",
         features: [
           "Ubegrænset antal atleter",
           "Ubegrænset antal trænere",
@@ -701,13 +685,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Kuukausittain",
     billingYearly: "Vuosittain",
     saveBadge: "Säästä 50%",
-    perAthlete: "SEK / urheilija / kuukausi",
     contactVolume: "Ota yhteyttä volyymihinnoittelua varten",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/kk",
-        perAthlete: "119 SEK / urheilija / kuukausi",
         features: [
           "Jopa 10 urheilijaa",
           "Rajattomasti valmentajia",
@@ -715,9 +697,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/kk",
-        perAthlete: "80 SEK / urheilija / kuukausi",
         badge: "Suosituin",
         features: [
           "Jopa 50 urheilijaa",
@@ -727,9 +708,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/kk",
-        perAthlete: "Ota yhteyttä volyymihinnoittelua varten",
         features: [
           "Rajattomasti urheilijoita",
           "Rajattomasti valmentajia",
@@ -852,13 +832,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monatlich",
     billingYearly: "Jährlich",
     saveBadge: "50 % sparen",
-    perAthlete: "SEK / Athlet / Monat",
     contactVolume: "Kontakt für Mengenrabatte",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/Monat",
-        perAthlete: "119 SEK / Athlet / Monat",
         features: [
           "Bis zu 10 Athleten",
           "Unbegrenzte Trainer",
@@ -866,9 +844,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/Monat",
-        perAthlete: "80 SEK / Athlet / Monat",
         badge: "Am beliebtesten",
         features: [
           "Bis zu 50 Athleten",
@@ -878,9 +855,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/Monat",
-        perAthlete: "Kontakt für Mengenrabatte",
         features: [
           "Unbegrenzte Athleten",
           "Unbegrenzte Trainer",
@@ -1003,13 +979,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Mensuel",
     billingYearly: "Annuel",
     saveBadge: "Économisez 50%",
-    perAthlete: "SEK / athlète / mois",
     contactVolume: "Contactez-nous pour un tarif de volume",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/mois",
-        perAthlete: "119 SEK / athlète / mois",
         features: [
           "Jusqu'à 10 athlètes",
           "Coachs illimités",
@@ -1017,9 +991,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/mois",
-        perAthlete: "80 SEK / athlète / mois",
         badge: "Le plus populaire",
         features: [
           "Jusqu'à 50 athlètes",
@@ -1029,9 +1002,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/mois",
-        perAthlete: "Contactez-nous pour un tarif de volume",
         features: [
           "Athlètes illimités",
           "Coachs illimités",
@@ -1154,13 +1126,11 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Maandelijks",
     billingYearly: "Jaarlijks",
     saveBadge: "Bespaar 50%",
-    perAthlete: "SEK / atleet / maand",
     contactVolume: "Neem contact op voor volume prijzen",
     plans: [
       {
+        id: "small",
         name: "Small Club",
-        price: "1 190 kr/maand",
-        perAthlete: "119 SEK / atleet / maand",
         features: [
           "Tot 10 atleten",
           "Onbeperkt aantal coaches",
@@ -1168,9 +1138,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "pro",
         name: "Club Pro",
-        price: "3 990 kr/maand",
-        perAthlete: "80 SEK / atleet / maand",
         badge: "Meest populair",
         features: [
           "Tot 50 atleten",
@@ -1180,9 +1149,8 @@ const localeContent: Record<string, LocaleCopy> = {
         ],
       },
       {
+        id: "unlimited",
         name: "Club Unlimited",
-        price: "9 990 kr/maand",
-        perAthlete: "Neem contact op voor volume prijzen",
         features: [
           "Onbeperkt aantal atleten",
           "Onbeperkt aantal coaches",
@@ -1368,21 +1336,21 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
           {
             "@type": "Offer",
             name: "Small Club",
-            price: "1190",
+            price: String(CLUB_PRICES_SEK.small.monthly),
             priceCurrency: "SEK",
             description: copy.offerDescs.small,
           },
           {
             "@type": "Offer",
             name: "Club Pro",
-            price: "3990",
+            price: String(CLUB_PRICES_SEK.pro.monthly),
             priceCurrency: "SEK",
             description: copy.offerDescs.pro,
           },
           {
             "@type": "Offer",
             name: "Club Unlimited",
-            price: "9990",
+            price: String(CLUB_PRICES_SEK.unlimited.monthly),
             priceCurrency: "SEK",
             description: copy.offerDescs.unlimited,
           },
@@ -1493,44 +1461,14 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
             <p className="mx-auto mt-3 max-w-2xl text-text-secondary">{copy.pricingDesc}</p>
           </div>
 
-          <div className="mb-8 flex items-center justify-center gap-3">
-            <span className="text-sm font-medium text-text-secondary">{copy.billingMonthly}</span>
-            <span className="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-700">
-              <span className="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white" />
-            </span>
-            <span className="text-sm font-medium text-white">{copy.billingYearly}</span>
-            <span className="rounded-full bg-accent px-2 py-0.5 text-xs font-bold text-bg-primary">
-              {copy.saveBadge}
-            </span>
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {copy.plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative rounded-3xl border bg-bg-card p-8 ${
-                  plan.badge ? "border-accent shadow-xl shadow-sky-500/10" : "border-border"
-                }`}
-              >
-                {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-bold text-bg-primary">
-                    {plan.badge}
-                  </div>
-                )}
-                <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                <div className="mt-4 text-3xl font-black text-white">{plan.price}</div>
-                <div className="mt-1 text-sm text-text-secondary">{plan.perAthlete}</div>
-                <ul className="mt-6 space-y-3 text-text-secondary">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-accent" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <ClubPricing
+            locale={locale}
+            plans={copy.plans}
+            billingMonthly={copy.billingMonthly}
+            billingYearly={copy.billingYearly}
+            saveBadge={copy.saveBadge}
+            contactVolume={copy.contactVolume}
+          />
         </div>
       </section>
 
