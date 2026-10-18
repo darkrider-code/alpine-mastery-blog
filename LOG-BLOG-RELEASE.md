@@ -177,3 +177,8 @@ Created by existing Git integration on branch push; no deployment API, productio
 - `56a6d575f2ee0fbd71e5c24348e6efe7f60f8475` fix: keep URL language usable when localStorage is blocked
 The final docs commit containing this record is listed in the PR/history (a file cannot contain its own commit SHA).
 
+
+## Currency policy update — 2026-10-18
+Daniel requests EUR/USD for non-Swedish language choices. BEFORE: consumerPricing.ts and consumerPricing.node.test.mjs. Use SEK for sv, USD for en and EUR for no/da/fi/de/fr/nl. Existing199 SEK base, approximate rate constants, rounding and exact SEK reference retained; no live-rate claim or charging changes. Club prices, app repo and dependencies remain out of scope. This policy supersedes the earlier NOK/DKK display table above.
+
+Currency policy AFTER: typecheck PASS; both touched source/test files lint0 errors/0 warnings; all19 tests PASS, including expected currency and rounded monthly amount for all8 locales. Current consumer display: sv199 SEK; en approx19 USD; no/da/fi/de/fr/nl approx17 EUR. Exact199 SEK reference retained for foreign amounts. Earlier NOK/DKK display amounts are historical and superseded. No dependency, club-price, app or charging changes.

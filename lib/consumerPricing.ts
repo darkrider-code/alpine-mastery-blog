@@ -3,7 +3,7 @@ export const BASE_MONTHLY_SEK = 199;
 // Approximate local units per 1 SEK: SEK=1, NOK=1.02, DKK=0.69, EUR=0.087, USD=0.094, GBP=0.074.
 // Retained May 2026 estimates (2026-05); exact source day was not recorded.
 // Inspected 2026-10-17, not live rates. Rates, date and rounding must be reviewed by Daniel before release.
-// English defaults to USD; an English visitor may instead need GBP.
+// Display policy: Swedish uses SEK, English uses USD; all other supported languages use EUR.
 export const SEK_RATES = { SEK: 1, NOK: 1.02, DKK: 0.69, EUR: 0.087, USD: 0.094, GBP: 0.074 } as const;
 export type ConsumerCurrency = keyof typeof SEK_RATES;
 const locales: Record<string, readonly [ConsumerCurrency, string, string, string]> = {
@@ -20,13 +20,13 @@ const locales: Record<string, readonly [ConsumerCurrency, string, string, string
     "Billing is in SEK. Other currencies are approximate."
   ],
   "no": [
-    "NOK",
+    "EUR",
     "nb-NO",
     "måned",
     "Du betaler i SEK. Andre valutaer er omtrentlige."
   ],
   "da": [
-    "DKK",
+    "EUR",
     "da-DK",
     "måned",
     "Du betaler i SEK. Andre valutaer er omtrentlige."

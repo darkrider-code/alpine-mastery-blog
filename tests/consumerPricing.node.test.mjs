@@ -8,6 +8,9 @@ test("consumer rates preserve base SEK and safe approximate local presentation",
   assert.equal(p.MONTHLY_AMOUNTS.EUR, 17);
   assert.equal(p.MONTHLY_AMOUNTS.USD, 19);
   for (const locale of ["sv", "en", "no", "da", "fi", "de", "fr", "nl"]) {
+    const currency = locale === "sv" ? "SEK" : locale === "en" ? "USD" : "EUR";
+    assert.equal(p.consumerPricing(locale)[0], currency, `${locale} display currency`);
+    assert.equal(p.MONTHLY_AMOUNTS[currency], locale === "sv" ? 199 : locale === "en" ? 19 : 17);
     const formatted = p.formatConsumerPrice(199, locale);
     assert.ok(p.consumerPricing(locale)[3]);
     if (locale !== "sv") { assert.ok(formatted.startsWith("≈ ")); assert.ok(formatted.includes("199 SEK")); }
