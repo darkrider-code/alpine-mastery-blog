@@ -1,5 +1,6 @@
+import { getOpenGraphLocale } from "@/lib/landingMetadata";
 ﻿import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "@/components/BlogLink";
 import BlogCard, { categoryColors } from "@/components/BlogCard";
 import CTABanner from "@/components/CTABanner";
@@ -7,7 +8,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import TranslatedPostBody from "@/components/TranslatedPostBody";
 import TranslatedPostHeader from "@/components/TranslatedPostHeader";
 import TranslatedRelatedTitle from "@/components/TranslatedRelatedTitle";
-import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
+import { getAllSlugs, getPostBySlug, getPostLocales, getRelatedPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getCategoryLabel, getTranslationForLocale } from "@/lib/translations";
 import { RenderMdx } from "@/lib/render-mdx";
 
@@ -65,82 +66,65 @@ function warnIfInvalidDescription(post: { slug: string; locale: string; descript
 export const revalidate = 3600; // Revalidate every hour to pick up content changes
 
 export function generateStaticParams() {
-  try {
-    const slugs = getAllSlugs();
+  return getAllSlugs().flatMap((slug) => getPostLocales(slug).map((locale) => ({ locale, slug })));
+}
 
-    for (const locale of SUPPORTED_LOCALES) {
-      for (const slug of slugs) {
-        const post = getPostBySlug(slug, locale);
-        if (post) {
-          warnIfInvalidDescription(post);
-        }
-      }
-    }
-
-    return SUPPORTED_LOCALES.flatMap((locale) =>
-      slugs.map((slug) => ({ locale, slug }))
-    );
-  } catch (error) {
-    console.error("Error in generateStaticParams:", error);
-    return [];
-  }
+function resolvePost(slug: string, locale: string) {
+  if (!SUPPORTED_LOCALES.some((supported) => supported === locale)) notFound();
+  const post = getPostBySlug(slug, locale);
+  if (post) return post;
+  if (locale !== "sv" && getPostBySlug(slug, "sv")) permanentRedirect("/sv/" + slug);
+  notFound();
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  try {
-    const { locale, slug } = await params;
-    const post = getPostBySlug(slug, locale);
+  const { locale, slug } = await params;
+  const post = resolvePost(slug, locale);
 
-    if (!post) {
-      return {};
-    }
+  warnIfInvalidDescription(post);
 
-    warnIfInvalidDescription(post);
+  const canonicalUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+  const languages = Object.fromEntries(
+    getPostLocales(slug).map((supportedLocale) => [
+      supportedLocale,
+      `https://blog.masteryhub.se/${supportedLocale}/${post.slug}`,
+    ])
+  ) as Record<string, string>;
 
-    const canonicalUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-    const languages = Object.fromEntries(
-      SUPPORTED_LOCALES.map((supportedLocale) => [
-        supportedLocale,
-        `https://blog.masteryhub.se/${supportedLocale}/${post.slug}`,
-      ])
-    ) as Record<string, string>;
-
-    return {
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
       title: post.title,
       description: post.description,
-      openGraph: {
-        title: post.title,
-        description: post.description,
-        type: "article",
-        publishedTime: post.publishedAt,
-        url: canonicalUrl,
-        images: [
-          {
-            url: "https://blog.masteryhub.se/og-image.png",
-            width: 1200,
-            height: 630,
-            alt: post.title,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: post.title,
-        description: post.description,
-        images: ["https://blog.masteryhub.se/og-image.png"],
-      },
-      alternates: {
-        canonical: canonicalUrl,
-        languages: {
-          ...languages,
-          "x-default": `https://blog.masteryhub.se/sv/${post.slug}`,
+      type: "article",
+      locale: getOpenGraphLocale(locale),
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt ?? post.publishedAt,
+      url: canonicalUrl,
+      images: [
+        {
+          url: "https://blog.masteryhub.se/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: post.title,
         },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: ["https://blog.masteryhub.se/og-image.png"],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        ...languages,
+        "x-default": `https://blog.masteryhub.se/sv/${post.slug}`,
       },
-    };
-  } catch (error) {
-    console.error("Error in generateMetadata:", error);
-    return {};
-  }
+    },
+  };
 }
 
 function formatDate(dateString: string, locale: string): string {
@@ -174,155 +158,151 @@ async function MdxContent({ content }: { content: string }) {
 }
 
 export default async function PostPage({ params }: PageProps) {
-  try {
-    const { locale, slug } = await params;
-    const post = getPostBySlug(slug, locale);
+  const { locale, slug } = await params;
+  const post = resolvePost(slug, locale);
 
-    if (!post) {
-      return notFound();
-    }
+  const relatedPosts = getRelatedPosts(post, locale, 3);
+  const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
+  const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
+  const sportLabel = getSportLabel(post.sport, locale);
+  const categoryLabel = getCategoryLabel(post.category, locale);
+  const formattedDate = formatDate(post.publishedAt, locale);
+  const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
+  const breadcrumbMasteryhub = getTranslationForLocale(locale, "site.breadcrumbMasteryhub") ?? "Masteryhub";
+  const breadcrumbBlog = getTranslationForLocale(locale, "site.breadcrumbBlog") ?? "Blog";
 
-    const relatedPosts = getRelatedPosts(post, locale, 3);
-    const badgeClass = categoryColors[post.category] ?? "bg-bg-secondary text-text-secondary";
-    const sportBadgeClass = sportColors[post.sport] ?? "bg-bg-secondary text-text-secondary";
-    const sportLabel = getSportLabel(post.sport, locale);
-    const categoryLabel = getCategoryLabel(post.category, locale);
-    const formattedDate = formatDate(post.publishedAt, locale);
-    const postUrl = `https://blog.masteryhub.se/${locale}/${post.slug}`;
-    const breadcrumbMasteryhub = getTranslationForLocale(locale, "site.breadcrumbMasteryhub") ?? "Masteryhub";
-    const breadcrumbBlog = getTranslationForLocale(locale, "site.breadcrumbBlog") ?? "Blog";
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    inLanguage: locale,
+    image: ["https://blog.masteryhub.se/og-image.png"],
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    author: {
+      "@type": "Organization",
+      name: post.author,
+      url: "https://masteryhub.se",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Masteryhub",
+    },
+    url: postUrl,
+  };
 
-    const articleJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: post.title,
-      description: post.description,
-      datePublished: post.publishedAt,
-      author: {
-        "@type": "Organization",
-        name: "Alpine Mastery",
-        url: "https://masteryhub.se",
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: breadcrumbMasteryhub,
+        item: "https://masteryhub.se",
       },
-      publisher: {
-        "@type": "Organization",
-        name: "Masteryhub",
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: breadcrumbBlog,
+        item: "https://blog.masteryhub.se",
       },
-      url: postUrl,
-    };
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  };
 
-    const breadcrumbJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: breadcrumbMasteryhub,
-          item: "https://masteryhub.se",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: breadcrumbBlog,
-          item: "https://blog.masteryhub.se",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: post.title,
-          item: postUrl,
-        },
-      ],
-    };
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
+      />
 
-    return (
-      <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
+      <ScrollProgress />
 
-        <ScrollProgress />
+      <article className="mx-auto max-w-6xl px-4 sm:px-6">
+        <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
+          <div className="mx-auto max-w-3xl">
+            <nav aria-label="breadcrumb" className="mb-6">
+              <ol className="flex flex-wrap items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary">
+                <li>
+                  <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
+                    {breadcrumbMasteryhub}
+                  </a>
+                </li>
+                <li className="text-border">›</li>
+                <li>
+                  <Link href={`/${locale}`} className="hover:text-accent transition-colors">
+                    {breadcrumbBlog}
+                  </Link>
+                </li>
+                <li className="text-border">›</li>
+                <li className="truncate text-white max-w-[200px] sm:max-w-none">
+                  {post.title}
+                </li>
+              </ol>
+            </nav>
 
-        <article className="mx-auto max-w-6xl px-4 sm:px-6">
-          <header className="bg-gradient-to-b from-bg-secondary to-bg-primary px-4 py-12 sm:px-6 sm:py-16">
-            <div className="mx-auto max-w-3xl">
-              <nav aria-label="breadcrumb" className="mb-6">
-                <ol className="flex flex-wrap items-center gap-2 list-none p-0 m-0 text-sm text-text-secondary">
-                  <li>
-                    <a href="https://masteryhub.se" className="hover:text-accent transition-colors">
-                      {breadcrumbMasteryhub}
-                    </a>
-                  </li>
-                  <li className="text-border">›</li>
-                  <li>
-                    <Link href={`/${locale}`} className="hover:text-accent transition-colors">
-                      {breadcrumbBlog}
-                    </Link>
-                  </li>
-                  <li className="text-border">›</li>
-                  <li className="truncate text-white max-w-[200px] sm:max-w-none">
-                    {post.title}
-                  </li>
-                </ol>
-              </nav>
+            <div className="relative mb-12 pb-10 border-b border-border">
+              <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-b from-bg-secondary to-transparent opacity-60" />
 
-              <div className="relative mb-12 pb-10 border-b border-border">
-                <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-b from-bg-secondary to-transparent opacity-60" />
+              <div className="mb-4 flex items-center gap-2">
+                <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${sportBadgeClass}`}>
+                  {sportLabel}
+                </span>
+                <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}`}>
+                  {categoryLabel}
+                </span>
+              </div>
 
-                <div className="mb-4 flex items-center gap-2">
-                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${sportBadgeClass}`}>
-                    {sportLabel}
-                  </span>
-                  <span className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}`}>
-                    {categoryLabel}
-                  </span>
-                </div>
+              <TranslatedPostHeader post={post} />
 
-                <TranslatedPostHeader post={post} />
-
-                <div className="flex items-center gap-3 text-sm text-text-secondary">
-                  <span>{formattedDate}</span>
-                  <span className="text-border">·</span>
-                  <span>{post.readingTime}</span>
-                  <span className="text-border">·</span>
-                  <span>{post.author}</span>
-                </div>
+              <div className="flex flex-wrap items-center gap-3 text-sm text-text-secondary">
+                <time dateTime={post.publishedAt}>{formattedDate}</time>
+                {post.updatedAt && <time dateTime={post.updatedAt}>{locale === "sv" ? "Uppdaterad " : "Updated "}{formatDate(post.updatedAt, locale)}</time>}
+                <span className="text-border">·</span>
+                <span>{post.readingTime}</span>
+                <span className="text-border">·</span>
+                <span>{post.author}</span>
               </div>
             </div>
-          </header>
-
-          <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
-              <TranslatedPostBody post={post}>
-                <MdxContent content={post.content} />
-              </TranslatedPostBody>
-            </div>
           </div>
+        </header>
 
-          <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
-            <CTABanner product={post.product} />
-
-            {relatedPosts.length > 0 && (
-              <section className="mt-16">
-                <TranslatedRelatedTitle category={post.category} locale={locale} />
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {relatedPosts.map((related) => (
-                    <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
-                  ))}
-                </div>
-              </section>
-            )}
+        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-accent prose-h2:pl-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-text-secondary prose-p:leading-relaxed prose-p:mb-4 prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:bg-bg-card prose-blockquote:rounded-r-xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:text-text-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-strong:text-white">
+            <TranslatedPostBody post={post}>
+              <MdxContent content={post.content} />
+            </TranslatedPostBody>
           </div>
-        </article>
-      </>
-    );
-  } catch (error) {
-    console.error("Error rendering post page:", error);
-    return notFound();
-  }
+        </div>
+
+        <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+          <CTABanner product={post.product} />
+
+          {relatedPosts.length > 0 && (
+            <section className="mt-16">
+              <TranslatedRelatedTitle category={post.category} locale={locale} />
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {relatedPosts.map((related) => (
+                  <BlogCard key={`${related.slug}-${locale}`} post={related} locale={locale} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </article>
+    </>
+  );
 }

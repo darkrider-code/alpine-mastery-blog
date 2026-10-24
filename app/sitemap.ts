@@ -1,54 +1,26 @@
 import type { MetadataRoute } from "next";
-import { getAllSlugs } from "@/lib/posts";
+import { getAllSlugs, getPostBySlug, getPostLocales } from "@/lib/posts";
 import { SUPPORTED_LOCALES } from "@/lib/translations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const slugs = getAllSlugs();
   const baseUrl = "https://blog.masteryhub.se";
-
-  const localeRoots = SUPPORTED_LOCALES.map(locale => ({
-    url: baseUrl + "/" + locale,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  const articles = SUPPORTED_LOCALES.flatMap(locale =>
-    slugs.map(slug => ({
-      url: baseUrl + "/" + locale + "/" + slug,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: locale === 'sv' ? 0.9 : 0.7,
+  const pages: MetadataRoute.Sitemap = SUPPORTED_LOCALES.flatMap((locale) =>
+    ["", "/ai-skidanalys", "/klubbpaket", "/ambassador"].map((route) => ({
+      url: baseUrl + "/" + locale + route,
     }))
   );
-
-  const landingPages = SUPPORTED_LOCALES.map(locale => ({
-    url: baseUrl + "/" + locale + "/ai-skidanalys",
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: locale === 'sv' ? 0.9 : 0.7,
-  }));
-
-  const klubbpaketPages = SUPPORTED_LOCALES.map(locale => ({
-    url: baseUrl + "/" + locale + "/klubbpaket",
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: locale === 'sv' ? 0.9 : 0.7,
-  }));
-
-  const ambassadorPages = SUPPORTED_LOCALES.map(locale => ({
-    url: baseUrl + "/" + locale + "/ambassador",
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: locale === 'sv' ? 0.9 : 0.7,
-  }));
-
-  return [
-    { url: baseUrl, lastModified: new Date(), priority: 1.0 },
-    ...localeRoots,
-    ...landingPages,
-    ...klubbpaketPages,
-    ...ambassadorPages,
-    ...articles,
-  ];
+  const articles: MetadataRoute.Sitemap = getAllSlugs().flatMap((slug) => {
+    const locales = getPostLocales(slug);
+    const languages = Object.fromEntries(locales.map((locale) => [locale, baseUrl + "/" + locale + "/" + slug]));
+    return locales.flatMap((locale) => {
+      const post = getPostBySlug(slug, locale);
+      if (!post) return [];
+      return [{ url: baseUrl + "/" + locale + "/" + slug,
+        lastModified: post.updatedAt ?? post.publishedAt,
+        alternates: { languages },
+      }];
+    });
+  });
+  // Only canonical pages; omit the root redirect and invented deployment dates.
+  return [...pages, ...articles];
 }
