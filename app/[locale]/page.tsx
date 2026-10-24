@@ -1,10 +1,9 @@
 import BlogLink from "@/components/BlogLink";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import BlogList from "@/components/BlogList";
+import SkiGuides from "@/components/SkiGuides";
 import HomeHero from "@/components/HomeHero";
-import { getAllPosts, DEFAULT_LOCALE } from "@/lib/posts";
-import { getLocaleFromCookies } from "@/lib/language";
+import { getAllPosts } from "@/lib/posts";
 import { SUPPORTED_LOCALES, getTranslationForLocale } from "@/lib/translations";
 
 interface PageProps {
@@ -66,8 +65,8 @@ export default async function HomePage({ params }: PageProps) {
 
   const aiSkidanalysCopy: Record<string, { title: string; description: string; cta: string }> = {
     sv: {
-      title: "AI-skidanalys – Bemästra berget med AI",
-      description: "Ladda upp ett klipp och få personlig AI-analys av din skidteknik inom sekunder. Perfekt för skidåkare, tränare och klubbar.",
+      title: "Personlig feedback på din skidteknik",
+      description: "Filma ett åk, förstå vad du kan förbättra och ta med ett tydligt fokus till nästa dag i backen. Prova en gratis videoanalys.",
       cta: "Prova AI-skidanalys →",
     },
     en: {
@@ -133,6 +132,7 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
+      {locale === "sv" && <SkiGuides />}
       <BlogList posts={posts} locale={locale} />
     </div>
   );

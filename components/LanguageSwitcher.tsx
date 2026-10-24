@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LANGUAGE_OPTIONS } from "@/lib/translations";
 import { useLanguage } from "@/components/LanguageProvider";
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ articleLocales }: { articleLocales: Record<string, string[]> }) {
   const { locale, setLocale, t } = useLanguage();
   const router = useRouter();
   const campaign = useCampaignSearch();
@@ -14,7 +14,9 @@ export default function LanguageSwitcher() {
 
   const switchLocale = (newLocale: string) => {
     const parts = pathname.split('/').filter(Boolean);
-    const rest = parts.slice(1).join('/');
+    let rest = parts.slice(1).join('/');
+    // An untranslated article should lead to the selected language index.
+    if (articleLocales[rest] && !articleLocales[rest].includes(newLocale)) rest = '';
     router.push(buildBlogLink(rest ? `/${newLocale}/${rest}` : `/${newLocale}`, campaign));
     setLocale(newLocale);
   };

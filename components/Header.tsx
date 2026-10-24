@@ -92,7 +92,7 @@ function BlogIcon() {
   );
 }
 
-export default function Header() {
+export default function Header({ articleLocales }: { articleLocales: Record<string, string[]> }) {
   const { t } = useLanguage();
   const pathname = usePathname();
 
@@ -165,7 +165,7 @@ export default function Header() {
           >
             {ambassadorLabel}
           </BlogLink>
-          <LanguageSwitcher />
+          <LanguageSwitcher articleLocales={articleLocales} />
         </div>
       </div>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 pb-3 sm:hidden">

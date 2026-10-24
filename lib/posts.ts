@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Post } from "@/types/post";
-import { DEFAULT_LOCALE } from "@/lib/translations";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/lib/translations";
 export { DEFAULT_LOCALE } from "@/lib/translations";
 
 const postsDirectory = path.join(process.cwd(), "content", "posts");
@@ -16,6 +16,7 @@ function parsePost(slug: string, locale: string, fileContents: string): Post {
     title: data.title as string,
     description: data.description as string,
     publishedAt: (data.publishedAt ?? data.date) as string,
+    updatedAt: data.updatedAt as string | undefined,
     category: data.category as string,
     author: (data.author as string) ?? "Alpine Mastery",
     readingTime: (data.readingTime as string) ?? "5 min",
@@ -32,25 +33,20 @@ export function getAllSlugs(): string[] {
   }
 
   return fs
-    .readdirSync(postsDirectory)
-    .filter((item) => fs.statSync(path.join(postsDirectory, item)).isDirectory())
+    .readdirSync(postsDirectory, { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((item) => item.name)
     .sort();
 }
 
 export function getPostBySlug(slug: string, locale: string = DEFAULT_LOCALE): Post | null {
+  if (!SUPPORTED_LOCALES.some((supported) => supported === locale) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null;
   const targetPath = path.join(postsDirectory, slug, `${locale}.mdx`);
-  const fallbackPath = path.join(postsDirectory, slug, "sv.mdx");
-  const filePath = fs.existsSync(targetPath)
-    ? targetPath
-    : fs.existsSync(fallbackPath)
-      ? fallbackPath
-      : null;
-
-  if (!filePath) {
+  if (!fs.existsSync(targetPath)) {
     return null;
   }
 
-  const fileContents = fs.readFileSync(filePath, "utf8");
+  const fileContents = fs.readFileSync(targetPath, "utf8");
   return parsePost(slug, locale, fileContents);
 }
 
@@ -70,13 +66,15 @@ export function getRelatedPosts(post: Post, locale: string, limit: number): Post
 }
 
 export function getPostLocales(slug: string): string[] {
+  if (!getAllSlugs().includes(slug)) return [];
   const slugPath = path.join(postsDirectory, slug);
 
   if (fs.existsSync(slugPath) && fs.statSync(slugPath).isDirectory()) {
     return fs
       .readdirSync(slugPath)
       .filter((name) => name.endsWith(".mdx"))
-      .map((name) => name.replace(/\.mdx$/, ""));
+      .map((name) => name.replace(/\.mdx$/, ""))
+      .filter((locale) => SUPPORTED_LOCALES.some((supported) => supported === locale));
   }
 
   return [];
