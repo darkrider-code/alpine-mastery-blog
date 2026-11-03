@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{locale}}">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1350px; }
+      body {
+        display: flex;
+        align-items: center;
+        padding: 110px;
+        color: #f3f1ec;
+        background: #171a1d;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      main { width: 100%; }
+      .eyebrow { color: #b6c4bc; font-size: 25px; letter-spacing: 0.12em; text-transform: uppercase; }
+      .number { margin-bottom: 48px; color: #8ca896; font-size: 30px; }
+      h1 { margin: 0; font-size: 64px; line-height: 1.18; font-weight: 620; }
+      footer { margin-top: 85px; color: #b6c4bc; font-size: 24px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="eyebrow">Alpine Mastery</div>
+      <div class="number">{{number}} / 7</div>
+      <h1>{{text}}</h1>
+      <footer>{{slug}}</footer>
+    </main>
+  </body>
+</html>
