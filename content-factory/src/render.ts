@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import type { Article, DraftPayload, Locale } from "./types.js";
 import { FACTORY_ROOT } from "./paths.js";
@@ -18,6 +19,54 @@ export interface RenderedOutput {
     output_file: string;
     variant?: string;
   }>;
+}
+
+interface ScreenshotPage {
+  setContent(content: string): Promise<void>;
+  screenshot(options: { path: string; fullPage: boolean }): Promise<Buffer>;
+}
+
+interface Browser {
+  newPage(options: {
+    viewport: { width: number; height: number };
+    deviceScaleFactor: number;
+  }): Promise<ScreenshotPage>;
+  close(): Promise<void>;
+}
+
+interface Chromium {
+  launch(options: { headless: boolean }): Promise<Browser>;
+}
+
+const requireFromFactory = createRequire(import.meta.url);
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object";
+}
+
+function isChromium(value: unknown): value is Chromium {
+  return isRecord(value) && typeof value.launch === "function";
+}
+
+function loadChromium(): Chromium | undefined {
+  let playwright: unknown;
+  try {
+    playwright = requireFromFactory("playwright");
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "MODULE_NOT_FOUND") {
+      return undefined;
+    }
+    throw error;
+  }
+  if (!isRecord(playwright) || !isChromium(playwright.chromium)) {
+    throw new Error("Installed Playwright package does not expose chromium.launch().");
+  }
+  return playwright.chromium;
+}
+
+function isMissingChromium(error: unknown): boolean {
+  return error instanceof Error &&
+    /executable.*(?:does not exist|not found)|browser.*not installed|please run.*playwright install/iu.test(error.message);
 }
 
 function csvCell(value: string): string {
@@ -134,33 +183,40 @@ export async function renderSlides(
   locale: Locale,
   outputDirectory: string,
 ): Promise<string[]> {
-  try {
-    const { chromium } = await import("playwright");
-    const template = await readFile(resolve(FACTORY_ROOT, "templates", "slide.html"), "utf8");
-    const browser = await chromium.launch({ headless: true });
-    try {
-      const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
-      await mkdir(resolve(FACTORY_ROOT, outputDirectory, "slides"), { recursive: true });
-      const outputs: string[] = [];
-      for (const [index, text] of slides.entries()) {
-        const html = template
-          .replaceAll("{{locale}}", locale)
-          .replaceAll("{{number}}", String(index + 1))
-          .replaceAll("{{text}}", escapeHtml(text))
-          .replaceAll("{{slug}}", escapeHtml(article.slug));
-        await page.setContent(html);
-        const path = `${outputDirectory}/slides/slide-${String(index + 1).padStart(2, "0")}.png`;
-        await page.screenshot({ path: resolve(FACTORY_ROOT, path), fullPage: false });
-        outputs.push(path);
-      }
-      return outputs;
-    } finally {
-      await browser.close();
-    }
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    console.warn(`Carousel PNG rendering skipped: Playwright or its Chromium browser is unavailable (${detail}).`);
+  const chromium = loadChromium();
+  if (!chromium) {
+    console.warn("Carousel PNG rendering skipped: install the optional Playwright package in content-factory.");
     return [];
+  }
+  const template = await readFile(resolve(FACTORY_ROOT, "templates", "slide.html"), "utf8");
+  let browser: Browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (error) {
+    if (isMissingChromium(error)) {
+      console.warn("Carousel PNG rendering skipped: install Playwright's Chromium browser with `npx playwright install chromium`.");
+      return [];
+    }
+    throw error;
+  }
+  try {
+    const page = await browser.newPage({ viewport: { width: 1080, height: 1350 }, deviceScaleFactor: 1 });
+    await mkdir(resolve(FACTORY_ROOT, outputDirectory, "slides"), { recursive: true });
+    const outputs: string[] = [];
+    for (const [index, text] of slides.entries()) {
+      const html = template
+        .replaceAll("{{locale}}", locale)
+        .replaceAll("{{number}}", String(index + 1))
+        .replaceAll("{{text}}", escapeHtml(text))
+        .replaceAll("{{slug}}", escapeHtml(article.slug));
+      await page.setContent(html);
+      const path = `${outputDirectory}/slides/slide-${String(index + 1).padStart(2, "0")}.png`;
+      await page.screenshot({ path: resolve(FACTORY_ROOT, path), fullPage: false });
+      outputs.push(path);
+    }
+    return outputs;
+  } finally {
+    await browser.close();
   }
 }
 
