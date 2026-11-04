@@ -116,8 +116,7 @@ export async function structuredCall<T>(
     }),
   });
   if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Gemini request failed (${response.status}): ${body.slice(0, 1000)}`);
+    throw new Error(`Gemini request failed with HTTP ${response.status}. Check the model, API key, and Gemini API access.`);
   }
   const data = await response.json() as GeminiResponse;
   const functionCall = data.candidates?.[0]?.content?.parts

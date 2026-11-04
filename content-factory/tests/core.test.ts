@@ -275,3 +275,33 @@ test("Gemini structured calls use the configured environment key and return toke
     else process.env.Content_Factory_Gemini_API_Key = originalKey;
   }
 });
+
+test("Gemini API errors do not echo request secrets or response bodies", async () => {
+  const originalKey = process.env.Content_Factory_Gemini_API_Key;
+  const originalFetch = globalThis.fetch;
+  const secret = "local-test-secret";
+  process.env.Content_Factory_Gemini_API_Key = secret;
+  globalThis.fetch = async () => new Response(`rejected key ${secret}`, { status: 403 });
+  try {
+    await assert.rejects(
+      structuredCall(
+        config,
+        "test_tool",
+        "Test structured output",
+        { type: "object" },
+        "System",
+        "Prompt",
+      ),
+      (error: unknown) => {
+        assert.ok(error instanceof Error);
+        assert.match(error.message, /HTTP 403/u);
+        assert.equal(error.message.includes(secret), false);
+        return true;
+      },
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalKey === undefined) delete process.env.Content_Factory_Gemini_API_Key;
+    else process.env.Content_Factory_Gemini_API_Key = originalKey;
+  }
+});
