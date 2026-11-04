@@ -8,7 +8,7 @@ test("sitemap includes only real canonical translations with truthful dates", as
  const { posts, sitemap } = await contentModules();
  const entries = sitemap();
  const expectedArticles = posts.getAllSlugs().reduce((sum, slug) => sum + posts.getPostLocales(slug).length, 0);
- assert.equal(entries.length, locales.length * 4 + expectedArticles);
+ assert.equal(entries.length, locales.length * 5 + expectedArticles);
  assert.equal(new Set(entries.map(entry => entry.url)).size, entries.length);
  assert.ok(!entries.some(entry => entry.url === "https://blog.masteryhub.se"));
  for (const entry of entries) {
@@ -16,7 +16,7 @@ test("sitemap includes only real canonical translations with truthful dates", as
    assert.equal(url.origin, "https://blog.masteryhub.se");
    const [, locale, slug] = url.pathname.split("/");
    assert.ok(locales.includes(locale));
-   if (!slug || ["ai-skidanalys", "klubbpaket", "ambassador"].includes(slug)) continue;
+   if (!slug || ["ai-skidanalys", "klubbpaket", "ambassador", "partner"].includes(slug)) continue;
    const post = posts.getPostBySlug(slug, locale);
    assert.ok(post, entry.url);
    assert.equal(entry.lastModified, post.updatedAt ?? post.publishedAt);
