@@ -1,0 +1,33 @@
+{
+  "model": "gemini-3.6-flash",
+  "temperature": 0.2,
+  "maxPosts": 50,
+  "locales": ["sv", "en", "no", "da", "fi", "de", "fr", "nl"],
+  "disclosures": {
+    "en": "I'm one of the people who built Alpine Mastery.",
+    "sv": "Jag är en av personerna bakom Alpine Mastery.",
+    "no": "Jeg er en av personene bak Alpine Mastery.",
+    "da": "Jeg er en af personerne bag Alpine Mastery.",
+    "fi": "Olen yksi Alpine Masteryn kehittäjistä.",
+    "de": "Ich gehöre zu den Menschen, die Alpine Mastery entwickelt haben.",
+    "fr": "Je fais partie des personnes qui ont créé Alpine Mastery.",
+    "nl": "Ik ben een van de mensen achter Alpine Mastery."
+  },
+  "bannedPhrases": [
+    "AI-powered",
+    "game changer",
+    "revolutionary",
+    "guaranteed improvement",
+    "guaranteed results",
+    "you will improve",
+    "unlock your full potential",
+    "the best ski analysis"
+  ],
+  "hypePhrases": [
+    "unbelievable",
+    "incredible results",
+    "transform your skiing overnight",
+    "instant results",
+    "secret trick"
+  ]
+}

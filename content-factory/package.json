@@ -1,0 +1,26 @@
+{
+  "name": "alpine-mastery-content-factory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "draft": "tsx src/cli.ts draft",
+    "review": "tsx src/cli.ts review",
+    "approve": "tsx src/cli.ts approve",
+    "export": "tsx src/cli.ts export",
+    "reply": "tsx src/cli.ts reply",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.55.0"
+  }
+}
