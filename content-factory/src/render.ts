@@ -58,10 +58,14 @@ function loadChromium(): Chromium | undefined {
     }
     throw error;
   }
-  if (!isRecord(playwright) || !isChromium(playwright.chromium)) {
+  if (!isRecord(playwright)) {
     throw new Error("Installed Playwright package does not expose chromium.launch().");
   }
-  return playwright.chromium;
+  const chromium = playwright.chromium;
+  if (!isChromium(chromium)) {
+    throw new Error("Installed Playwright package does not expose chromium.launch().");
+  }
+  return chromium;
 }
 
 function isMissingChromium(error: unknown): boolean {

@@ -13,7 +13,7 @@ npm run typecheck
 npm test
 ```
 
-The stable Gemini 3.6 Flash model is configured in `config.json`. Set `Content_Factory_Gemini_API_Key` in the environment where the CLI runs (or in the Vercel project environment if run there); the key is sent only in the HTTPS request header and is never written to files or logs. Keep the key out of config and draft files. PNG rendering uses the optional Playwright package and a locally installed Chromium browser. When Playwright or Chromium is unavailable, the draft command reports the reason and keeps the Markdown/CSV drafts.
+The stable Gemini 3.6 Flash model is configured in `config.json`. Set `Content_Factory_Gemini_API_Key` in the environment of the process that runs the CLI; a Vercel project secret is not automatically exposed to a local shell. The key is sent only in the HTTPS request header and is never written to files or logs. Keep the key out of config and draft files. This is a local CLI package, not a deployed web endpoint. PNG rendering uses the optional Playwright package and a locally installed Chromium browser. When Playwright or Chromium is unavailable, the draft command reports the reason and keeps the Markdown/CSV drafts.
 
 ## Create and review drafts
 
