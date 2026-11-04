@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import { partnerCopy } from "@/lib/partnerCopy";
 import AppLink from "@/components/AppLink";
 
 
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -25,6 +27,9 @@ export default function Footer() {
           <AppLink placement="footer_1" href="https://alpine.masteryhub.se" className="transition hover:text-accent">
             {t("site.footerAlpineCta")}
           </AppLink>
+          <Link href={`/${locale}/partner`} className="transition hover:text-accent">
+            {partnerCopy[locale]?.footer}
+          </Link>
         </div>
       </div>
     </footer>
