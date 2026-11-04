@@ -87,7 +87,7 @@ export async function structuredCall<T>(
   const endpoint = new URL(
     `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(config.model)}:generateContent`,
   );
-  const response = await fetch(endpoint, {
+  const request: RequestInit = {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -114,7 +114,12 @@ export async function structuredCall<T>(
         maxOutputTokens: maxTokens,
       },
     }),
-  });
+  };
+  let response = await fetch(endpoint, request);
+  if (response.status === 503 && config.model !== "gemini-flash-latest") {
+    const fallback = new URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent");
+    response = await fetch(fallback, request);
+  }
   if (!response.ok) {
     throw new Error(`Gemini request failed with HTTP ${response.status}. Check the model, API key, and Gemini API access.`);
   }
