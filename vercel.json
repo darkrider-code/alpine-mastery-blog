@@ -1,0 +1,3 @@
+{
+  "buildCommand": "npm ci --prefix content-factory --include=dev && node content-factory/build-worker.mjs && npm run build"
+}
