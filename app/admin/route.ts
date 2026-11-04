@@ -4,6 +4,10 @@ import { promisify } from "node:util";
 import { cp, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import matter from "gray-matter";
+import { buildLink } from "../../content-factory/src/links";
+import type { Locale } from "../../content-factory/src/types";
+import config from "../../content-factory/config.json";
 import { adminPage } from "./view";
 
 export const runtime = "nodejs";
@@ -39,7 +43,16 @@ export async function POST(request:Request) {
   try { input = JSON.parse(raw); } catch { return json({error:"Ogiltiga uppgifter."},400); }
   if (!input || !locales.includes(input.locale)) return json({error:"Välj ett språk."},400);
   const {action,locale,slug,thread,channel} = input;
-  if (action === "reply" ? typeof thread !== "string" || !thread.trim() || !["reddit","facebook","x"].includes(channel) : !["draft","check"].includes(action) || !(await slugs()).includes(slug)) return json({error:"Kontrollera formuläret."},400);
+  if (action === "reply" ? typeof thread !== "string" || !thread.trim() || !["reddit","facebook","x"].includes(channel) : !["draft","check","excerpt"].includes(action) || !(await slugs()).includes(slug)) return json({error:"Kontrollera formuläret."},400);
+  if (action === "excerpt") {
+    const article = matter(await readFile(join(articles,slug,locale+".mdx"),"utf8"));
+    const description = article.data.description;
+    if (typeof description !== "string" || !description.trim()) return json({error:"Artikeln saknar en ingress."},422);
+    const language = locale as Locale;
+    const link = buildLink({ kind:"article",slug,locale:language,channel:"facebook" });
+    const text = [description.trim(),config.disclosures[language],link].join("\n\n");
+    return json({queue:[{slug,locale,channel:"facebook",status:"needs_review",output_file:"artikelutdrag.txt",text,link}],audit:{metod:"Artikelns egen ingress. Granska före användning.",artikel:slug,ingress:description}});
+  }
   const dir = await mkdtemp(join(tmpdir(),"alpine-admin-"));
   try {
     await Promise.all(["config.json","prompts"].map(name=>cp(join(factory,name),join(dir,name),{recursive:true})));
