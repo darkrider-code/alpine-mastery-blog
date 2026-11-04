@@ -9,6 +9,7 @@ interface InlineCTAProps {
   children?: React.ReactNode;
   className?: string;
   placement?: string;
+  campaign?: "partner";
 }
 
 function getProductUrls(product?: string) {
@@ -32,11 +33,11 @@ function getProductUrls(product?: string) {
   };
 }
 
-export default function InlineCTA({ product, url, text, children, className, placement = "inline" }: InlineCTAProps) {
+export default function InlineCTA({ product, url, text, children, className, placement = "inline", campaign }: InlineCTAProps) {
   const urls = getProductUrls(product);
   const targetUrl = url || urls.freeAnalysis;
   const content = text || children;
-  const href = useAppLink(targetUrl, placement);
+  const href = useAppLink(targetUrl, placement, campaign);
 
   return (
     <Link
