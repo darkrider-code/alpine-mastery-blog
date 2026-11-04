@@ -1,6 +1,6 @@
 # Alpine Mastery Content Factory
 
-This package creates reviewable social drafts and reply suggestions from the repository's local MDX articles. It never publishes, schedules, scrapes, or calls Reddit, Facebook, X, or Instagram. Model-backed commands send the selected article or pasted thread, together with the versioned prompt, to Anthropic.
+This package creates reviewable social drafts and reply suggestions from the repository's local MDX articles. It never publishes, schedules, scrapes, or calls Reddit, Facebook, X, or Instagram. Model-backed commands send the selected article or pasted thread, together with the versioned prompt, to the configured Gemini API.
 
 ## Setup
 
@@ -8,12 +8,12 @@ Run commands from this directory:
 
 ```powershell
 npm install
-$env:ANTHROPIC_API_KEY = "..."
+$env:Content_Factory_Gemini_API_Key = "..."
 npm run typecheck
 npm test
 ```
 
-The model is configured in `config.json`. Keep the API key in the environment; never put it in config or draft files. PNG rendering uses the optional Playwright package and a locally installed Chromium browser. When Playwright or Chromium is unavailable, the draft command reports the reason and keeps the Markdown/CSV drafts.
+The Gemini model is configured in `config.json`. Set `Content_Factory_Gemini_API_Key` in the environment where the CLI runs (or in the Vercel project environment if run there); the key is sent only in the HTTPS request header and is never written to files or logs. Keep the key out of config and draft files. PNG rendering uses the optional Playwright package and a locally installed Chromium browser. When Playwright or Chromium is unavailable, the draft command reports the reason and keeps the Markdown/CSV drafts.
 
 ## Create and review drafts
 

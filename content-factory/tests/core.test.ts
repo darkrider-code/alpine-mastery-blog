@@ -7,6 +7,7 @@ import { renderOutputs } from "../src/render.js";
 import { FACTORY_ROOT } from "../src/paths.js";
 import { formatFacebookPost, validateClaimShape, validateClaimsDocument, validateDraft, validateText, countXCharacters } from "../src/validation.js";
 import { containsPrice, containsSensitiveTopic } from "../src/reply.js";
+import { structuredCall, toGeminiSchema } from "../src/model.js";
 import type { AppConfig, DraftPayload } from "../src/types.js";
 
 const config: AppConfig = {
@@ -209,5 +210,68 @@ test("rendered social drafts include disclosures and keep the Facebook question 
     assert.equal(output.files["first_comment.md"].split(/\s+/u).length, 8);
   } finally {
     await rm(outputDirectory, { recursive: true, force: true });
+  }
+});
+
+test("Gemini structured calls use the configured environment key and return token usage", async () => {
+  const originalKey = process.env.Content_Factory_Gemini_API_Key;
+  const originalFetch = globalThis.fetch;
+  const secret = "local-test-secret";
+  process.env.Content_Factory_Gemini_API_Key = secret;
+  let requestUrl = "";
+  let requestInit: RequestInit | undefined;
+  globalThis.fetch = async (input, init) => {
+    requestUrl = String(input);
+    requestInit = init;
+    return new Response(JSON.stringify({
+      candidates: [{
+        content: {
+          parts: [{ functionCall: { name: "test_tool", args: { answer: "draft only" } } }],
+        },
+      }],
+      usageMetadata: { promptTokenCount: 123, candidatesTokenCount: 45 },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const result = await structuredCall<{ answer: string }>(
+      config,
+      "test_tool",
+      "Test structured output",
+      {
+        type: "object",
+        properties: {
+          answer: { type: "string" },
+          optional: { anyOf: [{ type: "string" }, { type: "null" }] },
+        },
+        required: ["answer"],
+      },
+      "System",
+      "Prompt",
+      120,
+    );
+    assert.equal(new URL(requestUrl).pathname, "/v1beta/models/test-model:generateContent");
+    const headers = new Headers(requestInit?.headers);
+    assert.equal(headers.get("x-goog-api-key"), secret);
+    assert.deepEqual(result, {
+      value: { answer: "draft only" },
+      usage: { input: 123, output: 45 },
+    });
+    const sentBody = JSON.parse(String(requestInit?.body)) as {
+      toolConfig: { functionCallingConfig: { mode: string; allowedFunctionNames: string[] } };
+      tools: Array<{ functionDeclarations: Array<{ parameters: Record<string, unknown> }> }>;
+    };
+    assert.equal(sentBody.toolConfig.functionCallingConfig.mode, "ANY");
+    assert.deepEqual(sentBody.toolConfig.functionCallingConfig.allowedFunctionNames, ["test_tool"]);
+    assert.deepEqual(toGeminiSchema({
+      type: "object",
+      properties: { optional: { anyOf: [{ type: "string" }, { type: "null" }] } },
+    }), {
+      type: "OBJECT",
+      properties: { optional: { type: "STRING", nullable: true } },
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalKey === undefined) delete process.env.Content_Factory_Gemini_API_Key;
+    else process.env.Content_Factory_Gemini_API_Key = originalKey;
   }
 });
