@@ -1,3 +1,4 @@
+import { partnerCopy } from "@/lib/partnerCopy";
 import BlogLink from "@/components/BlogLink";
 import type { Metadata } from "next";
 import BlogList from "@/components/BlogList";
@@ -130,6 +131,14 @@ export default async function HomePage({ params }: PageProps) {
             </BlogLink>
           </div>
         </div>
+      </section>
+
+      <section className="mb-10 rounded-2xl border border-border bg-bg-card p-6 sm:p-8" aria-labelledby="home-partner-title">
+        <h2 id="home-partner-title" className="text-2xl font-bold text-white">{partnerCopy[locale].title}</h2>
+        <p className="mt-3 text-text-secondary">{partnerCopy[locale].description}</p>
+        <BlogLink href={`/${locale}/partner`} className="mt-4 inline-block py-2 font-semibold text-accent underline underline-offset-4 hover:text-white">
+          {partnerCopy[locale].footer}
+        </BlogLink>
       </section>
 
       {locale === "sv" && <SkiGuides />}

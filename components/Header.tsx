@@ -1,4 +1,5 @@
 "use client";
+import { partnerCopy } from "@/lib/partnerCopy";
 import BlogLink from "@/components/BlogLink";
 
 
@@ -164,6 +165,13 @@ export default function Header({ articleLocales }: { articleLocales: Record<stri
             className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
           >
             {ambassadorLabel}
+          </BlogLink>
+          <BlogLink
+            href={`/${currentLocale}/partner`}
+            aria-current={pathname === `/${currentLocale}/partner` ? "page" : undefined}
+            className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 hover:text-white"
+          >
+            {partnerCopy[currentLocale].footer}
           </BlogLink>
           <LanguageSwitcher articleLocales={articleLocales} />
         </div>
