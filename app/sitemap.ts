@@ -5,7 +5,7 @@ import { SUPPORTED_LOCALES } from "@/lib/translations";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://blog.masteryhub.se";
   const pages: MetadataRoute.Sitemap = SUPPORTED_LOCALES.flatMap((locale) =>
-    ["", "/ai-skidanalys", "/klubbpaket", "/ambassador"].map((route) => ({
+    ["", "/ai-skidanalys", "/klubbpaket", "/ambassador", "/partner"].map((route) => ({
       url: baseUrl + "/" + locale + route,
     }))
   );

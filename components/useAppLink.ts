@@ -3,9 +3,9 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "./LanguageProvider";
 import { useCampaignSearch } from "./useCampaignSearch";
 import { buildAppLink } from "@/lib/appLinks";
-export function useAppLink(base: string, placement: string) {
+export function useAppLink(base: string, placement: string, campaign?: "partner") {
  const pathname = usePathname();
  const { locale } = useLanguage();
  const search = useCampaignSearch();
- return buildAppLink(base, { search, locale, slug: pathname.split("/").slice(2).join("/") || "index", placement });
+ return buildAppLink(base, { search, locale, slug: pathname.split("/").slice(2).join("/") || "index", placement, campaign });
 }
