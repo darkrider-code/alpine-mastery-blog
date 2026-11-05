@@ -30,8 +30,8 @@ export interface PartnerCopy {
 }
 export const partnerCopy: Record<string, PartnerCopy> = {
   "sv": {
-    "title": "Feedback mellan skidlektionerna",
-    "description": "För skidlärare, skidskolor, lägerarrangörer och privata tränare som vill hjälpa eleverna att ta nästa steg mellan lektionerna.",
+    "title": "Videoanalys för skidlärare och skidskolor",
+    "description": "Hjälp eleverna att utveckla sin skidteknik mellan lektioner och skidläger. Videoanalys från mobilfilm med ett tydligt fokus och en övning. Första analysen gratis.",
     "problem": "Under en lektion får varje elev bara några minuters egen uppmärksamhet. Eleven kan inte heller se sin egen åkning. En kort film ger er något konkret att återkomma till.",
     "workflowTitle": "Från film till nästa lektion",
     "steps": [
@@ -72,8 +72,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "en": {
-    "title": "Feedback between ski lessons",
-    "description": "For ski instructors, ski schools, camp organisers and private coaches who want to help students progress between lessons.",
+    "title": "Ski video analysis for instructors and ski schools",
+    "description": "Help students improve their ski technique between lessons and ski camps. Phone video feedback with one clear focus and an exercise. First analysis free.",
     "problem": "During a lesson, each student gets only a few minutes of individual attention. Students cannot see their own skiing either. A short video gives you something concrete to revisit.",
     "workflowTitle": "From a video to the next lesson",
     "steps": [
@@ -114,8 +114,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "no": {
-    "title": "Tilbakemelding mellom skitimene",
-    "description": "For skiinstruktører, skiskoler, leirarrangører og private trenere som vil hjelpe elevene videre mellom timene.",
+    "title": "Videoanalyse for skiinstruktører og skiskoler",
+    "description": "Hjelp elevene med skiteknikken mellom skitimer og skileirer. Videoanalyse fra mobilfilm med ett tydelig fokus og en øvelse. Første analyse er gratis.",
     "problem": "I løpet av en skitime får hver elev bare noen få minutter med individuell oppmerksomhet. Eleven kan heller ikke se sin egen kjøring. En kort video gir dere noe konkret å komme tilbake til.",
     "workflowTitle": "Fra video til neste skitime",
     "steps": [
@@ -156,8 +156,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "da": {
-    "title": "Feedback mellem skilektionerne",
-    "description": "For skiinstruktører, skiskoler, lejrarrangører og private trænere, der vil hjælpe eleverne videre mellem lektionerne.",
+    "title": "Videoanalyse til skiinstruktører og skiskoler",
+    "description": "Hjælp eleverne med skiteknikken mellem skilektioner og skicamps. Videoanalyse af mobilvideo med ét tydeligt fokus og en øvelse. Første analyse er gratis.",
     "problem": "I en skilektion får hver elev kun få minutters individuel opmærksomhed. Eleven kan heller ikke se sit eget skiløb. En kort video giver jer noget konkret at vende tilbage til.",
     "workflowTitle": "Fra video til næste lektion",
     "steps": [
@@ -198,8 +198,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "fi": {
-    "title": "Palautetta hiihtotuntien välille",
-    "description": "Hiihdonopettajille, hiihtokouluille, leirijärjestäjille ja yksityisvalmentajille, jotka haluavat tukea oppilaiden kehitystä tuntien välillä.",
+    "title": "Laskettelun videoanalyysi hiihdonopettajille ja hiihtokouluille",
+    "description": "Tue oppilaiden laskutekniikkaa oppituntien ja lasketteluleirien välillä. Puhelinvideosta yksi selkeä kehityskohde ja harjoitus. Ensimmäinen analyysi on ilmainen.",
     "problem": "Tunnilla jokainen oppilas saa vain muutaman minuutin henkilökohtaista huomiota. Oppilas ei myöskään näe omaa laskemistaan. Lyhyt video antaa teille konkreettisen lähtökohdan seuraavaan keskusteluun.",
     "workflowTitle": "Videolta seuraavalle tunnille",
     "steps": [
@@ -240,8 +240,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "de": {
-    "title": "Feedback zwischen den Skistunden",
-    "description": "Für Skilehrer, Skischulen, Camp-Veranstalter und private Trainer, die ihre Schüler zwischen den Unterrichtsstunden begleiten möchten.",
+    "title": "Ski-Videoanalyse für Skilehrer und Skischulen",
+    "description": "Begleite deine Schüler zwischen Skistunden und Skicamps. Feedback zum Handyvideo mit einem klaren Technikfokus und einer Übung. Die erste Analyse ist kostenlos.",
     "problem": "In einer Skistunde bekommt jeder Schüler nur wenige Minuten individuelle Aufmerksamkeit. Die eigene Fahrt kann der Schüler dabei nicht sehen. Ein kurzes Video gibt euch etwas Konkretes, auf das ihr zurückkommen könnt.",
     "workflowTitle": "Vom Video zur nächsten Skistunde",
     "steps": [
@@ -282,8 +282,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "fr": {
-    "title": "Un retour entre les cours de ski",
-    "description": "Pour les moniteurs, les écoles de ski, les organisateurs de stages et les entraîneurs privés qui souhaitent accompagner leurs élèves entre les cours.",
+    "title": "Analyse vidéo de ski pour moniteurs et écoles de ski",
+    "description": "Aide tes élèves à progresser entre les cours et les stages de ski. Une vidéo, un point technique précis et un exercice. La première analyse est gratuite.",
     "problem": "Pendant un cours, chaque élève ne bénéficie que de quelques minutes d’attention individuelle. Il ne peut pas non plus voir sa propre façon de skier. Une courte vidéo vous donne un support concret à reprendre ensemble.",
     "workflowTitle": "De la vidéo au prochain cours",
     "steps": [
@@ -324,8 +324,8 @@ export const partnerCopy: Record<string, PartnerCopy> = {
     }
   },
   "nl": {
-    "title": "Feedback tussen de skilessen",
-    "description": "Voor skileraren, skischolen, organisatoren van skikampen en privétrainers die hun leerlingen tussen de lessen willen begeleiden.",
+    "title": "Videoanalyse voor skileraren en skischolen",
+    "description": "Help je leerlingen met hun skitechniek tussen skilessen en skikampen. Feedback op een telefoonvideo met één aandachtspunt en oefening. Eerste analyse gratis.",
     "problem": "Tijdens een les krijgt elke leerling maar een paar minuten individuele aandacht. Een leerling kan bovendien het eigen skiën niet zien. Een korte video geeft jullie iets concreets om op terug te komen.",
     "workflowTitle": "Van video naar de volgende les",
     "steps": [

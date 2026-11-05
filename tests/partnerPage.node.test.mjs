@@ -72,7 +72,7 @@ test("partner metadata matches the club SEO contract for each locale",async()=>{
   }
 });
 
-test("new partner UI centralizes app URLs and adds only footer navigation",async()=>{
+test("partner UI centralizes app URLs and retains footer navigation",async()=>{
   for(const filename of ["app/[locale]/partner/page.tsx","components/PartnerLinkGenerator.tsx","lib/partnerCopy.ts"]){
     const source=await readFile(resolve(filename),"utf8");
     assert.ok(!/https:\/\/alpine\.masteryhub\.se/.test(source),filename);
@@ -84,4 +84,23 @@ test("new partner UI centralizes app URLs and adds only footer navigation",async
   assert.ok(footer.includes("partnerCopy[locale]?.footer"));
   const sitemap=await readFile(resolve("app/sitemap.ts"),"utf8");
   assert.ok(sitemap.includes('"/partner"'));
+});
+
+test("header exposes a crawlable, localized partner link with current-page state", async () => {
+  for (const locale of locales) {
+    const anchor = ({children, placement, ...props}) => React.createElement("a", {...props, "data-placement": placement}, children);
+    const header = await compile("components/Header.tsx", {
+      ...shared,
+      "@/components/BlogLink": anchor,
+      "@/components/AppLink": anchor,
+      "@/components/LanguageSwitcher": () => null,
+      "@/components/LanguageProvider": {useLanguage: () => ({t: key => key})},
+      "@/lib/translations": {SUPPORTED_LOCALES: locales, DEFAULT_LOCALE: "sv", getTranslationForLocale: () => "Navigation"},
+      "next/navigation": {usePathname: () => `/${locale}/partner`},
+    });
+    const html = renderToStaticMarkup(React.createElement(header.default, {articleLocales: {}}));
+    const expected = renderToStaticMarkup(React.createElement("span", null, partnerCopy[locale].footer)).slice(6, -7);
+    assert.ok(html.includes(`href="/${locale}/partner" aria-current="page"`), locale);
+    assert.ok(html.includes(expected), locale);
+  }
 });
