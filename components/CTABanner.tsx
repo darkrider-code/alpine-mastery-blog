@@ -27,7 +27,7 @@ function getProductUrls(product?: string) {
 
   return {
     freeAnalysis: "https://alpine.masteryhub.se/free-analysis",
-    createAccount: "https://alpine.masteryhub.se/auth?redirect=/membership/checkout?cycle=monthly",
+    createAccount: "https://alpine.masteryhub.se/auth?mode=signup&redirect=%2Fmember",
   };
 }
 

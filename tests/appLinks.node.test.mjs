@@ -11,8 +11,19 @@ test("blog links preserve original campaign and account redirect", () => {
     assert.equal(url.searchParams.get("lang"), locale);
     assert.equal(url.searchParams.get("blog_slug"), "feedback");
     assert.equal(url.searchParams.get("redirect"), "/membership/checkout?cycle=monthly");
+    assert.equal(url.searchParams.get("checkout"), "true");
+    assert.equal(url.searchParams.get("mode"), "signup");
     assert.equal(url.searchParams.get("email"), null);
   }
+});
+test("free account and other products never opt into Alpine checkout", () => {
+  for (const base of ["https://alpine.masteryhub.se/auth?redirect=%2Fmember", "https://run.masteryhub.se/auth"]) {
+    const url = new URL(buildAppLink(base, { search: "", locale: "sv", slug: "index", placement: "banner_account" }));
+    assert.equal(url.searchParams.has("checkout"), false);
+  }
+  const yearly = new URL(buildAppLink("https://alpine.masteryhub.se/auth?redirect="+encodeURIComponent("/membership/checkout?cycle=yearly&coupon=WINTER"), { search: "", locale: "sv", slug: "index", placement: "inline" }));
+  assert.equal(yearly.searchParams.get("redirect"), "/membership/checkout?cycle=yearly&coupon=WINTER");
+  assert.equal(yearly.searchParams.get("checkout"), "true");
 });
 test("fallback and remembered campaign retain only allowed parameters", () => {
   assert.equal(campaignSearch("?email=private&utm_content=adult"), "utm_content=adult");

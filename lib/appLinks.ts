@@ -8,6 +8,15 @@ export function campaignSearch(search: string): string {
 export function buildAppLink(base: string, context: { search: string; locale: string; slug: string; placement: string; campaign?: "partner" }): string {
   const url = new URL(base);
   if (url.protocol !== "https:") return base;
+  // A checkout destination is an explicit plan choice. Keep that choice after auth.
+  if (url.hostname === "alpine.masteryhub.se" && url.pathname === "/auth") {
+    url.searchParams.set("mode", "signup");
+    const target = url.searchParams.get("redirect");
+    if (target && new URL(target, url.origin).origin === url.origin &&
+        new URL(target, url.origin).pathname === "/membership/checkout") {
+      url.searchParams.set("checkout", "true");
+    }
+  }
   const incoming = new URLSearchParams(context.search);
   for (const key of CAMPAIGN_KEYS) { const value = incoming.get(key); if (value) url.searchParams.set(key, value.slice(0, 200)); }
   if (context.campaign === "partner") {

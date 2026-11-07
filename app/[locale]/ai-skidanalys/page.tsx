@@ -9,7 +9,7 @@ import { SUPPORTED_LOCALES } from "@/lib/translations";
 
 const productUrls = {
   freeAnalysis: "https://alpine.masteryhub.se/free-analysis",
-  createAccount: "https://alpine.masteryhub.se/auth?redirect=/membership/checkout?cycle=monthly",
+  createAccount: "https://alpine.masteryhub.se/auth?mode=signup&redirect=%2Ffamily",
 };
 
 interface LocaleCopy {
@@ -94,7 +94,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery använder avancerad AI för att analysera din skidteknik bild för bild – kantvinkel, tryckfördelning, timing och linjeval. Perfekt för skidåkare, tränare och klubbar.",
     howBody2:
-      "Alpine Mastery använder AI för att analysera din skidteknik från en kort video. Ladda upp ett klipp, få en personlig analys inom sekunder – med förbättringstips, övningar och betyg. Testa gratis.",
+      "Alpine Mastery använder AI för att analysera din skidteknik från en kort video. Ladda upp ett klipp, få en personlig analys – med förbättringstips, övningar och betyg. Testa gratis.",
     demoHeading: "Se en riktig analys",
     demoSubtext: "En komplett AI-rapport från en riktig åkare – ingen inloggning krävs.",
     demoLabel: "Demo",
@@ -134,7 +134,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Direkt AI-skidanalys",
-        text: "Få en personlig skidanalys inom sekunder med förbättringstips, övningar och betyg på din teknik.",
+        text: "Få en personlig skidanalys med förbättringstips, övningar och betyg på din teknik.",
       },
       {
         title: "Begär coachgranskning",
@@ -246,7 +246,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery uses advanced AI to analyze your ski technique frame by frame – edge angle, pressure distribution, timing, and line choice. Perfect for skiers, coaches, and clubs.",
     howBody2:
-      "Alpine Mastery uses AI to analyze your ski technique from a short video. Upload a clip, get a personal analysis in seconds – with improvement tips, drills, and a score. Try it for free.",
+      "Alpine Mastery uses AI to analyze your ski technique from a short video. Upload a clip, get a personal analysis – with improvement tips, drills, and a score. Try it for free.",
     demoHeading: "See a real analysis",
     demoSubtext: "A complete AI report from a real skier – no login required.",
     demoLabel: "Demo",
@@ -286,7 +286,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Instant AI ski analysis",
-        text: "Get a personal ski analysis in seconds with improvement tips, drills, and a score for your technique.",
+        text: "Get a personal ski analysis with improvement tips, drills, and a score for your technique.",
       },
       {
         title: "Request coach review",
@@ -398,7 +398,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery bruker avansert AI for å analysere skiteknikken din bilde for bilde – kantvinkel, trykkfordeling, timing og linjeføring. Perfekt for skiløpere, trenere og klubber.",
     howBody2:
-      "Alpine Mastery bruker AI for å analysere skiteknikken din fra en kort video. Last opp et klipp, få en personlig analyse i sekunder – med forbedringstips, øvelser og vurdering. Prøv gratis.",
+      "Alpine Mastery bruker AI for å analysere skiteknikken din fra en kort video. Last opp et klipp, få en personlig analyse – med forbedringstips, øvelser og vurdering. Prøv gratis.",
     demoHeading: "Se en ekte analyse",
     demoSubtext: "En komplett AI-rapport fra en ekte skiløper – ingen innlogging kreves.",
     demoLabel: "Demo",
@@ -438,7 +438,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Direkte AI-skiteknikanalyse",
-        text: "Få en personlig skiteknikanalyse i sekunder med forbedringstips, øvelser og vurdering av teknikken din.",
+        text: "Få en personlig skiteknikanalyse med forbedringstips, øvelser og vurdering av teknikken din.",
       },
       {
         title: "Be om trenergranskning",
@@ -550,7 +550,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery bruger avanceret AI til at analysere din skidteknik billede for billede – kantvinkel, trykfordeling, timing og linjeføring. Perfekt til skiløbere, trænere og klubber.",
     howBody2:
-      "Alpine Mastery bruger AI til at analysere din skidteknik fra en kort video. Upload et klip, få en personlig analyse inden for sekunder – med forbedringstips, øvelser og karakter. Test gratis.",
+      "Alpine Mastery bruger AI til at analysere din skidteknik fra en kort video. Upload et klip, få en personlig analyse – med forbedringstips, øvelser og karakter. Test gratis.",
     demoHeading: "Se en rigtig analyse",
     demoSubtext: "En komplet AI-rapport fra en rigtig skiløber – ingen login kræves.",
     demoLabel: "Demo",
@@ -590,7 +590,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Øjeblikkelig AI-skidteknikanalyse",
-        text: "Få en personlig skianalyse inden for sekunder med forbedringstips, øvelser og en karakter for din teknik.",
+        text: "Få en personlig skianalyse med forbedringstips, øvelser og en karakter for din teknik.",
       },
       {
         title: "Anmod om trænergennemgang",
@@ -702,7 +702,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery käyttää kehittynyttä tekoälyä laskutekniikkasi analysointiin kuva kuv alta – kanttikulma, painonjakauma, ajoitus ja linjanvalinta. Täydellinen laskijoille, valmentajille ja seuroille.",
     howBody2:
-      "Alpine Mastery käyttää tekoälyä laskutekniikkasi analysointiin lyhyestä videosta. Lataa pätkä, saat henkilökohtaisen analyysin sekunneissa – parannusvinkkejä, harjoitteita ja arvosanan. Kokeile ilmaiseksi.",
+      "Alpine Mastery käyttää tekoälyä laskutekniikkasi analysointiin lyhyestä videosta. Lataa pätkä, saat henkilökohtaisen analyysin – parannusvinkkejä, harjoitteita ja arvosanan. Kokeile ilmaiseksi.",
     demoHeading: "Katso oikea analyysi",
     demoSubtext: "Täydellinen tekoälyraportti oikealta laskijalta – kirjautumista ei tarvita.",
     demoLabel: "Demo",
@@ -742,7 +742,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Välitön tekoälyanalyysi",
-        text: "Saat henkilökohtaisen laskuanalyysin sekunneissa parannusvinkkeineen, harjoitteineen ja arvosanoineen tekniikastasi.",
+        text: "Saat henkilökohtaisen laskuanalyysin parannusvinkkeineen, harjoitteineen ja arvosanoineen tekniikastasi.",
       },
       {
         title: "Pyydä valmentajan arvio",
@@ -854,7 +854,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery nutzt fortschrittliche KI, um deine Skitechnik Bild für Bild zu analysieren – Kantenwinkel, Druckverteilung, Timing und Linienwahl. Perfekt für Skifahrer, Trainer und Vereine.",
     howBody2:
-      "Alpine Mastery nutzt KI, um deine Skitechnik aus einem kurzen Video zu analysieren. Lade einen Clip hoch und erhalte in Sekunden eine persönliche Analyse – mit Verbesserungstipps, Übungen und Bewertung. Teste es kostenlos.",
+      "Alpine Mastery nutzt KI, um deine Skitechnik aus einem kurzen Video zu analysieren. Lade einen Clip hoch und erhalte eine persönliche Analyse – mit Verbesserungstipps, Übungen und Bewertung. Teste es kostenlos.",
     demoHeading: "Sieh dir eine echte Analyse an",
     demoSubtext: "Ein vollständiger KI-Bericht eines echten Skifahrers – keine Anmeldung erforderlich.",
     demoLabel: "Demo",
@@ -894,7 +894,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Sofortige KI-Skianalyse",
-        text: "Erhalte in Sekunden eine persönliche Skianalyse mit Verbesserungstipps, Übungen und einer Bewertung deiner Technik.",
+        text: "Erhalte eine persönliche Skianalyse mit Verbesserungstipps, Übungen und einer Bewertung deiner Technik.",
       },
       {
         title: "Coach-Überprüfung anfordern",
@@ -1006,7 +1006,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery utilise une IA avancée pour analyser ta technique de ski image par image – angle de carre, répartition de la pression, timing et choix de ligne. Parfait pour les skieurs, entraîneurs et clubs.",
     howBody2:
-      "Alpine Mastery utilise l’IA pour analyser ta technique de ski à partir d’une courte vidéo. Télécharge une séquence, obtiens une analyse personnelle en quelques secondes – avec conseils d’amélioration, exercices et note. Essaie gratuitement.",
+      "Alpine Mastery utilise l’IA pour analyser ta technique de ski à partir d’une courte vidéo. Télécharge une séquence, obtiens une analyse personnelle – avec conseils d’amélioration, exercices et note. Essaie gratuitement.",
     demoHeading: "Voir une vraie analyse",
     demoSubtext: "Un rapport IA complet d’un vrai skieur – sans connexion requise.",
     demoLabel: "Démo",
@@ -1046,7 +1046,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Analyse IA instantanée",
-        text: "Reçois une analyse personnelle de ta technique en quelques secondes avec conseils d’amélioration, exercices et note.",
+        text: "Reçois une analyse personnelle de ta technique avec conseils d’amélioration, exercices et note.",
       },
       {
         title: "Demander un examen par un coach",
@@ -1158,7 +1158,7 @@ const localeContent: Record<string, LocaleCopy> = {
     howBody1:
       "Alpine Mastery gebruikt geavanceerde AI om je skitechniek beeld voor beeld te analyseren – kantangle, drukverdeling, timing en lijnkeuze. Perfect voor skiërs, coaches en clubs.",
     howBody2:
-      "Alpine Mastery gebruikt AI om je skitechniek uit een korte video te analyseren. Upload een filmpje, ontvang binnen seconden een persoonlijke analyse – met verbeteringssuggesties, oefeningen en score. Probeer gratis.",
+      "Alpine Mastery gebruikt AI om je skitechniek uit een korte video te analyseren. Upload een filmpje, ontvang een persoonlijke analyse – met verbeteringssuggesties, oefeningen en score. Probeer gratis.",
     demoHeading: "Bekijk een echte analyse",
     demoSubtext: "Een compleet AI-rapport van een echte skiër – geen login vereist.",
     demoLabel: "Demo",
@@ -1198,7 +1198,7 @@ const localeContent: Record<string, LocaleCopy> = {
       },
       {
         title: "Directe AI-skitechniekanalyse",
-        text: "Krijg binnen seconden een persoonlijke skianalyse met verbeteringssuggesties, oefeningen en een score voor je techniek.",
+        text: "Krijg een persoonlijke skianalyse met verbeteringssuggesties, oefeningen en een score voor je techniek.",
       },
       {
         title: "Vraag coachreview aan",

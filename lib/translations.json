@@ -25,7 +25,7 @@
       "blog": "Blogg",
       "noPosts": "Inga artiklar i denna kategori ännu.",
       "ctaBannerTitle": "Tillämpa tekniken direkt",
-      "ctaBannerDescription": "Ladda upp ett klipp och få AI-analys av din teknik på under 2 minuter."
+      "ctaBannerDescription": "Ladda upp en kort skidfilm, även från förra säsongen. Få personlig teknikfeedback och en övning till nästa åk. Första analysen är gratis, utan kort."
     },
     "categories": {
       "Technique": "Teknik",
@@ -62,7 +62,7 @@
       "blog": "Blog",
       "noPosts": "No articles in this category yet.",
       "ctaBannerTitle": "Apply the technique directly",
-      "ctaBannerDescription": "Upload a clip and get AI analysis of your technique in under 2 minutes."
+      "ctaBannerDescription": "Upload a short ski video, including one from last season. Get personal technique feedback and a drill for your next run. First analysis free, no card needed."
     },
     "categories": {
       "Technique": "Technique",
@@ -99,7 +99,7 @@
       "blog": "Blogg",
       "noPosts": "Ingen artikler i denne kategorien ennå.",
       "ctaBannerTitle": "Bruk teknikken direkte",
-      "ctaBannerDescription": "Last opp en klipp og få AI-analyse av teknikken din på under 2 minutter."
+      "ctaBannerDescription": "Last opp en kort skifilm, gjerne fra forrige sesong. Få personlig tilbakemelding og en øvelse til neste tur. Første analyse er gratis, uten kort."
     },
     "categories": {
       "Technique": "Teknikk",
@@ -136,7 +136,7 @@
       "blog": "Blog",
       "noPosts": "Ingen artikler i denne kategori endnu.",
       "ctaBannerTitle": "Brug teknikken direkte",
-      "ctaBannerDescription": "Upload et klip og få AI-analyse af din teknik på under 2 minutter."
+      "ctaBannerDescription": "Upload en kort skifilm, gerne fra sidste sæson. Få personlig teknikfeedback og en øvelse til næste tur. Første analyse er gratis, uden kort."
     },
     "categories": {
       "Technique": "Teknik",
@@ -173,7 +173,7 @@
       "blog": "Blogi",
       "noPosts": "Ei artikkeleita tässä kategoriassa vielä.",
       "ctaBannerTitle": "Käytä tekniikkaa suoraan",
-      "ctaBannerDescription": "Lataa video ja saat AI-analyysin tekniikastasi alle 2 minuutissa."
+      "ctaBannerDescription": "Lataa lyhyt laskuvideo, vaikka viime kaudelta. Saat henkilökohtaista tekniikkapalautetta ja harjoitteen seuraavaan laskuun. Ensimmäinen analyysi on ilmainen ilman maksukorttia."
     },
     "categories": {
       "Technique": "Tekniikka",
@@ -210,7 +210,7 @@
       "blog": "Blog",
       "noPosts": "Noch keine Artikel in dieser Kategorie.",
       "ctaBannerTitle": "Technik direkt anwenden",
-      "ctaBannerDescription": "Laden Sie ein Video hoch und erhalten Sie eine KI-Analyse Ihrer Technik in unter 2 Minuten."
+      "ctaBannerDescription": "Lade ein kurzes Skivideo hoch, auch aus der letzten Saison. Erhalte persönliches Technikfeedback und eine Übung für die nächste Abfahrt. Erste Analyse kostenlos, ohne Kreditkarte."
     },
     "categories": {
       "Technique": "Technik",
@@ -247,7 +247,7 @@
       "blog": "Blog",
       "noPosts": "Aucun article dans cette catégorie pour l'instant.",
       "ctaBannerTitle": "Appliquer la technique directement",
-      "ctaBannerDescription": "Téléchargez une vidéo et obtenez une analyse IA de votre technique en moins de 2 minutes."
+      "ctaBannerDescription": "Importez une courte vidéo de ski, même de la saison précédente. Recevez un retour technique personnalisé et un exercice pour la prochaine descente. Première analyse gratuite, sans carte."
     },
     "categories": {
       "Technique": "Technique",
@@ -284,7 +284,7 @@
       "blog": "Blog",
       "noPosts": "Nog geen artikelen in deze categorie.",
       "ctaBannerTitle": "Pas de techniek direct toe",
-      "ctaBannerDescription": "Upload een video en krijg AI-analyse van je techniek in minder dan 2 minuten."
+      "ctaBannerDescription": "Upload een korte skivideo, ook van vorig seizoen. Krijg persoonlijke techniekfeedback en een oefening voor je volgende afdaling. Eerste analyse gratis, zonder betaalkaart."
     },
     "categories": {
       "Technique": "Techniek",

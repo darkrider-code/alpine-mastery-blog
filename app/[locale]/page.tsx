@@ -1,3 +1,4 @@
+import { individualCopy } from "@/lib/individualCopy";
 import { partnerCopy } from "@/lib/partnerCopy";
 import BlogLink from "@/components/BlogLink";
 import type { Metadata } from "next";
@@ -64,50 +65,9 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   const posts = getAllPosts(locale);
 
-  const aiSkidanalysCopy: Record<string, { title: string; description: string; cta: string }> = {
-    sv: {
-      title: "Personlig feedback på din skidteknik",
-      description: "Filma ett åk, förstå vad du kan förbättra och ta med ett tydligt fokus till nästa dag i backen. Prova en gratis videoanalys.",
-      cta: "Prova AI-skidanalys →",
-    },
-    en: {
-      title: "AI Ski Analysis – Master the mountain with AI",
-      description: "Upload a clip and get personalized AI analysis of your ski technique within seconds. Perfect for skiers, coaches, and clubs.",
-      cta: "Try AI ski analysis →",
-    },
-    no: {
-      title: "AI-skiteknikanalyse – Mester fjellet med AI",
-      description: "Last opp et klipp og få personlig AI-analyse av skiteknikken din i løpet av sekunder. Perfekt for skiløpere, trenere og klubber.",
-      cta: "Prøv AI-skiteknikanalyse →",
-    },
-    da: {
-      title: "AI-skidteknikanalyse – Mester bjerget med AI",
-      description: "Upload et klip og få personlig AI-analyse af din skidteknik inden for sekunder. Perfekt til skiløbere, trænere og klubber.",
-      cta: "Prøv AI-skidteknikanalyse →",
-    },
-    fi: {
-      title: "Tekoälypohjainen laskuanalyysi – Hallitse rinne tekoälyn avulla",
-      description: "Lataa pätkä ja saat henkilökohtaisen tekoälyanalyysin laskutekniikastasi sekunneissa. Täydellinen laskijoille, valmentajille ja seuroille.",
-      cta: "Kokeile tekoälyanalyysiä →",
-    },
-    de: {
-      title: "KI-Skianalyse – Meistere den Berg mit KI",
-      description: "Lade einen Clip hoch und erhalte in Sekunden eine persönliche KI-Analyse deiner Skitechnik. Perfekt für Skifahrer, Trainer und Vereine.",
-      cta: "KI-Skianalyse testen →",
-    },
-    fr: {
-      title: "Analyse IA du ski – Maîtrise la montagne avec l'IA",
-      description: "Télécharge une séquence et obtiens une analyse IA personnelle de ta technique de ski en quelques secondes. Parfait pour les skieurs, entraîneurs et clubs.",
-      cta: "Essayer l'analyse IA →",
-    },
-    nl: {
-      title: "AI-skitechniekanalyse – Beheers de berg met AI",
-      description: "Upload een filmpje en ontvang binnen seconden een persoonlijke AI-analyse van je skitechniek. Perfect voor skiërs, coaches en clubs.",
-      cta: "Probeer AI-skianalyse →",
-    },
-  };
-
-  const copy = aiSkidanalysCopy[locale] ?? aiSkidanalysCopy.sv;
+  const intro = individualCopy(locale);
+  const copy = { title: intro.title, description: intro.body,
+    cta: getTranslationForLocale(locale, "site.ctaPrimary") ?? "Try a free analysis" };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
