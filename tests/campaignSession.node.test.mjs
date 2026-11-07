@@ -10,7 +10,7 @@ function assertHandoff(search,locale="nl"){
  const url=new URL(buildAppLink("https://alpine.masteryhub.se/free-analysis",{search,locale,slug:"ai-skidanalys",placement:"header_mobile"}));
  for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) assert.equal(url.searchParams.get(key),new URLSearchParams(campaign).get(key));
  assert.equal(url.searchParams.get("blog_slug"),"ai-skidanalys");assert.equal(url.searchParams.get("blog_placement"),"header_mobile");
- assert.equal(url.searchParams.get("blog_locale"),locale);assert.equal(url.searchParams.get("lang"),locale);assert.equal(url.searchParams.get("email"),null);
+ assert.equal(url.searchParams.get("blog_locale"),locale);assert.equal(url.searchParams.get("lang"),locale === "nl" ? "en" : locale);assert.equal(url.searchParams.get("email"),null);
 }
 test("URL acquisition is available before storage and is persisted when permitted",()=>{
  const store=memoryStorage(),session=createCampaignSession();let reads=0;
@@ -53,3 +53,4 @@ test("actual language persistence effect retains document locale when localStora
   assert.doesNotThrow(()=>exports.run());assert.equal(document.documentElement.lang,"nl");if(!blocked) assert.equal(values.get("alpine-mastery-language"),"nl");
  }
 });
+

@@ -7,6 +7,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = SUPPORTED_LOCALES.flatMap((locale) =>
     ["", "/ai-skidanalys", "/klubbpaket", "/ambassador", "/partner"].map((route) => ({
       url: baseUrl + "/" + locale + route,
+      alternates: {
+        languages: {
+          ...Object.fromEntries(SUPPORTED_LOCALES.map((language) => [language, baseUrl + "/" + language + route])),
+          "x-default": baseUrl + "/sv" + route,
+        },
+      },
     }))
   );
   const articles: MetadataRoute.Sitemap = getAllSlugs().flatMap((slug) => {
@@ -24,3 +30,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Only canonical pages; omit the root redirect and invented deployment dates.
   return [...pages, ...articles];
 }
+
