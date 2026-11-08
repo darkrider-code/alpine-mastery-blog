@@ -46,9 +46,9 @@ test("all locales use the required currency mapping and both billing periods", (
   assert.match(pricing.formatClubPrice("small", "monthly", "en"), /\$/);
 });
 
-test("unlimited keeps volume pricing text separate from its translated base price", async () => {
+test("unlimited shows fixed-price copy separately from its translated base price", async () => {
   const source = await readFile(resolve("components/ClubPricing.tsx"), "utf8");
-  assert.match(source, /plan\.id === "unlimited" \? contactVolume/);
+  assert.match(source, /plan\.id === "unlimited" \? fixedPrice/);
   assert.match(source, /formatClubPrice\(plan\.id, period, locale\)/);
   assert.match(source, /formatClubPerSkier\(plan\.id, period, locale\)/);
 });

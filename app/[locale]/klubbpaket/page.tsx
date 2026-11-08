@@ -34,7 +34,7 @@ interface LocaleCopy {
   billingMonthly: string;
   billingYearly: string;
   saveBadge: string;
-  contactVolume: string;
+  fixedPrice: string;
   plans: {
     id: "small" | "pro" | "unlimited";
     name: string;
@@ -101,7 +101,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månadsvis",
     billingYearly: "Årsvis",
     saveBadge: "Spara 50%",
-    contactVolume: "Kontakta oss för volympris",
+    fixedPrice: "Fast pris för obegränsat antal åkare",
     plans: [
       {
         id: "small",
@@ -250,7 +250,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monthly",
     billingYearly: "Yearly",
     saveBadge: "Save 50%",
-    contactVolume: "Contact for volume pricing",
+    fixedPrice: "Fixed price for unlimited athletes",
     plans: [
       {
         id: "small",
@@ -395,7 +395,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedlig",
     billingYearly: "Årlig",
     saveBadge: "Spar 50%",
-    contactVolume: "Kontakt oss for volumpris",
+    fixedPrice: "Fast pris for ubegrenset antall løpere",
     plans: [
       {
         id: "small",
@@ -544,7 +544,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedligt",
     billingYearly: "Årligt",
     saveBadge: "Spar 50%",
-    contactVolume: "Kontakt os for volumenpris",
+    fixedPrice: "Fast pris for ubegrænset antal atleter",
     plans: [
       {
         id: "small",
@@ -693,7 +693,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Kuukausittain",
     billingYearly: "Vuosittain",
     saveBadge: "Säästä 50%",
-    contactVolume: "Ota yhteyttä volyymihinnoittelua varten",
+    fixedPrice: "Kiinteä hinta rajattomalle määrälle urheilijoita",
     plans: [
       {
         id: "small",
@@ -842,7 +842,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monatlich",
     billingYearly: "Jährlich",
     saveBadge: "50 % sparen",
-    contactVolume: "Kontakt für Mengenrabatte",
+    fixedPrice: "Festpreis für unbegrenzt viele Athleten",
     plans: [
       {
         id: "small",
@@ -991,7 +991,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Mensuel",
     billingYearly: "Annuel",
     saveBadge: "Économisez 50%",
-    contactVolume: "Contactez-nous pour un tarif de volume",
+    fixedPrice: "Prix fixe pour un nombre illimité d’athlètes",
     plans: [
       {
         id: "small",
@@ -1140,7 +1140,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Maandelijks",
     billingYearly: "Jaarlijks",
     saveBadge: "Bespaar 50%",
-    contactVolume: "Neem contact op voor volume prijzen",
+    fixedPrice: "Vaste prijs voor een onbeperkt aantal atleten",
     plans: [
       {
         id: "small",
@@ -1483,7 +1483,7 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
             billingMonthly={copy.billingMonthly}
             billingYearly={copy.billingYearly}
             saveBadge={copy.saveBadge}
-            contactVolume={copy.contactVolume}
+            fixedPrice={copy.fixedPrice}
           />
         </div>
       </section>
