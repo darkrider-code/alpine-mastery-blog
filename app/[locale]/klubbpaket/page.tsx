@@ -34,7 +34,7 @@ interface LocaleCopy {
   billingMonthly: string;
   billingYearly: string;
   saveBadge: string;
-  contactVolume: string;
+  fixedPrice: string;
   plans: {
     id: "small" | "pro" | "unlimited";
     name: string;
@@ -101,7 +101,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månadsvis",
     billingYearly: "Årsvis",
     saveBadge: "Spara 50%",
-    contactVolume: "Kontakta oss för volympris",
+    fixedPrice: "Fast pris för obegränsat antal åkare",
     plans: [
       {
         id: "small",
@@ -117,6 +117,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populär",
         features: [
+          "Batchuppladdning: upp till 5 filmer för samma åkare åt gången",
           "Upp till 50 åkare",
           "Obegränsat antal tränare",
           "Obegränsade analyser",
@@ -127,6 +128,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchuppladdning: upp till 5 filmer för samma åkare åt gången",
           "Obegränsat antal åkare",
           "Obegränsat antal tränare",
           "Obegränsade analyser",
@@ -248,7 +250,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monthly",
     billingYearly: "Yearly",
     saveBadge: "Save 50%",
-    contactVolume: "Contact for volume pricing",
+    fixedPrice: "Fixed price for unlimited athletes",
     plans: [
       {
         id: "small",
@@ -260,6 +262,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Most popular",
         features: [
+          "Batch upload: up to 5 videos for the same skier at a time",
           "Up to 50 skiers",
           "Unlimited coaches",
           "Unlimited analyses",
@@ -270,6 +273,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batch upload: up to 5 videos for the same skier at a time",
           "Unlimited skiers",
           "Unlimited coaches",
           "Unlimited analyses",
@@ -391,7 +395,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedlig",
     billingYearly: "Årlig",
     saveBadge: "Spar 50%",
-    contactVolume: "Kontakt oss for volumpris",
+    fixedPrice: "Fast pris for ubegrenset antall løpere",
     plans: [
       {
         id: "small",
@@ -407,6 +411,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populær",
         features: [
+          "Batchopplasting: opptil 5 videoer av samme løper om gangen",
           "Opptil 50 løpere",
           "Ubegrenset antall trenere",
           "Ubegrensede analyser",
@@ -417,6 +422,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchopplasting: opptil 5 videoer av samme løper om gangen",
           "Ubegrenset antall løpere",
           "Ubegrenset antall trenere",
           "Ubegrensede analyser",
@@ -538,7 +544,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Månedligt",
     billingYearly: "Årligt",
     saveBadge: "Spar 50%",
-    contactVolume: "Kontakt os for volumenpris",
+    fixedPrice: "Fast pris for ubegrænset antal atleter",
     plans: [
       {
         id: "small",
@@ -554,6 +560,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populær",
         features: [
+          "Batchupload: op til 5 videoer af samme atlet ad gangen",
           "Op til 50 atleter",
           "Ubegrænset antal trænere",
           "Ubegrænsede analyser",
@@ -564,6 +571,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchupload: op til 5 videoer af samme atlet ad gangen",
           "Ubegrænset antal atleter",
           "Ubegrænset antal trænere",
           "Ubegrænsede analyser",
@@ -685,7 +693,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Kuukausittain",
     billingYearly: "Vuosittain",
     saveBadge: "Säästä 50%",
-    contactVolume: "Ota yhteyttä volyymihinnoittelua varten",
+    fixedPrice: "Kiinteä hinta rajattomalle määrälle urheilijoita",
     plans: [
       {
         id: "small",
@@ -701,6 +709,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Suosituin",
         features: [
+          "Erälataus: enintään 5 videota samasta urheilijasta kerralla",
           "Jopa 50 urheilijaa",
           "Rajattomasti valmentajia",
           "Rajattomasti analyysejä",
@@ -711,6 +720,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Erälataus: enintään 5 videota samasta urheilijasta kerralla",
           "Rajattomasti urheilijoita",
           "Rajattomasti valmentajia",
           "Rajattomasti analyysejä",
@@ -832,7 +842,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Monatlich",
     billingYearly: "Jährlich",
     saveBadge: "50 % sparen",
-    contactVolume: "Kontakt für Mengenrabatte",
+    fixedPrice: "Festpreis für unbegrenzt viele Athleten",
     plans: [
       {
         id: "small",
@@ -848,6 +858,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Am beliebtesten",
         features: [
+          "Stapel-Upload: bis zu 5 Videos desselben Athleten auf einmal",
           "Bis zu 50 Athleten",
           "Unbegrenzte Trainer",
           "Unbegrenzte Analysen",
@@ -858,6 +869,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Stapel-Upload: bis zu 5 Videos desselben Athleten auf einmal",
           "Unbegrenzte Athleten",
           "Unbegrenzte Trainer",
           "Unbegrenzte Analysen",
@@ -979,7 +991,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Mensuel",
     billingYearly: "Annuel",
     saveBadge: "Économisez 50%",
-    contactVolume: "Contactez-nous pour un tarif de volume",
+    fixedPrice: "Prix fixe pour un nombre illimité d’athlètes",
     plans: [
       {
         id: "small",
@@ -995,6 +1007,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Le plus populaire",
         features: [
+          "Envoi groupé : jusqu’à 5 vidéos du même athlète à la fois",
           "Jusqu'à 50 athlètes",
           "Coachs illimités",
           "Analyses illimitées",
@@ -1005,6 +1018,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Envoi groupé : jusqu’à 5 vidéos du même athlète à la fois",
           "Athlètes illimités",
           "Coachs illimités",
           "Analyses illimitées",
@@ -1126,7 +1140,7 @@ const localeContent: Record<string, LocaleCopy> = {
     billingMonthly: "Maandelijks",
     billingYearly: "Jaarlijks",
     saveBadge: "Bespaar 50%",
-    contactVolume: "Neem contact op voor volume prijzen",
+    fixedPrice: "Vaste prijs voor een onbeperkt aantal atleten",
     plans: [
       {
         id: "small",
@@ -1142,6 +1156,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Meest populair",
         features: [
+          "Batchupload: maximaal 5 video’s van dezelfde atleet tegelijk",
           "Tot 50 atleten",
           "Onbeperkt aantal coaches",
           "Onbeperkte analyses",
@@ -1152,6 +1167,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchupload: maximaal 5 video’s van dezelfde atleet tegelijk",
           "Onbeperkt aantal atleten",
           "Onbeperkt aantal coaches",
           "Onbeperkte analyses",
@@ -1467,7 +1483,7 @@ export default async function KlubbpaketPage({ params }: { params: Promise<{ loc
             billingMonthly={copy.billingMonthly}
             billingYearly={copy.billingYearly}
             saveBadge={copy.saveBadge}
-            contactVolume={copy.contactVolume}
+            fixedPrice={copy.fixedPrice}
           />
         </div>
       </section>

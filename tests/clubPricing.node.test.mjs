@@ -15,8 +15,8 @@ test("club base prices and derived per-skier prices are shared", () => {
   });
   assert.match(pricing.formatClubPerSkier("small", "monthly", "sv"), /^119 SEK/);
   assert.match(pricing.formatClubPerSkier("pro", "monthly", "sv"), /^80 SEK/);
-  assert.match(pricing.formatClubPerSkier("small", "yearly", "sv"), /^714 SEK/);
-  assert.match(pricing.formatClubPerSkier("pro", "yearly", "sv"), /^479 SEK/);
+  assert.match(pricing.formatClubPerSkier("small", "yearly", "sv"), /^60 SEK/);
+  assert.match(pricing.formatClubPerSkier("pro", "yearly", "sv"), /^40 SEK/);
 });
 
 test("all locales use the required currency mapping and both billing periods", () => {
@@ -46,9 +46,9 @@ test("all locales use the required currency mapping and both billing periods", (
   assert.match(pricing.formatClubPrice("small", "monthly", "en"), /\$/);
 });
 
-test("unlimited keeps volume pricing text separate from its translated base price", async () => {
+test("unlimited shows fixed-price copy separately from its translated base price", async () => {
   const source = await readFile(resolve("components/ClubPricing.tsx"), "utf8");
-  assert.match(source, /plan\.id === "unlimited" \? contactVolume/);
+  assert.match(source, /plan\.id === "unlimited" \? fixedPrice/);
   assert.match(source, /formatClubPrice\(plan\.id, period, locale\)/);
   assert.match(source, /formatClubPerSkier\(plan\.id, period, locale\)/);
 });
@@ -64,4 +64,26 @@ test("club amounts are not duplicated in the page or component", async () => {
     assert.equal(/(?:119|80)\s*SEK/.test(source), false, `${file} contains a duplicated per-skier amount`);
     assert.equal(/199\s*SEK/.test(source), false, `${file} contains a duplicated private amount`);
   }
+});
+
+
+test("both billing periods express per-skier cost per month", () => {
+  for (const locale of locales) {
+    assert.match(pricing.formatClubPerSkier("pro", "yearly", locale), /^40 SEK/);
+    assert.ok(pricing.formatClubPerSkier("pro", "yearly", locale).includes(pricing.clubPricing(locale).monthlyUnit));
+  }
+});
+
+test("batch copy appears only on the two eligible plans in every blog locale", async () => {
+  const source = await readFile(resolve("app/[locale]/klubbpaket/page.tsx"), "utf8");
+  const sections = source.split(/(?=^  [a-z]{2}: \{)/m).slice(1);
+  assert.equal(sections.length, 8);
+  for (const section of sections) {
+    for (const plan of ["small", "pro", "unlimited"]) {
+      const features = section.match(new RegExp('id: "' + plan + '",[\\s\\S]*?features: \\[([\\s\\S]*?)\\]'))?.[1];
+      assert.ok(features);
+      assert.equal(/\b5\b/.test(features), plan !== "small");
+    }
+  }
+  assert.doesNotMatch(source, /volympris|volume pric|volumpris|volumenpris|volyymihinnoitt|Mengenrabatt|tarif de volume|volume prijzen/i);
 });

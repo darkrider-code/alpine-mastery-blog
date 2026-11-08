@@ -131,9 +131,9 @@ export function formatClubPrice(plan: ClubPlanId, period: ClubBillingPeriod, loc
 
 export function formatClubPerSkier(plan: Exclude<ClubPlanId, "unlimited">, period: ClubBillingPeriod, locale: string): string {
   const settings = clubPricing(locale);
-  const price = CLUB_PRICES_SEK[plan][period] / CLUB_PRICES_SEK[plan].capacity;
+  const price = CLUB_PRICES_SEK[plan][period] / (period === "yearly" ? 12 : 1) / CLUB_PRICES_SEK[plan].capacity;
   const amount = new Intl.NumberFormat(settings.intlLocale, { maximumFractionDigits: 0 }).format(price);
-  const unit = period === "monthly" ? settings.monthlyUnit : settings.yearlyUnit;
+  const unit = settings.monthlyUnit;
   const skier = locale === "en" ? "skier" : locale === "no" ? "løper" : locale === "da" ? "atlet" : locale === "fi" ? "urheilija" : locale === "de" ? "Athlet" : locale === "fr" ? "athlète" : locale === "nl" ? "atleet" : "åkare";
   const base = `${amount} SEK / ${skier} / ${unit}`;
   return settings.currency === "SEK" ? base : `${base} (${settings.approximate} ${formatClubCurrency(price, locale)})`;

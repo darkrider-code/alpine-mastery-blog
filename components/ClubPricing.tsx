@@ -22,14 +22,14 @@ export default function ClubPricing({
   billingMonthly,
   billingYearly,
   saveBadge,
-  contactVolume,
+  fixedPrice,
 }: {
   locale: string;
   plans: ClubPlan[];
   billingMonthly: string;
   billingYearly: string;
   saveBadge: string;
-  contactVolume: string;
+  fixedPrice: string;
 }) {
   const [period, setPeriod] = useState<ClubBillingPeriod>("monthly");
   const note = clubPricing(locale).note;
@@ -72,7 +72,7 @@ export default function ClubPricing({
             <h3 className="text-xl font-bold text-white">{plan.name}</h3>
             <div className="mt-4 text-3xl font-black text-white">{formatClubPrice(plan.id, period, locale)}</div>
             <div className="mt-1 text-sm text-text-secondary">
-              {plan.id === "unlimited" ? contactVolume : formatClubPerSkier(plan.id, period, locale)}
+              {plan.id === "unlimited" ? fixedPrice : formatClubPerSkier(plan.id, period, locale)}
             </div>
             <ul className="mt-6 space-y-3 text-text-secondary">
               {plan.features.map((feature) => (
