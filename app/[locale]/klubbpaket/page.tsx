@@ -117,6 +117,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populär",
         features: [
+          "Batchuppladdning: upp till 5 filmer för samma åkare åt gången",
           "Upp till 50 åkare",
           "Obegränsat antal tränare",
           "Obegränsade analyser",
@@ -127,6 +128,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchuppladdning: upp till 5 filmer för samma åkare åt gången",
           "Obegränsat antal åkare",
           "Obegränsat antal tränare",
           "Obegränsade analyser",
@@ -260,6 +262,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Most popular",
         features: [
+          "Batch upload: up to 5 videos for the same skier at a time",
           "Up to 50 skiers",
           "Unlimited coaches",
           "Unlimited analyses",
@@ -270,6 +273,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batch upload: up to 5 videos for the same skier at a time",
           "Unlimited skiers",
           "Unlimited coaches",
           "Unlimited analyses",
@@ -407,6 +411,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populær",
         features: [
+          "Batchopplasting: opptil 5 videoer av samme løper om gangen",
           "Opptil 50 løpere",
           "Ubegrenset antall trenere",
           "Ubegrensede analyser",
@@ -417,6 +422,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchopplasting: opptil 5 videoer av samme løper om gangen",
           "Ubegrenset antall løpere",
           "Ubegrenset antall trenere",
           "Ubegrensede analyser",
@@ -554,6 +560,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Mest populær",
         features: [
+          "Batchupload: op til 5 videoer af samme atlet ad gangen",
           "Op til 50 atleter",
           "Ubegrænset antal trænere",
           "Ubegrænsede analyser",
@@ -564,6 +571,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchupload: op til 5 videoer af samme atlet ad gangen",
           "Ubegrænset antal atleter",
           "Ubegrænset antal trænere",
           "Ubegrænsede analyser",
@@ -701,6 +709,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Suosituin",
         features: [
+          "Erälataus: enintään 5 videota samasta urheilijasta kerralla",
           "Jopa 50 urheilijaa",
           "Rajattomasti valmentajia",
           "Rajattomasti analyysejä",
@@ -711,6 +720,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Erälataus: enintään 5 videota samasta urheilijasta kerralla",
           "Rajattomasti urheilijoita",
           "Rajattomasti valmentajia",
           "Rajattomasti analyysejä",
@@ -848,6 +858,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Am beliebtesten",
         features: [
+          "Stapel-Upload: bis zu 5 Videos desselben Athleten auf einmal",
           "Bis zu 50 Athleten",
           "Unbegrenzte Trainer",
           "Unbegrenzte Analysen",
@@ -858,6 +869,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Stapel-Upload: bis zu 5 Videos desselben Athleten auf einmal",
           "Unbegrenzte Athleten",
           "Unbegrenzte Trainer",
           "Unbegrenzte Analysen",
@@ -995,6 +1007,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Le plus populaire",
         features: [
+          "Envoi groupé : jusqu’à 5 vidéos du même athlète à la fois",
           "Jusqu'à 50 athlètes",
           "Coachs illimités",
           "Analyses illimitées",
@@ -1005,6 +1018,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Envoi groupé : jusqu’à 5 vidéos du même athlète à la fois",
           "Athlètes illimités",
           "Coachs illimités",
           "Analyses illimitées",
@@ -1142,6 +1156,7 @@ const localeContent: Record<string, LocaleCopy> = {
         name: "Club Pro",
         badge: "Meest populair",
         features: [
+          "Batchupload: maximaal 5 video’s van dezelfde atleet tegelijk",
           "Tot 50 atleten",
           "Onbeperkt aantal coaches",
           "Onbeperkte analyses",
@@ -1152,6 +1167,7 @@ const localeContent: Record<string, LocaleCopy> = {
         id: "unlimited",
         name: "Club Unlimited",
         features: [
+          "Batchupload: maximaal 5 video’s van dezelfde atleet tegelijk",
           "Onbeperkt aantal atleten",
           "Onbeperkt aantal coaches",
           "Onbeperkte analyses",
