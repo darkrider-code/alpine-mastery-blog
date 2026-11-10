@@ -29,7 +29,8 @@ export function buildAppLink(base: string, context: { search: string; locale: st
   url.searchParams.set("blog_slug", context.slug.slice(0, 200));
   url.searchParams.set("blog_placement", context.placement.slice(0, 80));
   url.searchParams.set("blog_locale", context.locale);
-  url.searchParams.set("lang", context.locale);
+  // Keep the original blog locale while selecting a language the app supports.
+  url.searchParams.set("lang", context.locale === "nl" ? "en" : context.locale);
   return url.toString();
 }
 
@@ -60,3 +61,4 @@ export function buildPartnerLink(slug: string, channel: PartnerChannel, audience
 export function buildPartnerContactLink(): string {
   return "https://alpine.masteryhub.se/contact?utm_source=blog&utm_medium=referral&utm_campaign=partner";
 }
+

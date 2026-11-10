@@ -1,5 +1,6 @@
 import { individualCopy } from "@/lib/individualCopy";
 import { partnerCopy } from "@/lib/partnerCopy";
+import { getOpenGraphLocale } from "@/lib/landingMetadata";
 import BlogLink from "@/components/BlogLink";
 import type { Metadata } from "next";
 import BlogList from "@/components/BlogList";
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${homeTitle} | Masteryhub Training Lab`,
     description: homeDescription,
     openGraph: {
+      locale: getOpenGraphLocale(locale),
       title: homeTitle,
       description: homeDescription,
       url: canonicalUrl,
@@ -106,3 +108,4 @@ export default async function HomePage({ params }: PageProps) {
     </div>
   );
 }
+

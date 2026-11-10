@@ -8,7 +8,7 @@ test("blog links preserve original campaign and account redirect", () => {
     const url = new URL(buildAppLink("https://alpine.masteryhub.se/auth?redirect=%2Fmembership%2Fcheckout%3Fcycle%3Dmonthly", { search: "?utm_source=instagram&utm_medium=organic_social&utm_campaign=ski&utm_content=parent&email=private", locale, slug: "feedback", placement: "inline" }));
     assert.equal(url.searchParams.get("utm_source"), "instagram");
     assert.equal(url.searchParams.get("utm_content"), "parent");
-    assert.equal(url.searchParams.get("lang"), locale);
+    assert.equal(url.searchParams.get("lang"), locale === "nl" ? "en" : locale);
     assert.equal(url.searchParams.get("blog_slug"), "feedback");
     assert.equal(url.searchParams.get("redirect"), "/membership/checkout?cycle=monthly");
     assert.equal(url.searchParams.get("checkout"), "true");
@@ -39,3 +39,4 @@ test("search terms survive alongside the complete original campaign",()=>{
  assert.equal(url.searchParams.get("email"),null);
  assert.equal(new URLSearchParams(campaignSearch("?utm_term="+"x".repeat(250))).get("utm_term").length,200);
 });
+
