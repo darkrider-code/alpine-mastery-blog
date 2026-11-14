@@ -16,6 +16,22 @@ test('article indexes and sitemap contain real locale-specific files',async()=>{
  assert.equal(posts.getPostBySlug('unpublished-article','en'),null);
 });
 
+test('Swedish carving article places the new film guidance before AI-video analysis',async()=>{
+ const source=await readFile('content/posts/biomekaniken-bakom-svangen/sv.mdx','utf8');
+ const headings=[
+  '## Checklista: granska filmen och välj ett nästa steg',
+  '## Från skidfilm till en konkret fråga',
+  '## Jämför två filmer utan att dra för snabba slutsatser',
+  '## För föräldrar: låt barnet börja med sin upplevelse',
+  '## Prova med din egen skidfilm',
+  '## Vad kan AI-videoanalys säga – och vad kan den inte mäta exakt?',
+ ].map(heading=>source.indexOf(heading));
+ assert.ok(headings.every(index=>index>=0));
+ assert.deepEqual(headings,[...headings].sort((a,b)=>a-b));
+ assert.match(source,/<InlineCTA placement="carving_example_video">Prova en gratis skidanalys<\/InlineCTA>/);
+ assert.match(source,/AI-feedback kan vara fel/);
+});
+
 test('metadata and static paths follow actual translations; missing translations redirect',async()=>{
  const {posts}=await contentModules();
  const file='app/[locale]/[slug]/page.tsx';
