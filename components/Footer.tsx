@@ -24,7 +24,7 @@ export default function Footer() {
           <a href="https://masteryhub.se" className="transition hover:text-accent">
             masteryhub.se
           </a>
-          <AppLink placement="footer_1" href="https://alpine.masteryhub.se" className="transition hover:text-accent">
+          <AppLink placement="footer_1" href="https://alpine.masteryhub.se/free-analysis" className="transition hover:text-accent">
             {t("site.footerAlpineCta")}
           </AppLink>
           <Link href={`/${locale}/partner`} className="transition hover:text-accent">
