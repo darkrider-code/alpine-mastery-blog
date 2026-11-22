@@ -40,3 +40,15 @@ test("search terms survive alongside the complete original campaign",()=>{
  assert.equal(new URLSearchParams(campaignSearch("?utm_term="+"x".repeat(250))).get("utm_term").length,200);
 });
 
+
+for (const locale of ["sv","en","no","da","fi","de","fr","nl"]) {
+  for (const path of ["/free-analysis","/membership"]) {
+    test(locale + " routes to " + path, () => {
+      const url = new URL(buildAppLink("https://alpine.masteryhub.se" + path, {locale, placement:"footer_1", slug:"index", search:"?utm_campaign=winter"}));
+      assert.equal(url.pathname, path);
+      assert.equal(url.searchParams.get("lang"), locale === "nl" ? "en" : locale);
+      assert.equal(url.searchParams.get("blog_locale"), locale);
+      assert.equal(url.searchParams.get("utm_campaign"), "winter");
+    });
+  }
+}
